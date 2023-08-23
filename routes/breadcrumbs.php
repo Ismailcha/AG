@@ -51,3 +51,13 @@ Breadcrumbs::for('user-management.permissions.index', function (BreadcrumbTrail 
     $trail->parent('user-management.index');
     $trail->push('Permissions', route('user-management.permissions.index'));
 });
+// Home > Dashboard > produit form
+Breadcrumbs::for('added_pages.produit.add_produit', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Ajoute Produit', route('dashboard'));
+});
+// Home > Dashboard > produit liste
+Breadcrumbs::for('added_pages.produit.liste_produit', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Liste des produits', route('dashboard'));
+});

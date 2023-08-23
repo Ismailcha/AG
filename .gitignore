@@ -1,6 +1,7 @@
 /public/build
 /public/hot
 /public/mix-manifest.json
+/public/produit_images
 /storage/*.key
 /vendor
 .env.backup
