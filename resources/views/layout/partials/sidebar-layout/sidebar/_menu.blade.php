@@ -23,12 +23,19 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                        {{-- <a class="menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
                             href="{{ route('dashboard') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Default</span>
+                        </a> --}}
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+                            href="{{ route('produits.liste') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Liste des produits</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

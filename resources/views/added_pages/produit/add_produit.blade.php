@@ -15,6 +15,12 @@
                 {{ session('success') }}
             </div>
         @endif
+        <a class="" href="{{ route('produits.liste') }}">
+            <span class="">
+                <span class=""></span>
+            </span>
+            <span class="menu-title">Liste des produits</span>
+        </a>
         <form action="{{ route('produits.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 

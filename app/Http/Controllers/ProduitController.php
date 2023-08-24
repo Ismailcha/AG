@@ -64,13 +64,11 @@ class ProduitController extends Controller
                     'image' => $imagePath,
                 ]);
             });
-
-            return redirect()->route('produits.create')->with('success', 'Produit ajouté avec succès!');
         } catch (\Exception $e) {
             return redirect()->route('produits.create')->with('error', 'Une erreur est survenue lors de l\'ajout du produit.');
         }
 
-        return redirect()->route('produits.create')->with('success', 'Produit ajouté avec succès!');
+        return redirect()->route('produits.liste')->with('success', 'Produit ajouté avec succès!');
     }
 
     /**

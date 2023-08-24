@@ -1,9 +1,9 @@
-<!-- resources/views/liste_produit.blade.php -->
+a<!-- resources/views/liste_produit.blade.php -->
 
 <x-default-layout>
 
     @section('title')
-        Ajouter Produit
+        Liste des Produits
     @endsection
 
     @section('breadcrumbs')
@@ -13,8 +13,13 @@
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
         <div class="container mt-4">
-            <h1>Liste des Produits</h1>
 
+            <a class="" href="{{ route('produits.create') }}">
+                <span class="">
+                    <span class=""></span>
+                </span>
+                <span class="menu-title">Ajouter un produit</span>
+            </a>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -35,7 +40,8 @@
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
                             </td>
                             <td>
-                                <a href="{{ route('produits.edit', $produit->id) }}" class="btn btn-primary">Modifier</a>
+                                <a href="{{ route('produits.edit', $produit->id) }}"
+                                    class="btn btn-primary">Modifier</a>
                             </td>
                         </tr>
                     @endforeach
