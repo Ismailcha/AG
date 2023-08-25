@@ -43,6 +43,14 @@
                                 <a href="{{ route('produits.edit', $produit->id) }}"
                                     class="btn btn-primary">Modifier</a>
                             </td>
+                            <td>
+                                <form action="{{ route('produits.delete', $produit->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>
