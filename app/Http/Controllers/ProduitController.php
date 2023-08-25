@@ -52,21 +52,6 @@ class ProduitController extends Controller
             'categorie' => $validatedData['categorie'],
             'image' => $imagePath,
         ]);
-        try {
-            DB::transaction(function () use ($validatedData, $request) {
-                $imagePath = $request->file('image')->store('produit_images', 'public');
-
-                Produit::create([
-                    'nom' => $validatedData['nom'],
-                    'description' => $validatedData['description'],
-                    'prix' => $validatedData['prix'],
-                    'categorie' => $validatedData['categorie'],
-                    'image' => $imagePath,
-                ]);
-            });
-        } catch (\Exception $e) {
-            return redirect()->route('produits.create')->with('error', 'Une erreur est survenue lors de l\'ajout du produit.');
-        }
 
         return redirect()->route('produits.liste')->with('success', 'Produit ajouté avec succès!');
     }
