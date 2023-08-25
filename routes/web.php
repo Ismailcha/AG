@@ -6,10 +6,38 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\Apps\PermissionManagementController;
+=======
+use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArticleController;
+>>>>>>> Stashed changes
 
 
+Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::get('articless', [ArticleController::class, 'index'])->name('articless.index');
+Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('users/createclient', [ClientController::class, 'create'])->name('users.createclient');
+Route::post('users/createclient', [ClientController::class, 'store'])->name('createclient.store');
+// ----------------------------- sales  ------------------------------//
+Route::controller(SalesController::class)->group(function () {
 
+    // -------------------- estimate  -------------------//
+    Route::get('form/estimates/page', 'estimatesIndex')->middleware('auth')->name('form/estimates/page');
+    Route::get('create/estimate/page', 'createEstimateIndex')->middleware('auth')->name('create/estimate/page');
+    Route::get('edit/estimate/{estimate_number}', 'editEstimateIndex')->middleware('auth');
+    Route::get('estimate/view/{estimate_number}', 'viewEstimateIndex')->middleware('auth');
+
+    Route::post('create/estimate/save', 'createEstimateSaveRecord')->middleware('auth')->name('create/estimate/save');
+    Route::post('create/estimate/update', 'EstimateUpdateRecord')->middleware('auth')->name('create/estimate/update');
+    Route::post('estimate_add/delete', 'EstimateAddDeleteRecord')->middleware('auth')->name('estimate_add/delete');
+    Route::post('estimate/delete', 'EstimateDeleteRecord')->middleware('auth')->name('estimate/delete');});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
