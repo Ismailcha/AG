@@ -31,13 +31,35 @@
                             <span class="menu-title">Default</span>
                         </a> --}}
                         <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+<<<<<<< Updated upstream
                             href="{{ route('produits.liste') }}">
+=======
+                            href="{{--{{ route('produits.liste') }}--}}">
+>>>>>>> Stashed changes
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Liste des produits</span>
+<<<<<<< Updated upstream
+=======
+                        </a>
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+                            href="{{ route('form/estimates/page') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Gestion des offre particulier</span>
+                        </a>
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+                            href=" {{ route('articless.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Gestion des offre particulier</span>
+>>>>>>> Stashed changes
                         </a>
                         <!--end:Menu link-->
+                       
                     </div>
                     <!--end:Menu item-->
                 </div>
