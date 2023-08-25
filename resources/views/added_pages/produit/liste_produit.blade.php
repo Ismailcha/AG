@@ -47,6 +47,22 @@
                     @endforeach
                 </tbody>
             </table>
+            <!-- Previous Page Link -->
+            @if ($produits->currentPage() > 1)
+                <a href="{{ $produits->previousPageUrl() }}" class="btn btn-outline-primary">Precedent</a>
+            @endif
+
+            <!-- Page Links -->
+            @for ($i = 1; $i <= $produits->lastPage(); $i++)
+                <a href="{{ $produits->url($i) }}"
+                    class="btn btn-outline-secondary{{ $i === $produits->currentPage() ? ' active' : '' }}">{{ $i }}</a>
+            @endfor
+
+            <!-- Next Page Link -->
+            @if ($produits->hasMorePages())
+                <a href="{{ $produits->nextPageUrl() }}" class="btn btn-outline-primary">Suivant</a>
+            @endif
+
         </div>
     </div>
     <!--end::Row-->

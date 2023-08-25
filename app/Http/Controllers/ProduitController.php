@@ -14,7 +14,7 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produits = Produit::all(); // Fetch all products from the database
+        $produits = Produit::paginate(4);
 
         return view('added_pages.produit.liste_produit', compact('produits'));
     }
