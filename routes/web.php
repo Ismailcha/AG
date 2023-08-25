@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TechnicienController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
-use App\Http\Controllers\SalesController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ArticleController;
 
 
 
@@ -32,7 +33,8 @@ Route::controller(SalesController::class)->group(function () {
     Route::post('create/estimate/save', 'createEstimateSaveRecord')->middleware('auth')->name('create/estimate/save');
     Route::post('create/estimate/update', 'EstimateUpdateRecord')->middleware('auth')->name('create/estimate/update');
     Route::post('estimate_add/delete', 'EstimateAddDeleteRecord')->middleware('auth')->name('estimate_add/delete');
-    Route::post('estimate/delete', 'EstimateDeleteRecord')->middleware('auth')->name('estimate/delete');});
+    Route::post('estimate/delete', 'EstimateDeleteRecord')->middleware('auth')->name('estimate/delete');
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,8 +62,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/produits/liste', [ProduitController::class, 'index'])->name('produits.liste');
     Route::get('/produits/{id}/modify', [ProduitController::class, 'edit'])->name('produits.edit');
     Route::delete('/produits/{id}', [ProduitController::class, 'destroy'])->name('produits.delete');
-
     Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+    // technicien 
+    Route::resource('techniciens', TechnicienController::class);
 });
 
 Route::get('/error', function () {
