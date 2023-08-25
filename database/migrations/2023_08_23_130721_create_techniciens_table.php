@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('techniciens', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('cin');
+            $table->string('email');
+            $table->string('societe');
+            $table->string('specialite');
+            $table->integer('tel');
             $table->timestamps();
         });
     }

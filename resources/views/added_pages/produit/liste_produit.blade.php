@@ -1,4 +1,4 @@
-a<!-- resources/views/liste_produit.blade.php -->
+<!-- resources/views/liste_produit.blade.php -->
 
 <x-default-layout>
 
@@ -13,7 +13,7 @@ a<!-- resources/views/liste_produit.blade.php -->
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
         <div class="container mt-4">
-
+            {{-- if admin : --}}
             <a class="" href="{{ route('produits.create') }}">
                 <span class="">
                     <span class=""></span>
