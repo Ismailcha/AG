@@ -71,6 +71,6 @@ class TechnicienController extends Controller
         $technicien->delete();
 
         return redirect()->route('techniciens.index')
-            ->with('success', 'Technician a été supprimer.');
+            ->with('success', 'Technicien a été supprimer.');
     }
 }
