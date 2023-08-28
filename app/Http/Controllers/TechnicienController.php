@@ -34,6 +34,43 @@ class TechnicienController extends Controller
         Technicien::create($validatedData);
 
         return redirect()->route('techniciens.index')
-            ->with('success', 'Technician added successfully.');
+            ->with('success', 'Technicien a été bien ajouté.');
+    }
+    public function edit($id)
+    {
+        $technicien = Technicien::findOrFail($id);
+
+        return view('added_pages.technicien.modify_technicien', compact('technicien'));
+    }
+
+    // Update the specified technician in the database
+    public function update(Request $request, $id)
+    {
+        $technicien = Technicien::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'cin' => 'required',
+            'email' => 'required|email',
+            'societe' => 'required',
+            'specialite' => 'required',
+            'tel' => 'required|numeric',
+        ]);
+
+        $technicien->update($validatedData);
+
+        return redirect()->route('techniciens.index')
+            ->with('success', 'Technicien a été bien modifier.');
+    }
+
+    // Remove the specified technician from the database
+    public function destroy($id)
+    {
+        $technicien = Technicien::findOrFail($id);
+        $technicien->delete();
+
+        return redirect()->route('techniciens.index')
+            ->with('success', 'Technician a été supprimer.');
     }
 }

@@ -1,7 +1,7 @@
 <x-default-layout>
 
     @section('title')
-        Ajouter Technicien
+        Liste Techniciens
     @endsection
 
     @section('breadcrumbs')
@@ -10,8 +10,17 @@
 
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-        <h1>Liste des Techniciens</h1>
-
+        <a class="" href="{{ route('techniciens.create') }}">
+            <span class="">
+                <span class=""></span>
+            </span>
+            <span class="menu-title">Ajouter un technicien</span>
+        </a>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -35,6 +44,16 @@
                         <td>{{ $technicien->societe }}</td>
                         <td>{{ $technicien->specialite }}</td>
                         <td>{{ $technicien->tel }}</td>
+                        <td>
+                            <a href="{{ route('techniciens.edit', $technicien->id) }}"
+                                class="btn btn-primary">Modifier</a>
+                            <form action="{{ route('techniciens.destroy', $technicien->id) }}" method="POST"
+                                class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
