@@ -52,7 +52,6 @@
             <button type="submit" class="btn btn-primary">Ajouter Produit</button>
         </form>
 
-
     </div>
     <!--end::Row-->
 </x-default-layout>

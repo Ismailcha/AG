@@ -60,12 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
     // produits
-    Route::get('/produits/create', [ProduitController::class, 'create'])->name('produits.create');
-    Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
-    Route::get('/produits/liste', [ProduitController::class, 'index'])->name('produits.liste');
-    Route::get('/produits/{id}/modify', [ProduitController::class, 'edit'])->name('produits.edit');
-    Route::delete('/produits/{id}', [ProduitController::class, 'destroy'])->name('produits.delete');
-    Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+    Route::resource('produits', ProduitController::class);
     // technicien 
     Route::resource('techniciens', TechnicienController::class);
 });

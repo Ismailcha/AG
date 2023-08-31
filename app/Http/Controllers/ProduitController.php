@@ -69,7 +69,7 @@ class ProduitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Produit $produit, $id)
+    public function edit($id)
     {
         $produit = Produit::findOrFail($id);
 
@@ -79,7 +79,7 @@ class ProduitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produit $produit, $id)
+    public function update(Request $request, $id)
     {
         $produit = Produit::findOrFail($id); // Find the product by ID
 
@@ -106,19 +106,19 @@ class ProduitController extends Controller
 
         $produit->update($validatedData);
 
-        return redirect()->route('produits.liste')->with('success', 'Produit modifié avec succès!');
+        return redirect()->route('produits.index')->with('success', 'Produit modifié avec succès!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produit $produit,$id)
+    public function destroy($id)
     {
         $produit = Produit::findOrFail($id);
-    // Perform any additional validation or checks here before deleting
+        // Perform any additional validation or checks here before deleting
 
-    $produit->delete();
+        $produit->delete();
 
-    return redirect()->route('produits.liste')->with('success', 'Product deleted successfully.');
+        return redirect()->route('produits.index')->with('success', 'Product deleted successfully.');
     }
 }

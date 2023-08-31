@@ -34,7 +34,7 @@
                     @foreach ($produits as $produit)
                         <tr>
                             <td>{{ $produit->nom }}</td>
-                            <td>{{ $produit->description}}</td>
+                            <td>{{ $produit->description }}</td>
                             <td>{{ $produit->prix }}</td>
                             <td>{{ $produit->categorie }}</td>
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
@@ -44,7 +44,7 @@
                                     class="btn btn-primary">Modifier</a>
                             </td>
                             <td>
-                                <form action="{{ route('produits.delete', $produit->id) }}" method="POST"
+                                <form action="{{ route('produits.destroy', $produit->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     @csrf
                                     @method('DELETE')
