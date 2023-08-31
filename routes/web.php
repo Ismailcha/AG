@@ -12,11 +12,6 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
-use App\Http\Controllers\SalesController;
-use App\Http\Controllers\TechnicienController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ArticleController;
 
 Route::get('/offress/create',  [OffreController::class, 'searchArticles'])->name('articles.search');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.delete');
