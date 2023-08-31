@@ -1,6 +1,12 @@
-@extends('layouts.app')
+<x-default-layout>
 
-@section('content')
+    @section('title')
+        Dashboard
+    @endsection
+
+    @section('breadcrumbs')
+        {{ Breadcrumbs::render('dashboard') }}
+    @endsection
 <div class="page-wrapper">
     <!-- Page Content -->
     <div class="content container-fluid">
@@ -167,4 +173,5 @@
     }
 </script>
 
-@endsection
+   <!--end::Row-->
+</x-default-layout>

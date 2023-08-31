@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
+use App\Models\Produit;
 use App\Models\Estimates;
 use App\Models\EstimatesAdd;
 use App\Models\Expense;
@@ -21,40 +21,40 @@ class SalesController extends Controller
         $search = $request->input('search');
 
         // Perform the search query using the provided search term
-        $articles = Article::where('nom', 'LIKE', '%' . $search . '%')->get();
+        $produits = Produit::where('nom', 'LIKE', '%' . $search . '%')->get();
 
         // Return the search results as JSON
-        return response()->json($articles);
+        return response()->json($produits);
     }
     public function index(Request $request)
     {
         $searchQuery = $request->query('search');
     
         if ($searchQuery) {
-            $searchResults = Article::where('name', 'like', '%' . $searchQuery . '%')->get();
+            $searchResults = Produit::where('name', 'like', '%' . $searchQuery . '%')->get();
         } else {
             $searchResults = [];
         }
     
-        $offres = Offre::all();
-        $articles = Article::all();
+        // $offres = Offre::all();
+        $produits = Produit::all();
     
-        return view('createestimate', compact('offres', 'articles', 'searchResults'));
+        return view('createestimate', compact('offres', 'produits', 'searchResults'));
     }
     public function create(Request $request)
 {
     $searchQuery = $request->query('search');
 
     if ($searchQuery) {
-        $searchResults = Article::where('nom', 'like', '%' . $searchQuery . '%')->get();
+        $searchResults = Produit::where('nom', 'like', '%' . $searchQuery . '%')->get();
     } else {
         $searchResults = [];
     }
 
-    $articles = Article::all();
+    $produits = Produit::all();
     $clients = Client::all(); // Assuming you have an "Article" model
 
-    return view('createestimate', compact('articles' , 'clients'));
+    return view('createestimate', compact('produits' , 'clients'));
 }
     public function printTable()
     {
@@ -111,10 +111,10 @@ class SalesController extends Controller
     /** page create estimates */
     public function createEstimateIndex()
     {
-        $articles = Article::all();
+        $produits = Produit::all();
         $users = User::all();
         $clients = Client::all();
-        return view('sales.createestimate', compact('articles','users','clients'));
+        return view('sales.createestimate', compact('produits','users','clients'));
        
 
         

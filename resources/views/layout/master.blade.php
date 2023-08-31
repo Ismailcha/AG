@@ -100,6 +100,11 @@
             });
         });
     </script>
+    <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
+    {{-- @vite('resources/js/app.js') --}}
+    @yield('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        @stack('scripts') <!-- Include the scripts defined in the view file -->
 
     @livewireScripts
 </body>

@@ -1,6 +1,12 @@
-@extends('layout.app')
+<x-default-layout>
 
-@section('content')
+    @section('title')
+        Dashboard
+    @endsection
+
+    @section('breadcrumbs')
+        {{ Breadcrumbs::render('dashboard') }}
+    @endsection
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -98,6 +104,5 @@
     
         
         
-    
-    
-@endsection
+        <!--end::Row-->
+</x-default-layout>

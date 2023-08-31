@@ -10,8 +10,12 @@
 
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-        <h1>Ajouter un Technicien</h1>
-
+        <a class="" href="{{ route('techniciens.index') }}">
+            <span class="">
+                <span class=""></span>
+            </span>
+            <span class="menu-title">liste des techniciens</span>
+        </a>
         <form action="{{ route('techniciens.store') }}" method="POST">
             @csrf
 

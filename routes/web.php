@@ -11,15 +11,19 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
+use App\Models\Produit;
 
-
-
+Route::get('/offress/create',  [OffreController::class, 'searchArticles'])->name('articles.search');
+Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.delete');
+Route::post('/articles', [ArticleController::class, 'createproduct'])->name('articles.store');
+Route::get('/produits/{id}',[ProduitController::class, 'show']);
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 Route::get('articless', [ArticleController::class, 'index'])->name('articless.index');
 Route::get('users/create', [UserController::class, 'create'])->name('users.create');
 Route::get('users/createclient', [ClientController::class, 'create'])->name('users.createclient');
 Route::post('users/createclient', [ClientController::class, 'store'])->name('createclient.store');
+Route::get('/get-client-data/{clientId}', [ClientController::class, 'getClientData']);
 // ----------------------------- sales  ------------------------------//
 Route::controller(SalesController::class)->group(function () {
 
@@ -60,8 +64,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/produits/liste', [ProduitController::class, 'index'])->name('produits.liste');
     Route::get('/produits/{id}/modify', [ProduitController::class, 'edit'])->name('produits.edit');
     Route::delete('/produits/{id}', [ProduitController::class, 'destroy'])->name('produits.delete');
-
     Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+    // technicien 
+    Route::resource('techniciens', TechnicienController::class);
 });
 
 Route::get('/error', function () {
@@ -71,3 +76,5 @@ Route::get('/error', function () {
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
 
 require __DIR__ . '/auth.php';
+
+//
