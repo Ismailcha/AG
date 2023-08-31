@@ -8,6 +8,7 @@ use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TechnicienController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
