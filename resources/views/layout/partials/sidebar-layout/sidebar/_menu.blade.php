@@ -44,6 +44,28 @@
                             </span>
                             <span class="menu-title">Liste des techniciens</span>
                         </a>
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+                            href="{{ route('form/estimates/page') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Les Offres individuel</span>
+                        </a>
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+                            href="{{ route('articless.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Articles</span>
+                        </a>
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
+                            href="{{ route('users.createclient') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Liste des client</span>
+                        </a>
+
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->

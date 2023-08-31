@@ -1,4 +1,14 @@
+<x-default-layout>
 
+    @section('title')
+        Dashboard
+    @endsection
+
+    @section('breadcrumbs')
+        {{ Breadcrumbs::render('dashboard') }}
+    @endsection
+
+    <!--begin::Row-->
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -129,3 +139,6 @@
 }
 
     </script>
+
+    <!--end::Row-->
+</x-default-layout>

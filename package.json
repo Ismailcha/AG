@@ -80,7 +80,7 @@
         "lozad": "^1.16.0",
         "moment": "^2.29.1",
         "nouislider": "^15.2.0",
-        "npm": "^7.19.1",
+        "npm": "^9.8.1",
         "pdfmake": "^0.2.0",
         "prism-themes": "^1.7.0",
         "prismjs": "^1.24.1",
@@ -93,11 +93,12 @@
         "toastr": "^2.1.4",
         "typed.js": "2.0.16",
         "vis-timeline": "^7.4.9",
-        "vite": "^4.4.9",
         "wnumb": "^1.2.0",
         "yarn": "^1.22.19"
     },
     "devDependencies": {
+        "@vitejs/plugin-vue": "^4.3.4",
+        "@vitejs/plugin-vue2": "^2.2.0",
         "alpinejs": "^3.7.1",
         "autoprefixer": "^10.4.2",
         "del": "^6.0.0",
@@ -112,6 +113,7 @@
         "rtlcss": "^3.5.0",
         "sass": "1.55.0",
         "sass-loader": "13.2.0",
+        "vite": "^4.4.9",
         "webpack-rtl-plugin": "^2.0.0"
     }
 }

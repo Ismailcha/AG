@@ -12,15 +12,22 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArticleController;
 
-
-
+Route::get('/offress/create',  [OffreController::class, 'searchArticles'])->name('articles.search');
+Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.delete');
+Route::post('/articles', [ArticleController::class, 'createproduct'])->name('articles.store');
+Route::get('/produits/{id}', [ProduitController::class, 'show']);
 Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
 Route::get('users', [UserController::class, 'index'])->name('users.index');
 Route::get('articless', [ArticleController::class, 'index'])->name('articless.index');
 Route::get('users/create', [UserController::class, 'create'])->name('users.create');
 Route::get('users/createclient', [ClientController::class, 'create'])->name('users.createclient');
 Route::post('users/createclient', [ClientController::class, 'store'])->name('createclient.store');
+Route::get('/get-client-data/{clientId}', [ClientController::class, 'getClientData']);
 // ----------------------------- sales  ------------------------------//
 Route::controller(SalesController::class)->group(function () {
 
@@ -74,3 +81,5 @@ Route::get('/error', function () {
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect']);
 
 require __DIR__ . '/auth.php';
+
+//

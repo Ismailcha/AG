@@ -1,6 +1,5 @@
-
 <x-default-layout>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @section('title')
         Dashboard
     @endsection
@@ -11,7 +10,9 @@
 
     <!--begin::Row-->
     
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Page Wrapper -->
+
 <!-- Page Wrapper -->
 <div class="page-wrapper">
     <!-- Page Content -->
@@ -30,7 +31,7 @@
         </div>
         <!-- /Page Header -->
         {{-- message --}}
-        {{-- {!! Toastr::message() !!} --}}
+        {!! Toastr::message() !!}
         <div class="row">
             <div class="col-sm-12">
                 <form action="{{ route('create/estimate/save') }}" method="POST">
@@ -143,9 +144,9 @@
                                         <td class="row-index text-center"><p>1</p></td>
                                         <td>
                                             <select name="item[]" id="article" class="form-control" required>
-                                                <option value="" selected>--articles--</option>
-                                                @foreach($articles as $article)
-                                                    <option value="{{$article->id}}">{{$article->nom}}</option>
+                                                <option value="" selected>--produits--</option>
+                                                @foreach($produits as $produit)
+                                                    <option value="{{$produit->id}}">{{$produit->nom}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -165,12 +166,12 @@
                             function updateFields(selectedItemId, row) {
                                 // Make an AJAX request to fetch the item details
                                 $.ajax({
-                                    url: '/articles/' + selectedItemId, // Replace with your Laravel route URL for fetching a single article
+                                    url: '/produits/' + selectedItemId, // Replace with your Laravel route URL for fetching a single article
                                     type: 'GET',
                                     success: function (response) {
                                         // Update the description and unit cost fields with the fetched data
-                                        row.find('input[name="description[]"]').val(response.article.Laboratoire);
-                                        row.find('input[name="unit_cost[]"]').val(response.article.ppv);
+                                        row.find('input[name="description[]"]').val(response.produit.description);
+                                        row.find('input[name="unit_cost[]"]').val(response.produit.prix);
                                         updateTotal(row); // Update the amount total
                                     },
                                     error: function (xhr) {
@@ -233,9 +234,9 @@ document.getElementById("grand_total").value = grandTotal.toFixed(2);
                                         <td class="row-index text-center"><p>${rowIdx}</p></td>
                                         <td>
                                             <select name="item[]" id="article" class="form-control" required>
-                                                <option value="" selected>--articles--</option>
-                                                @foreach($articles as $article)
-                                                    <option value="{{$article->id}}">{{$article->nom}}</option>
+                                                <option value="" selected>--produit--</option>
+                                                @foreach($produits as $produit)
+                                                    <option value="{{$produit->id}}">{{$produit->nom}}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -376,127 +377,5 @@ var grandTotal = total - (total * (discount / 100));
 document.getElementById("grand_total").value = grandTotal.toFixed(2);
 }
 </script>
-
     <!--end::Row-->
 </x-default-layout>
-
-
-{{-- <h4>Search Results</h4>
-                                    <table class="table" id="articlesTable">
-                                        <thead>
-                                            <tr>
-                                                <th>photo</th>
-                                                <th>nom</th>
-                                                <th>PPV</th>
-                                                <th>PPH</th>
-                                                <th>Select</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {{-- Populate initial data --}}
-                                            {{-- @foreach($articles as $article)
-                                                <tr>
-                                                    <td><img style="width: 20px" src="{{ $article->photo }}" alt=""></td>
-                                                    <td>{{ $article->nom }}</td>
-                                                    <td>{{ $article->ppv }}DH</td>
-                                                    <td>{{ $article->pph }}DH</td>
-                                                    <td>
-                                                        <button class="btn btn-primary" data-nom="{{ $article->nom }}" data-ppv="{{ $article->ppv }}" data-pph="{{ $article->pph }}">Select</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                        ------------script 9dima------------------
-                                        --}}
-                                        {{-- <script>
-    // ... your existing JavaScript code ...
-
-    // Handle item selection change event
-    $('#tableEstimate').on('change', 'select[name="item[]"]', function () {
-        var selectedItemId = $(this).val(); // Get the selected item ID
-
-        // Find the corresponding row and update the description and unit cost fields
-        var row = $(this).closest('tr');
-        var descriptionField = row.find('input.description');
-        var unitCostField = row.find('input.unit_cost');
-
-        // Get the additional data from the selected option using data attributes
-        var description = $(this).find('option:selected').data('description');
-        var unitCost = $(this).find('option:selected').data('unit-cost');
-
-        // Update the description and unit cost fields with the fetched data
-        descriptionField.val(description);
-        unitCostField.val(unitCost);
-    });
-
-    // ... your existing JavaScript code ...
-</script> --}}
-
-    
-                                    {{-- <script> 
-                                        var rowIdx = 1;
-                                        $(".addBtn").on("click", function () {
-                                            // Adding a row inside the tbody.
-                                            $("#tableEstimate tbody").append(`
-                                                <tr id="R${++rowIdx}">
-                                                    <td class="row-index text-center"><p>${rowIdx}</p></td>
-                                                    <td>  <select name="item[]" id="article" class="form-control" required>
-                                                        <option value="" selected>--articles--</option>
-                                                        @foreach($articles as $article)
-                                                        
-                                                    <option value="{{$article->id}}">{{$article->nom}}</option>
-                                                @endforeach
-                                                    </select></td>
-                                                    <td><input class="form-control" type="text" style="min-width:150px" id="description" name="description[]"></td>
-                                                    <td><input class="form-control unit_price" style="width:100px" type="text"  readonly id="unit_cost" name="unit_cost[]"></td>
-                                                    <td><input class="form-control qty" style="width:80px" type="text" id="qty" name="qty[]"></td>
-                                                    <td><input class="form-control total" style="width:120px" type="text" id="amount" name="amount[]" value="0" readonly></td>
-                                                    <td><a href="javascript:void(0)" class="text-danger font-18 remove" title="Remove"><button style="color red"></button></a></td>
-                                                </tr>`);
-                                        });
-                                
-                                        $("#tableEstimate tbody").on("click", ".remove", function () {
-                                            var child = $(this).closest("tr").nextAll();
-                                            child.each(function () {
-                                                var id = $(this).attr("id");
-                                                var idx = $(this).children(".row-index").children("p").html();
-                                                var newIdx = parseInt(idx) - 1;
-                                                $(this).children(".row-index").children("p").html(newIdx);
-                                                $(this).attr("id", "R" + newIdx);
-                                            });
-                                            $(this).closest("tr").remove();
-                                            calculateTotal();
-                                        });
-                                
-                                        $("#tableEstimate tbody").on("input", ".qty, .unit_price", function () {
-                                            var row = $(this).closest("tr");
-                                            var qty = parseFloat(row.find(".qty").val());
-                                            var unit_price = parseFloat(row.find(".unit_price").val());
-                                            var total = qty * unit_price;
-                                            if (!isNaN(total)) {
-                                                row.find(".total").val(total.toFixed(2));
-                                                calculateTotal();
-                                            }
-                                        });
-                                
-                                        function calculateTotal() {
-                                            /* Footer Calculation */
-          var sum = 0;
-          var amts = document.getElementsByName("amount[]");
-    
-          for (let index = 0; index < amts.length; index++) {
-            var amt = amts[index].value;
-            sum = parseFloat(sum) + parseFloat(amt);
-          }
-    
-          document.getElementById("total").value = sum;
-          CalculateGrandTotal();
-                                        }
-                                        function CalculateGrandTotal() {
-          var total = parseFloat(document.getElementById("total").value);
-          var discount = parseFloat(document.getElementById("discount").value);
-    
-          var grandTotal = total - (total * (discount / 100));
-          document.getElementById("grand_total").value = grandTotal.toFixed(2);
-        }
-                                    </script> --}}
