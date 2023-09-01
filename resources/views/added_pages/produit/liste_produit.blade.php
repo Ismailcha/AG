@@ -20,6 +20,11 @@
                 </span>
                 <span class="menu-title">Ajouter un produit</span>
             </a>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <table class="table table-bordered">
                 <thead>
                     <tr>
