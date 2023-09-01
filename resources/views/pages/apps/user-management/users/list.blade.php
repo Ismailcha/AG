@@ -16,7 +16,9 @@
                 <!--begin::Search-->
                 <div class="d-flex align-items-center position-relative my-1">
                     {!! getIcon('magnifier', 'fs-3 position-absolute ms-5') !!}
-                    <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Search user" id="mySearchInput"/>
+                    <input type="text" data-kt-user-table-filter="search"
+                        class="form-control form-control-solid w-250px ps-13" placeholder="Search user"
+                        id="mySearchInput" />
                 </div>
                 <!--end::Search-->
             </div>
@@ -27,10 +29,10 @@
                 <!--begin::Toolbar-->
                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                     <!--begin::Add user-->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                         {!! getIcon('plus', 'fs-2', '', 'i') !!}
                         Add User
-                    </button>
+                    </button> --}}
                     <!--end::Add user-->
                 </div>
                 <!--end::Toolbar-->
@@ -57,11 +59,11 @@
     @push('scripts')
         {{ $dataTable->scripts() }}
         <script>
-            document.getElementById('mySearchInput').addEventListener('keyup', function () {
+            document.getElementById('mySearchInput').addEventListener('keyup', function() {
                 window.LaravelDataTables['users-table'].search(this.value).draw();
             });
-            document.addEventListener('livewire:load', function () {
-                Livewire.on('success', function () {
+            document.addEventListener('livewire:load', function() {
+                Livewire.on('success', function() {
                     $('#kt_modal_add_user').modal('hide');
                     window.LaravelDataTables['users-table'].ajax.reload();
                 });
