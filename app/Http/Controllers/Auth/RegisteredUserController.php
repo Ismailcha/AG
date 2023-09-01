@@ -40,14 +40,18 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'tel' => ['required', 'string', 'max:255'],
+            'adresse' => ['required', 'string', 'max:255'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'last_login_at' => \Illuminate\Support\Carbon::now()->toDateTimeString(),
-            'last_login_ip' => $request->getClientIp()
+            'last_login_at' => Carbon::now()->toDateTimeString(),
+            'last_login_ip' => $request->getClientIp(),
+            'tel' => $request->input('tel'), // Save tel
+            'adresse' => $request->input('adresse'), // Save adresse
         ]);
 
         event(new Registered($user));
