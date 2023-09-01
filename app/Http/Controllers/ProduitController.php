@@ -53,7 +53,7 @@ class ProduitController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('produits.liste')->with('success', 'Produit ajouté avec succès!');
+        return redirect()->route('produit.liste')->with('success', 'Produit ajouté avec succès!');
     }
 
     /**
@@ -106,7 +106,7 @@ class ProduitController extends Controller
 
         $produit->update($validatedData);
 
-        return redirect()->route('produits.index')->with('success', 'Produit modifié avec succès!');
+        return redirect()->route('produit.index')->with('success', 'Produit modifié avec succès!');
     }
 
     /**
@@ -119,6 +119,6 @@ class ProduitController extends Controller
 
         $produit->delete();
 
-        return redirect()->route('produits.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('produit.index')->with('success', 'Product deleted successfully.');
     }
 }
