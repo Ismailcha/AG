@@ -53,7 +53,7 @@ class ProduitController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('produit.liste')->with('success', 'Produit ajouté avec succès!');
+        return redirect()->route('produit.index')->with('success', 'Produit ajouté avec succès!');
     }
 
     /**
