@@ -30,8 +30,8 @@
                             </span>
                             <span class="menu-title">Default</span>
                         </a> --}}
-                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
-                            href="{{ route('produits.index') }}">
+                        <a class="menu-link {{ request()->routeIs('produit.liste') ? 'active' : '' }}"
+                            href="{{ route('produit.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

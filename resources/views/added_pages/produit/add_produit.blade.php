@@ -15,13 +15,13 @@
                 {{ session('success') }}
             </div>
         @endif
-        <a class="" href="{{ route('produits.liste') }}">
+        <a class="" href="{{ route('produit.index') }}">
             <span class="">
                 <span class=""></span>
             </span>
             <span class="menu-title">Liste des produits</span>
         </a>
-        <form action="{{ route('produits.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('produit.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">

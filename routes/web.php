@@ -60,7 +60,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
     // produits
-    Route::resource('produits', ProduitController::class);
+    Route::resource('produit', ProduitController::class);
     // technicien 
     Route::resource('techniciens', TechnicienController::class);
 });

@@ -14,7 +14,7 @@
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
         <div class="container mt-4">
             {{-- if admin : --}}
-            <a class="" href="{{ route('produits.create') }}">
+            <a class="" href="{{ route('produit.create') }}">
                 <span class="">
                     <span class=""></span>
                 </span>
@@ -40,11 +40,10 @@
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
                             </td>
                             <td>
-                                <a href="{{ route('produits.edit', $produit->id) }}"
-                                    class="btn btn-primary">Modifier</a>
+                                <a href="{{ route('produit.edit', $produit->id) }}" class="btn btn-primary">Modifier</a>
                             </td>
                             <td>
-                                <form action="{{ route('produits.destroy', $produit->id) }}" method="POST"
+                                <form action="{{ route('produit.destroy', $produit->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     @csrf
                                     @method('DELETE')
