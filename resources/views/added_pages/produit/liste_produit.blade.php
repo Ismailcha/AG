@@ -41,7 +41,7 @@
                             <td>{{ $produit->nom }}</td>
                             <td>{{ $produit->description }}</td>
                             <td>{{ $produit->prix }}</td>
-                            <td>{{ $produit->categorie }}</td>
+                            <td>{{ $produit->categorie->nomCat }}</td>
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
                             </td>
                             <td>

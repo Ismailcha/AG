@@ -34,28 +34,32 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the input
-        $validatedData = $request->validate([
-            'nom' => 'required',
-            'description' => 'required',
-            'prix' => 'required|numeric',
-            'categorie' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        try {
+            // Validate the input
+            $validatedData = $request->validate([
+                'nom' => 'required',
+                'description' => 'required',
+                'prix' => 'required|numeric',
+                'categorie_id' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
 
-        // Handle image upload
-        $imagePath = $request->file('image')->store('produit_images', 'public');
+            // Handle image upload
+            $imagePath = $request->file('image')->store('produit_images', 'public');
 
-        // Create a new produit record
-        Produit::create([
-            'nom' => $validatedData['nom'],
-            'description' => $validatedData['description'],
-            'prix' => $validatedData['prix'],
-            'categorie' => $validatedData['categorie'],
-            'image' => $imagePath,
-        ]);
+            // Create a new produit record
+            Produit::create([
+                'nom' => $validatedData['nom'],
+                'description' => $validatedData['description'],
+                'prix' => $validatedData['prix'],
+                'categorie_id' => $validatedData['categorie_id'],
+                'image' => $imagePath,
+            ]);
 
-        return redirect()->route('produit.index')->with('success', 'Produit ajouté avec succès!');
+            return redirect()->route('produit.index')->with('success', 'Produit ajouté avec succès!');
+        } catch (\Exception $e) {
+            return redirect()->route('produit.index')->with('success', 'Une erreur s\'est produite lors de l\'ajout du produit.');
+        }
     }
 
     /**
@@ -89,7 +93,7 @@ class ProduitController extends Controller
             'nom' => 'required',
             'description' => 'required',
             'prix' => 'required|numeric',
-            'categorie' => 'required',
+            'categorie_id' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

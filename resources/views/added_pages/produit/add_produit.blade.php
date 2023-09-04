@@ -40,13 +40,21 @@
             </div>
 
             <div class="mb-3">
-                <label for="category_id" class="form-label">Categorie:</label>
-                <select class="form-select" id="category_id" name="category_id">
+                <label for="categorie_id" class="form-label">Categorie:</label>
+                <select class="form-select" id="categorie_id" name="categorie_id">
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->nomCat }}</option>
                     @endforeach
                 </select>
             </div>
+            <div id="floating-form" style="display: none;">
+                <form action="" method="POST">
+                    @csrf
+                    <input type="text" name="nomCat" placeholder="Nom Categorie">
+                    <button type="submit">enregistrer</button>
+                </form>
+            </div>
+            <button id="show-form-button">Ajouter categorie</button>
 
             <div class="mb-3">
                 <label for="image" class="form-label">Image:</label>
@@ -59,3 +67,9 @@
     </div>
     <!--end::Row-->
 </x-default-layout>
+<script>
+    // JavaScript code to show the floating form
+    document.getElementById('show-form-button').addEventListener('click', function() {
+        document.getElementById('floating-form').style.display = 'block';
+    });
+</script>

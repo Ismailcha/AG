@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nom');
             $table->text('description');
             $table->integer('prix');
-            $table->string('categorie');
             $table->string('image')->nullable();
             $table->foreignId('categorie_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
