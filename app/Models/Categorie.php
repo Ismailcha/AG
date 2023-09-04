@@ -9,6 +9,7 @@ class Categorie extends Model
 {
     use HasFactory;
     protected $table = 'categories';
+    protected $fillable = ['nomCat'];
     public function produits()
     {
         return $this->hasMany(Produit::class);
