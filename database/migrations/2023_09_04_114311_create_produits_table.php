@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('prix');
             $table->string('categorie');
             $table->string('image')->nullable();
+            $table->foreignId('categorie_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

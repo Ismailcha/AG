@@ -40,8 +40,12 @@
             </div>
 
             <div class="mb-3">
-                <label for="categorie" class="form-label">Catégorie:</label>
-                <input type="text" class="form-control" id="categorie" name="categorie" required>
+                <label for="category_id" class="form-label">Categorie:</label>
+                <select class="form-select" id="category_id" name="category_id">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->nomCat }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mb-3">

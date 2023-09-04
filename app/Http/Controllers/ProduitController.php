@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,8 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        return view('added_pages.produit.add_produit');
+        $categories = Categorie::all();
+        return view('added_pages.produit.add_produit', compact('categories'));
     }
 
     /**
