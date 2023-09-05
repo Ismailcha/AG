@@ -16,7 +16,8 @@ use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\CategorieController;
 
 
-
+//organisme
+Route::resource('organismes', 'OrganismeController');
 
 
 // List all offers
