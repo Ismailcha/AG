@@ -8,11 +8,42 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TechnicienController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\CategorieController;
+
+
+
+
+
+// List all offers
+Route::get('/offers', [OfferController::class, 'index'])->name('offers.index');
+
+// Show the form to create a new offer
+Route::get('/offers/create', [OfferController::class, 'create'])->name('offers.create');
+
+// Store a newly created offer
+Route::post('/offers', [OfferController::class, 'store'])->name('offers.store');
+
+// Show the details of a specific offer
+Route::get('/offers/{id}', [OfferController::class, 'show'])->name('offers.show');
+
+// Show the form to edit an existing offer
+Route::get('/offers/{id}/edit', [OfferController::class, 'edit'])->name('offers.edit');
+
+// Update an existing offer
+Route::put('/offers/{id}', [OfferController::class, 'update'])->name('offers.update');
+
+// Remove a product from an offer
+Route::delete('/offers/{offerId}/remove-product/{produitId}', [OfferController::class, 'removeProduct'])->name('offers.removeProduct');
+
+// Delete an offer
+Route::delete('/offers/{id}', [OfferController::class, 'destroy'])->name('offers.destroy');
+
+
 
 Route::get('/offress/create',  [OffreController::class, 'searchArticles'])->name('articles.search');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.delete');
