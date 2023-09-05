@@ -39,7 +39,10 @@ class ProduitController extends Controller
             $validatedData = $request->validate([
                 'nom' => 'required',
                 'description' => 'required',
-                'prix' => 'required|numeric',
+                'prixAchat' => 'required|numeric',
+                'prixVente' => 'required|numeric',
+                'laboratoire' => 'required',
+                'grossiste' => '',
                 'categorie_id' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
@@ -56,9 +59,9 @@ class ProduitController extends Controller
                 'image' => $imagePath,
             ]);
 
-            return redirect()->route('produit.index')->with('success', 'Produit ajouté avec succès!');
+            return redirect()->route('produit.index')->with('success', 'Produit ajouté avec succès!')->withInput();
         } catch (\Exception $e) {
-            return redirect()->route('produit.index')->with('success', 'Une erreur s\'est produite lors de l\'ajout du produit.');
+            return redirect()->route('produit.index')->with('success', 'Une erreur s\'est produite lors de l\'ajout du produit.')->withInput();
         }
     }
 
@@ -92,7 +95,10 @@ class ProduitController extends Controller
         $validatedData = $request->validate([
             'nom' => 'required',
             'description' => 'required',
-            'prix' => 'required|numeric',
+            'prixAchat' => 'required|numeric',
+            'prixVente' => 'required|numeric',
+            'laboratoire' => 'required',
+            'grossiste' => '',
             'categorie_id' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
