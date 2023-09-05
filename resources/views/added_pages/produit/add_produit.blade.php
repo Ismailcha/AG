@@ -26,24 +26,50 @@
 
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom:</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
+                <input type="text" class="form-control" id="nom" name="nom"
+                    value="{{ old('nom', isset(session('input')['nom']) ? session('input')['nom'] : '') }}" required>
             </div>
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description:</label>
-                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description', isset(session('input')['description']) ? session('input')['description'] : '') }}</textarea>
             </div>
 
             <div class="mb-3">
-                <label for="prix" class="form-label">Prix:</label>
-                <input type="number" class="form-control" id="prix" name="prix" required>
+                <label for="prixAchat" class="form-label">Prix d'achat:</label>
+                <input type="number" class="form-control" id="prixAchat" name="prixAchat"
+                    value="{{ old('prixAchat', isset(session('input')['prixAchat']) ? session('input')['prixAchat'] : '') }}"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="prixVente" class="form-label">Prix de vente:</label>
+                <input type="number" class="form-control" id="prixVente" name="prixVente"
+                    value="{{ old('prixVente', isset(session('input')['prixVente']) ? session('input')['prixVente'] : '') }}"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="laboratoire" class="form-label">Laboratoire:</label>
+                <input type="text" class="form-control" id="laboratoire" name="laboratoire"
+                    value="{{ old('laboratoire', isset(session('input')['laboratoire']) ? session('input')['laboratoire'] : '') }}"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="grossiste" class="form-label">Grossiste:</label>
+                <input type="text" class="form-control" id="grossiste" name="grossiste"
+                    value="{{ old('grossiste', isset(session('input')['grossiste']) ? session('input')['grossiste'] : '') }}">
             </div>
 
             <div class="mb-3">
                 <label for="categorie_id" class="form-label">Categorie:</label>
                 <select class="form-select" id="categorie_id" name="categorie_id">
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->nomCat }}</option>
+                        <option value="{{ $category->id }}"
+                            {{ old('categorie_id', isset(session('input')['categorie_id']) ? session('input')['categorie_id'] : '') == $category->id ? 'selected' : '' }}>
+                            {{ $category->nomCat }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -75,8 +101,8 @@
 
                         <form role="form" method="post" action="{{ route('categories.store') }}">
                             @csrf
-                            <label for="name">Nom categorie:</label>
-                            <input type="text" class="form-control" id="nom" name="nomCat" required>
+                            <label for="nomCat">Nom categorie:</label>
+                            <input type="text" class="form-control" id="nomCat" name="nomCat" required>
                             <button type="submit" class="btn btn-primary">
                                 <h4>enregistrer</h4>
                             </button>

@@ -45,7 +45,7 @@ class CategorieController extends Controller
                 'nomCat' => $validatedData['nomCat'],
             ]);
 
-            return redirect()->route('produit.create')->with('success', 'Category created successfully.');
+            return redirect()->route('produit.create')->with('success', 'Categories cree avec success.')->with('input', $request->input());
         }
     }
 
