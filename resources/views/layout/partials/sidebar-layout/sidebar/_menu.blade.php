@@ -86,12 +86,12 @@
                             </span>
                             <span class="menu-title">Liste des offerssssss</span>
                         </a>
-                        <a class="menu-link {{ request()->routeIs('offers.index') ? 'active' : '' }}"
-                            href="{{ route('offers.index') }}">
+                        <a class="menu-link {{ request()->routeIs('organismes.index') ? 'active' : '' }}"
+                            href="{{ route('organismes.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Liste des offerssssss</span>
+                            <span class="menu-title">Liste des organismes</span>
                         </a>
 
                         <!--end:Menu link-->
