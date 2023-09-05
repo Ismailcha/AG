@@ -12,7 +12,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+        return view('added_pages.produit.categorie.liste_cat', compact('categories'));
     }
 
     /**
@@ -49,24 +50,30 @@ class CategorieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categorie $categorie)
+    // Edit category
+    public function edit(Categorie $category)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Categorie $categorie)
+    // Update category
+    public function update(Request $request, Categorie $category)
     {
-        //
+        $request->validate([
+            'nomCat' => 'required|string|max:255',
+        ]);
+
+        $category->update([
+            'nomCat' => $request->input('nomCat'),
+        ]);
+
+        return redirect()->route('categories.index')->with('success', 'Categorie modifier');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Categorie $categorie)
+    // Delete category
+    public function destroy(Categorie $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Categorie supprimer');
     }
 }
