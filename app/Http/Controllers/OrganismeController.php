@@ -11,7 +11,7 @@ class OrganismeController extends Controller
     public function index()
     {
         $organismes = Organisme::all();
-        return view('organismes.index', compact('organismes'));
+        return view('added_pages.organisme.index', compact('organismes'));
     }
 
     // Show the create form

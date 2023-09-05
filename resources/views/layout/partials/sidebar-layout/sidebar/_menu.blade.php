@@ -37,13 +37,13 @@
                             </span>
                             <span class="menu-title">Liste des produits</span>
                         </a>
-                        <a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
+                        {{-- <a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
                             href="{{ route('categories.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Liste des categories</span>
-                        </a>
+                        </a> --}}
                         <a class="menu-link {{ request()->routeIs('techniciens.index') ? 'active' : '' }}"
                             href="{{ route('techniciens.index') }}">
                             <span class="menu-bullet">
@@ -79,13 +79,13 @@
                             </span>
                             <span class="menu-title">Liste des techniciens</span>
                         </a>
-                        <a class="menu-link {{ request()->routeIs('offers.index') ? 'active' : '' }}"
+                        {{-- <a class="menu-link {{ request()->routeIs('offers.index') ? 'active' : '' }}"
                             href="{{ route('offers.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Liste des offerssssss</span>
-                        </a>
+                        </a> --}}
                         <a class="menu-link {{ request()->routeIs('organismes.index') ? 'active' : '' }}"
                             href="{{ route('organismes.index') }}">
                             <span class="menu-bullet">

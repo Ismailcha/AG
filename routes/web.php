@@ -14,11 +14,12 @@ use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\OrganismeController;
 
 
 //organisme
-Route::resource('organismes', 'OrganismeController');
-Route::get('/organismes', [OrganismeController::class, 'index'])->name('organismes.index');
+// Route::resource('organismes', OrganismeController::class);
+
 
 // List all offers
 Route::get('/offers', [OfferController::class, 'index'])->name('offers.index');
@@ -98,6 +99,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('techniciens', TechnicienController::class);
     // categories
     Route::resource('categories', CategorieController::class);
+    // organisme
+    Route::get('/organismes', [OrganismeController::class, 'index'])->name('organismes.index');
 });
 
 Route::get('/error', function () {
