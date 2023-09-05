@@ -33,11 +33,22 @@ class CategorieController extends Controller
             'nomCat' => 'required|string|max:255',
         ]);
 
-        Categorie::create([
-            'nomCat' => $validatedData['nomCat'],
-        ]);
-        return redirect()->route('produit.create')->with('success', 'Categorie bien ajouter.');
+        // Check if a category with the same name exists
+        $existingCategory = Categorie::where('nomCat', $validatedData['nomCat'])->first();
+
+        if ($existingCategory) {
+            // Category already exists, you can return a message
+            return redirect()->route('produit.create')->with('error', 'Category already exists.');
+        } else {
+            // Category doesn't exist, create a new one
+            Categorie::create([
+                'nomCat' => $validatedData['nomCat'],
+            ]);
+
+            return redirect()->route('produit.create')->with('success', 'Category created successfully.');
+        }
     }
+
 
     /**
      * Display the specified resource.

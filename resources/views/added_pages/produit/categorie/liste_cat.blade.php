@@ -111,15 +111,16 @@
                 },
                 method: 'PUT',
                 url: '/categories/' + categoryId, // Make sure this URL is correct
+                dataType: 'json',
                 data: {
                     nomCat: newName // Make sure the field name matches your validation rules
                 },
                 success: function(response) {
                     // Handle the response from the server, e.g., show a success message
                     if (response.success) {
-                        alert('Category updated successfully.');
+
                     } else {
-                        alert('Category update failed.');
+
                     }
 
                     // Hide the "Save" and "Cancel" buttons and show the "Modify" button
