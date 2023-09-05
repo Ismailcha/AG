@@ -47,14 +47,9 @@
                     @endforeach
                 </select>
             </div>
-            <div id="floating-form" style="display: none;">
-                <form action="" method="POST">
-                    @csrf
-                    <input type="text" name="nomCat" placeholder="Nom Categorie">
-                    <button type="submit">enregistrer</button>
-                </form>
-            </div>
-            <button id="show-form-button">Ajouter categorie</button>
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindow">
+                <h7>Ajouter categorie</h7>
+            </button>
 
             <div class="mb-3">
                 <label for="image" class="form-label">Image:</label>
@@ -66,10 +61,34 @@
 
     </div>
     <!--end::Row-->
+    <div class="modal fade" id="modalWindow" aria-labelledby="modal exemple" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Ajout nouvelle categorie !</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close">
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="modal-body">
+
+                        <form role="form" method="post" action="{{ route('categories.store') }}">
+                            @csrf
+                            <label for="name">Nom categorie:</label>
+                            <input type="text" class="form-control" id="nom" name="nomCat" required>
+                            <button type="submit" class="btn btn-primary">
+                                <h4>enregistrer</h4>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="close">
+                            <h4> Fermer</h4>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-default-layout>
-<script>
-    // JavaScript code to show the floating form
-    document.getElementById('show-form-button').addEventListener('click', function() {
-        document.getElementById('floating-form').style.display = 'block';
-    });
-</script>

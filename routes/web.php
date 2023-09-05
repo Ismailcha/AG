@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\Apps\PermissionManagementController;
+use App\Http\Controllers\CategorieController;
 
 
 
@@ -94,6 +95,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('produit', ProduitController::class);
     // technicien 
     Route::resource('techniciens', TechnicienController::class);
+    // categorie 
+    Route::resource('categories', CategorieController::class);
 });
 
 Route::get('/error', function () {

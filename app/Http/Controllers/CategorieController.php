@@ -28,7 +28,14 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nomCat' => 'required|string|max:255',
+        ]);
+
+        Categorie::create([
+            'nomCat' => $validatedData['nomCat'],
+        ]);
+        return redirect()->route('produit.create')->with('success', 'Categorie bien ajouter.');
     }
 
     /**
