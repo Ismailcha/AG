@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategorieController extends Controller
 {
@@ -30,7 +31,7 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nomCat' => 'required|string|max:255',
+            'nomCat' => 'required|string|max:255', Rule::unique('categories')->ignore($request->id), // Ignore the current category
         ]);
 
         // Check if a category with the same name exists
