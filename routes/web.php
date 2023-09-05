@@ -96,7 +96,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('produit', ProduitController::class);
     // technicien 
     Route::resource('techniciens', TechnicienController::class);
-    // categorie 
+    // categories
     Route::resource('categories', CategorieController::class);
 });
 
