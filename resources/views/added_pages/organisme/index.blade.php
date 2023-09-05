@@ -8,8 +8,8 @@
         {{ Breadcrumbs::render('dashboard') }}
     @endsection
     <h1>List of Organismes</h1>
-    
-    <a href="{{ route('organismes.create') }}" class="btn btn-primary">Create Organisme</a>
+
+    <a href="" class="btn btn-primary">Create Organisme</a>
 
     <table class="table">
         <thead>
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($organisms as $organism)
+            @foreach ($organismes as $organism)
                 <tr>
                     <td>{{ $organism->nom }}</td>
                     <td>{{ $organism->type == 1 ? 'Laboratoire' : 'Grossiste' }}</td>

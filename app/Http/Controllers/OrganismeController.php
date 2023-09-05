@@ -17,7 +17,7 @@ class OrganismeController extends Controller
     // Show the create form
     public function create()
     {
-        return view('organismes.create');
+        return view('');
     }
 
     // Store a new organisme

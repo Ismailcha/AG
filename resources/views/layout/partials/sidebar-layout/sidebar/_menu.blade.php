@@ -51,8 +51,7 @@
                             </span>
                             <span class="menu-title">Liste des techniciens</span>
                         </a>
-                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
-                            href="{{ route('form/estimates/page') }}">
+                        <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}" href="">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

@@ -17,8 +17,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\OrganismeController;
 
 
-//organisme
-// Route::resource('organismes', OrganismeController::class);
+
 
 
 // List all offers
