@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Organisme;
 use App\Models\Produit; // Import the Organisme model
+use Illuminate\Support\Facades\Log;
 
 class OrganismeController extends Controller
 {
@@ -13,7 +14,7 @@ class OrganismeController extends Controller
     {
         $produits = Produit::all();
         $organismes = Organisme::all();
-        return view('added_pages.organisme.index', compact('organismes' , 'produits'));
+        return view('added_pages.organisme.index', compact('organismes', 'produits'));
     }
 
     // Show the create form
@@ -25,32 +26,44 @@ class OrganismeController extends Controller
     // Store a new organisme
     public function store(Request $request)
     {
-        // Validate the form data
-        $validatedData = $request->validate([
-            'nom' => 'required|string|max:255',
-            'type' => 'required|in:1,2',
-            'adress' => 'required|string|max:255',
-            'email' => 'required|email|unique:organismes,email',
-            'telephone' => 'required|string|max:20',
-            'ICE' => 'required|string|max:20',
-            'Potent' => 'required|string|max:255',
-            'RC' => 'required|string|max:255',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // If you want to validate the logo as an image
-        ]);
+        try {
+            // Validate the input
+            $validatedData = $request->validate([
+                'nom' => 'required',
+                'type' => 'required', // Adjust this as needed based on your radio buttons
+                'adress' => 'required',
+                'email' => 'required|email',
+                'telephone' => 'required',
+                'ICE' => 'required',
+                'Potent' => 'required',
+                'RC' => 'required',
+                'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust this based on your file input
+            ]);
+            // Handle logo upload if provided
+            $logoPath = null;
+            if ($request->hasFile('logo')) {
+                $logoPath = $request->file('logo')->store('organisme_logos', 'public');
+            }
 
-        // Handle logo upload (if provided)
-        if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('organisme_logos', 'public');
-            $validatedData['logo'] = $logoPath;
+            // Create a new Organisme record
+            Organisme::create([
+                'nom' => $validatedData['nom'],
+                'type' => $validatedData['type'],
+                'adress' => $validatedData['adress'],
+                'email' => $validatedData['email'],
+                'telephone' => $validatedData['telephone'],
+                'ICE' => $validatedData['ICE'],
+                'Potent' => $validatedData['Potent'],
+                'RC' => $validatedData['RC'],
+                'logo' => $logoPath,
+            ]);
+
+            return redirect()->route('organismes.index')->with('success', 'Organisme ajouté avec succès!');
+        } catch (\Exception $e) {
+            return redirect()->route('organismes.index')->with('success', 'Une erreur s\'est produite lors de l\'ajout de l\'organisme.');
         }
-
-        // Create a new Organisme record
-        Organisme::create($validatedData);
-
-        // Redirect to a success page or the index page
-        return redirect()->route('organismes.index')->with('success', 'Organisme created successfully');
-    
     }
+
 
     // Show an organisme
     public function show(Organisme $organisme)
@@ -76,9 +89,8 @@ class OrganismeController extends Controller
         // Deletion logic
     }
     public function showOrganisme($id)
-{
-    $organisme = Organisme::findOrFail($id);
-    return view('organisme_modal', compact('organisme'));
-}
-
+    {
+        $organisme = Organisme::findOrFail($id);
+        return view('organisme_modal', compact('organisme'));
+    }
 }
