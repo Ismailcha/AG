@@ -55,7 +55,7 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Les Offres individuel</span>
+                            <span class="menu-title">Les Offres individuel</span>{{--hahowa--}}
                         </a>
                         <a class="menu-link {{ request()->routeIs('produits.liste') ? 'active' : '' }}"
                             href="{{ route('articless.index') }}">
