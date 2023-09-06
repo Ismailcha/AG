@@ -74,7 +74,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindow">
-                <h7>Ajouter categorie</h7>
+                <h6>Ajouter categorie</h6>
             </button>
 
             <div class="mb-3">

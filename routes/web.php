@@ -99,7 +99,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // categories
     Route::resource('categories', CategorieController::class);
     // organisme
-    Route::get('/organismes', [OrganismeController::class, 'index'])->name('organismes.index');
+    Route::get('/organismes/liste', [OrganismeController::class, 'index'])->name('organismes.index');
+    //store organisme
+    Route::post('/organismes', [OrganismeController::class, 'store'])->name('organismes.store');
 });
 
 Route::get('/error', function () {
