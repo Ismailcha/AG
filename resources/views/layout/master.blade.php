@@ -100,6 +100,32 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        function confirmWithSweetAlert(form) {
+            Swal.fire({
+                title: 'Etes vous sur de supprimer ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user confirms, submit the form
+                    form.submit();
+                } else {
+                    // If the user cancels, do not submit the form
+                    return false;
+                }
+            });
+
+            // Prevent the default form submission
+            return false;
+        }
+    </script>
     {{-- @vite('resources/js/app.js') --}}
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>

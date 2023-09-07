@@ -1,5 +1,3 @@
-<!-- resources/views/liste_produit.blade.php -->
-
 <x-default-layout>
 
     @section('title')
@@ -51,11 +49,12 @@
                             </td>
                             <td>
                                 <form action="{{ route('produit.destroy', $produit->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                    onsubmit="return confirmWithSweetAlert(this);">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                 </form>
+
                             </td>
 
                         </tr>
