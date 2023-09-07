@@ -30,7 +30,8 @@
                     <tr>
                         <th>Nom</th>
                         <th>Description</th>
-                        <th>Prix</th>
+                        <th>Prix d'achat</th>
+                        <th>Prix de vente</th>
                         <th>Catégorie</th>
                         <th>Image</th>
                     </tr>
@@ -40,7 +41,8 @@
                         <tr>
                             <td>{{ $produit->nom }}</td>
                             <td>{{ $produit->description }}</td>
-                            <td>{{ $produit->prix }}</td>
+                            <td>{{ $produit->prixAchat }}</td>
+                            <td>{{ $produit->prixVente }}</td>
                             <td>{{ $produit->categorie->nomCat }}</td>
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
                             </td>

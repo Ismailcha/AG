@@ -1,5 +1,8 @@
 <x-default-layout>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
 
+    <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     @section('title')
         Ajouter Produit
     @endsection
@@ -64,7 +67,7 @@
 
             <div class="mb-3">
                 <label for="categorie_id" class="form-label">Categorie:</label>
-                <select class="form-select" id="categorie_id" name="categorie_id">
+                <select class="search-dropdown form-select" id="categorie_id" name="categorie_id">
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"
                             {{ old('categorie_id', isset(session('input')['categorie_id']) ? session('input')['categorie_id'] : '') == $category->id ? 'selected' : '' }}>
@@ -73,6 +76,7 @@
                     @endforeach
                 </select>
             </div>
+
             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindow">
                 <h6>Ajouter categorie</h6>
             </button>
@@ -118,3 +122,8 @@
         </div>
     </div>
 </x-default-layout>
+<script>
+    $(document).ready(function() {
+        $('.search-dropdown').select2();
+    });
+</script>

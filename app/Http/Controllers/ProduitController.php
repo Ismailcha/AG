@@ -54,7 +54,10 @@ class ProduitController extends Controller
             Produit::create([
                 'nom' => $validatedData['nom'],
                 'description' => $validatedData['description'],
-                'prix' => $validatedData['prix'],
+                'prixAchat' => $validatedData['prixAchat'],
+                'prixVente' => $validatedData['prixVente'],
+                'laboratoire' => $validatedData['laboratoire'],
+                'grossiste' => $validatedData['grossiste'],
                 'categorie_id' => $validatedData['categorie_id'],
                 'image' => $imagePath,
             ]);
