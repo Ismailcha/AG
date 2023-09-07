@@ -1,5 +1,4 @@
 <x-default-layout>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
 
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
