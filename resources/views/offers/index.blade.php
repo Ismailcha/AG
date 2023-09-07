@@ -34,5 +34,5 @@
             </tbody>
         </table>
     </div>
-
+    
 </x-default-layout>

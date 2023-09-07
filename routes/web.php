@@ -92,6 +92,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/user-management/roles', RoleManagementController::class);
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
+    // recherche produit
+    Route::get('/produits/search', [ProduitController::class, 'search'])->name('produits.search');
+
     // produits
     Route::resource('produit', ProduitController::class);
     // technicien 

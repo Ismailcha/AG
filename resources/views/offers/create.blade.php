@@ -1,4 +1,9 @@
 <x-default-layout>
+<!-- Include jQuery (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include your JavaScript file -->
+<script src="{{ asset('js/live_search.js') }}"></script>
 
     <!-- Set the title -->
     @section('title', 'Create Offer')
@@ -72,7 +77,44 @@
             <!-- Add Products Section -->
             <h2>Add Products to Offer</h2>
             <!-- You can include code here to select products and associate them with the offer -->
+            <tbody>
+                @foreach ($produits as $produit)
+                <div class="form-group">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search by Name">
+                </div>
+                
+    <tr>
+        <td>{{ $produit->nom }}</td>
+        
+        <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90"></td>
+       <script>
+        $(document).ready(function () {
+    // Listen for keyup event on the search input
+    $('#searchInput').keyup(function () {
+        // Get the search query value
+        var query = $(this).val();
 
+        // Send an AJAX request to the server
+        $.ajax({
+            type: 'GET',
+            url: '{{ route("produits.search") }}', // Adjust the route name
+            data: {
+                query: query
+            },
+            success: function (data) {
+                // Update the product table with the search results
+                $('#productTable tbody').html(data);
+            }
+        });
+    });
+});
+
+       </script>
+       
+    </tr>
+@endforeach
+
+            </tbody>
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Create Offer</button>
         </form>
