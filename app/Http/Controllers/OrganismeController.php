@@ -68,26 +68,68 @@ class OrganismeController extends Controller
     // Show an organisme
     public function show(Organisme $organisme)
     {
-        return view('organismes.show', compact('organisme'));
+        return view('added_pages.organisme.show', compact('organisme'));
     }
 
     // Show the edit form
     public function edit(Organisme $organisme)
     {
-        return view('organismes.edit', compact('organisme'));
+        return view('added_pages.organisme.edit', compact('organisme'));
     }
 
     // Update an organisme
     public function update(Request $request, Organisme $organisme)
-    {
-        // Validation and updating logic
+{
+    try {
+        // Validate the input
+        $validatedData = $request->validate([
+            'nom' => 'required',
+            'type' => 'required', // Adjust this as needed based on your radio buttons
+            'adress' => 'required',
+            'email' => 'required|email',
+            'telephone' => 'required',
+            'ICE' => 'required',
+            'Potent' => 'required',
+            'RC' => 'required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust this based on your file input
+        ]);
+
+        // Handle logo upload if provided
+        $logoPath = $organisme->logo;
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('organisme_logos', 'public');
+        }
+
+        // Update the Organisme record
+        $organisme->update([
+            'nom' => $validatedData['nom'],
+            'type' => $validatedData['type'],
+            'adress' => $validatedData['adress'],
+            'email' => $validatedData['email'],
+            'telephone' => $validatedData['telephone'],
+            'ICE' => $validatedData['ICE'],
+            'Potent' => $validatedData['Potent'],
+            'RC' => $validatedData['RC'],
+            'logo' => $logoPath,
+        ]);
+
+        return redirect()->route('added_pages.organisme.index')->with('success', 'Organisme mis à jour avec succès!');
+    } catch (\Exception $e) {
+        return redirect()->route('added_pages.organisme.index')->with('error', 'Une erreur s\'est produite lors de la mise à jour de l\'organisme.');
     }
+}
+
 
     // Delete an organisme
     public function destroy(Organisme $organisme)
-    {
-        // Deletion logic
-    }
+{
+    // Delete the $organisme
+    $organisme->delete();
+
+    // Redirect to the list of organismes or a success page
+    return redirect()->route('organismes.index')->with('success', 'Organisme deleted successfully');
+}
+
     public function showOrganisme($id)
     {
         $organisme = Organisme::findOrFail($id);

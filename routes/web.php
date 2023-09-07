@@ -100,7 +100,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('categories', CategorieController::class);
     // organisme
     Route::get('/organismes/liste', [OrganismeController::class, 'index'])->name('organismes.index');
+    // store organisme
     Route::post('/organismes/store', [OrganismeController::class, 'store'])->name('organismes.store');
+    //show organisme
+    // In routes/web.php
+    Route::get('/organismes/{organisme}', [OrganismeController::class, 'show'])->name('organismes.show');
+
+    // edit organisme
+Route::get('/organismes/{organisme}/edit', [OrganismeController::class, 'edit'])->name('organismes.edit');
+// delete organisme
+Route::delete('/organismes/{organisme}', [OrganismeController::class, 'destroy'])->name('organismes.destroy');
+// delete organisme
+Route::put('/organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
+//update organisme
+
 });
 
 Route::get('/error', function () {

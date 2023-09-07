@@ -26,6 +26,7 @@
                 <th>Address</th>
                 <th>Email</th>
                 <th>Telephone</th>
+                <th>logo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,15 +38,16 @@
                     <td>{{ $organism->adress }}</td>
                     <td>{{ $organism->email }}</td>
                     <td>{{ $organism->telephone }}</td>
+                    <td><img src="{{ asset('storage/' . $organism->logo) }}" alt="logo Image" width="90">
                     <td>
-                        <a href="" class="btn btn-info">View</a>
-                        <a href="" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('organismes.show', $organism->id) }}" class="btn btn-info">View</a>
+                        <a href="{{ route('organismes.edit', $organism->id) }}" class="btn btn-warning">Edit</a>
                         <!-- Add a delete button if needed -->
-                        <form action="" method="POST">
+                        <form action="{{ route('organismes.destroy', $organism->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                        </form>                        
                     </td>
                 </tr>
             @endforeach
