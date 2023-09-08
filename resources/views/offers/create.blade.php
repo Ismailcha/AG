@@ -80,8 +80,8 @@
                     <tr>
                         <th>Product Name</th>
                         <th>Prix Achat</th>
-                        <th>Remise</th>
                         <th>Qty</th>
+                        <th>Remise</th>
                         <th>Prix Remise</th>
                         <th>Action</th>
                     </tr>
@@ -233,8 +233,8 @@
                 '" name="productName[]" readonly></td>' +
                 '<td><input type="text" class="form-control" value="' + productPrixAchat +
                 '" name="productPrixAchat[]" readonly></td>' +
-                '<td><input type="number" class="form-control" name="discount[]"></td>' +
                 '<td><input type="number" class="form-control" name="qty[]"></td>' +
+                '<td><input type="number" class="form-control" name="discount[]">' +
                 '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
                 '<td><button class="remove-product-btn">-</button></td>' +
                 '</tr>';
