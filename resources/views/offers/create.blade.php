@@ -71,7 +71,7 @@
             </div>
 
             <!-- Add Products Section -->
-           
+
 
             <!-- Table to display selected products -->
             <h2>Selected Produits</h2>
@@ -109,9 +109,11 @@
                     @foreach ($produits as $produit)
                         <tr>
                             <td>{{ $produit->nom }}</td>
-                            <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90"></td>
+                            <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
+                            </td>
                             <td>
-                                <button class="add-product-btn" data-nom="{{ $produit->nom }}" data-prixAchat="{{ $produit->prixAchat }}">+</button>
+                                <button class="add-product-btn" data-nom="{{ $produit->nom }}"
+                                    data-prixAchat="{{ $produit->prixAchat }}">+</button>
                             </td>
                         </tr>
                     @endforeach
@@ -150,7 +152,9 @@
                                 '</td><td><img src="{{ asset('storage/') }}/' +
                                 product.image +
                                 '" alt="Produit Image" width="90"></td>' +
-                                '<td><button class="add-product-btn" data-nom="' + product.nom + '" data-prixAchat="' + product.prixAchat + '">+</button></td></tr>'
+                                '<td><button class="add-product-btn" data-nom="' +
+                                product.nom + '" data-prixAchat="' + product.prixAchat +
+                                '">+</button></td></tr>'
                             );
                         });
                     } else {
@@ -200,7 +204,9 @@
                                     '</td><td><img src="{{ asset('storage/') }}/' +
                                     product.image +
                                     '" alt="Produit Image" width="90"></td>' +
-                                    '<td><button class="add-product-btn" data-nom="' + product.nom + '" data-prixAchat="' + product.prixAchat + '">+</button></td></tr>'
+                                    '<td><button class="add-product-btn" data-nom="' +
+                                    product.nom + '" data-prixAchat="' + product
+                                    .prixAchat + '">+</button></td></tr>'
                                 );
                             });
                         } else {
@@ -219,12 +225,14 @@
         // Listen for click events on the "+" buttons
         $(document).on('click', '.add-product-btn', function() {
             var productName = $(this).data('nom');
-            var productPrixAchat = $(this).data('prixAchat');
-
+            var productPrixAchat = $(this).data('prixachat');
+            console.log($(this));
             // Create a new row for selected product
             var newRow = '<tr>' +
-                '<td><input type="text" class="form-control" value="' + productName + '" name="productName[]" readonly></td>' +
-                '<td><input type="text" class="form-control" value="' + productPrixAchat + '" name="productPrixAchat[]" readonly></td>' +
+                '<td><input type="text" class="form-control" value="' + productName +
+                '" name="productName[]" readonly></td>' +
+                '<td><input type="text" class="form-control" value="' + productPrixAchat +
+                '" name="productPrixAchat[]" readonly></td>' +
                 '<td><input type="number" class="form-control" name="discount[]"></td>' +
                 '<td><input type="number" class="form-control" name="qty[]"></td>' +
                 '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
