@@ -80,9 +80,9 @@
                     <tr>
                         <th>Product Name</th>
                         <th>Prix Achat</th>
-                        <th>Discount</th>
+                        <th>Remise</th>
                         <th>Qty</th>
-                        <th>Discounted Prix Achat</th>
+                        <th>Prix Remise</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -136,7 +136,7 @@
             // Send an AJAX request to the server to get all products
             $.ajax({
                 type: 'GET',
-                url: '{{ route('produits.search') }}', // Use the correct route name for fetching all products
+                url: '{{ route('produits.all') }}', // Use the correct route name for fetching all products
                 success: function(response) {
                     // Clear the table body
                     productTableBody.empty();
@@ -241,4 +241,3 @@
         });
     });
 </script>
-

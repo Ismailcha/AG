@@ -136,12 +136,19 @@ class ProduitController extends Controller
 
         return redirect()->route('produit.index')->with('success', 'Product deleted successfully.');
     }
+    public function all()
+    {
+        $produits = Produit::all(); // Retrieve all products from the database
+
+        return response()->json(['produits' => $produits]);
+    }
     public function search(Request $request)
     {
         $query = $request->input('query');
 
         // Perform the search based on the 'nom' field
         $produits = Produit::where('nom', 'like', '%' . $query . '%')->get();
+        
 
         return response()->json(['produits' => $produits]); // Use 'produits' instead of 'produit'
     }
