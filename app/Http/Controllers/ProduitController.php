@@ -137,13 +137,12 @@ class ProduitController extends Controller
         return redirect()->route('produit.index')->with('success', 'Product deleted successfully.');
     }
     public function search(Request $request)
-{
-    $query = $request->input('query');
+    {
+        $query = $request->input('query');
 
-    // Perform the search based on the 'nom' field
-    $produits = Produit::where('nom', 'like', '%' . $query . '%')->get();
+        // Perform the search based on the 'nom' field
+        $produits = Produit::where('nom', 'like', '%' . $query . '%')->get();
 
-    return view('offers.create', compact('produits'));
-}
-
+        return response()->json(['produits' => $produits]); // Use 'produits' instead of 'produit'
+    }
 }

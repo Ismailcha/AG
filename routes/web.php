@@ -93,7 +93,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('/user-management/permissions', PermissionManagementController::class);
     });
     // recherche produit
-    Route::get('/produits/search', [ProduitController::class, 'search'])->name('produits.search');
+    Route::get('/search_produit', [ProduitController::class, 'search'])->name('produits.search');
 
     // produits
     Route::resource('produit', ProduitController::class);
@@ -110,12 +110,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/organismes/{organisme}', [OrganismeController::class, 'show'])->name('organismes.show');
 
     // edit organisme
-Route::get('/organismes/{organisme}/edit', [OrganismeController::class, 'edit'])->name('organismes.edit');
-// delete organisme
-Route::delete('/organismes/{organisme}', [OrganismeController::class, 'destroy'])->name('organismes.destroy');
-// delete organisme
-Route::put('/organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
-//update organisme
+    Route::get('/organismes/{organisme}/edit', [OrganismeController::class, 'edit'])->name('organismes.edit');
+    // delete organisme
+    Route::delete('/organismes/{organisme}', [OrganismeController::class, 'destroy'])->name('organismes.destroy');
+    // delete organisme
+    Route::put('/organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
+    //update organisme
 
 });
 
