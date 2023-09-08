@@ -223,10 +223,10 @@
         });
 
         // Listen for click events on the "+" buttons
-        $(document).on('click', '.add-product-btn', function() {
+        $(document).on('click', '.add-product-btn', function(e) {
+            e.preventDefault();
             var productName = $(this).data('nom');
             var productPrixAchat = $(this).data('prixachat');
-            console.log($(this));
             // Create a new row for selected product
             var newRow = '<tr>' +
                 '<td><input type="text" class="form-control" value="' + productName +
