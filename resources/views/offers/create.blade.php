@@ -112,7 +112,7 @@
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
                             </td>
                             <td>
-                                <button class="add-product-btn" data-nom="{{ $produit->nom }}"
+                                <button class="add-product-btn btn btn-primary" data-nom="{{ $produit->nom }}"
                                     data-prixAchat="{{ $produit->prixAchat }}">+</button>
                             </td>
                         </tr>
@@ -152,7 +152,7 @@
                                 '</td><td><img src="{{ asset('storage/') }}/' +
                                 product.image +
                                 '" alt="Produit Image" width="90"></td>' +
-                                '<td><button class="add-product-btn" data-nom="' +
+                                '<td><button class="add-product-btn btn btn-primary" data-nom="' +
                                 product.nom + '" data-prixAchat="' + product.prixAchat +
                                 '">+</button></td></tr>'
                             );
@@ -204,7 +204,7 @@
                                     '</td><td><img src="{{ asset('storage/') }}/' +
                                     product.image +
                                     '" alt="Produit Image" width="90"></td>' +
-                                    '<td><button class="add-product-btn" data-nom="' +
+                                    '<td><button class="add-product-btn btn btn-primary" data-nom="' +
                                     product.nom + '" data-prixAchat="' + product
                                     .prixAchat + '">+</button></td></tr>'
                                 );
@@ -236,7 +236,7 @@
                 '<td><input type="number" class="form-control" name="qty[]"></td>' +
                 '<td><input type="number" class="form-control" name="discount[]">' +
                 '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
-                '<td><button class="remove-product-btn">-</button></td>' +
+                '<td><button class="remove-product-btn btn btn-primary">-</button></td>' +
                 '</tr>';
 
             // Append the new row to the selected product table
