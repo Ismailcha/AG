@@ -128,107 +128,112 @@
 
 <script>
     $(document).ready(function() {
-        // Reference to the product table body
-        var productTableBody = $('#productTable tbody');
-        // Reference to the selected product table body
-        var selectedProductTableBody = $('#selectedProductTable tbody');
+    // Reference to the product table body
+    var productTableBody = $('#productTable tbody');
+    // Reference to the selected product table body
+    var selectedProductTableBody = $('#selectedProductTable tbody');
 
-        // Function to fetch and display all products
-        function displayAllProducts() {
-            // Send an AJAX request to the server to get all products
-            $.ajax({
-                type: 'GET',
-                url: '{{ route('produits.all') }}', // Use the correct route name for fetching all products
-                success: function(response) {
-                    // Clear the table body
-                    productTableBody.empty();
+    // Function to fetch and display all products
+    function displayAllProducts() {
+        // Send an AJAX request to the server to get all products
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('produits.all') }}', // Use the correct route name for fetching all products
+            success: function(response) {
+                // Clear the table body
+                productTableBody.empty();
 
+                var produits = response.produits;
+
+                if (produits.length > 0) {
+                    produits.forEach(function(product) {
+                        // Display each product
+                        productTableBody.append('<tr><td>' + product.nom +
+                            '</td><td><img src="{{ asset('storage/') }}/' +
+                            product.image +
+                            '" alt="Produit Image" width="90"></td>' +
+                            '<td><button class="add-product-btn btn btn-primary" data-nom="' +
+                            product.nom + '" data-prixAchat="' + product.prixAchat +
+                            '">+</button></td></tr>'
+                        );
+                    });
+                } else {
+                    // No products found
+                    productTableBody.append(
+                        '<tr><td colspan="3">Aucun produit trouvé </td></tr>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    // Initial display of all products
+    displayAllProducts();
+
+    // Listen for keyup event on the search input
+    $('#searchInput').keyup(function() {
+        // Get the search query value
+        var query = $(this).val();
+
+        // If the search query is empty, display all products
+        if (query === '') {
+            displayAllProducts();
+            return;
+        }
+
+        // Send an AJAX request to the server to search for products
+        $.ajax({
+            type: 'GET',
+            url: '{{ route('produits.search') }}', // Use the correct route name for searching products
+            data: {
+                query: query
+            },
+            success: function(response) {
+                // Clear the table body
+                productTableBody.empty();
+
+                if (query !== '') {
                     var produits = response.produits;
 
                     if (produits.length > 0) {
                         produits.forEach(function(product) {
-                            // Display each product
+                            // Display each matching product
                             productTableBody.append('<tr><td>' + product.nom +
                                 '</td><td><img src="{{ asset('storage/') }}/' +
                                 product.image +
                                 '" alt="Produit Image" width="90"></td>' +
                                 '<td><button class="add-product-btn btn btn-primary" data-nom="' +
-                                product.nom + '" data-prixAchat="' + product.prixAchat +
-                                '">+</button></td></tr>'
+                                product.nom + '" data-prixAchat="' + product
+                                .prixAchat + '">+</button></td></tr>'
                             );
                         });
                     } else {
-                        // No products found
+                        // No matching products found
                         productTableBody.append(
-                            '<tr><td colspan="3">Aucun produit trouvé </td></tr>');
+                            '<tr><td colspan="3">Aucun résultat trouvé </td></tr>');
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
                 }
-            });
-        }
-
-        // Initial display of all products
-        displayAllProducts();
-
-        // Listen for keyup event on the search input
-        $('#searchInput').keyup(function() {
-            // Get the search query value
-            var query = $(this).val();
-
-            // If the search query is empty, display all products
-            if (query === '') {
-                displayAllProducts();
-                return;
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
             }
-
-            // Send an AJAX request to the server to search for products
-            $.ajax({
-                type: 'GET',
-                url: '{{ route('produits.search') }}', // Use the correct route name for searching products
-                data: {
-                    query: query
-                },
-                success: function(response) {
-                    // Clear the table body
-                    productTableBody.empty();
-
-                    if (query !== '') {
-                        var produits = response.produits;
-
-                        if (produits.length > 0) {
-                            produits.forEach(function(product) {
-                                // Display each matching product
-                                productTableBody.append('<tr><td>' + product.nom +
-                                    '</td><td><img src="{{ asset('storage/') }}/' +
-                                    product.image +
-                                    '" alt="Produit Image" width="90"></td>' +
-                                    '<td><button class="add-product-btn btn btn-primary" data-nom="' +
-                                    product.nom + '" data-prixAchat="' + product
-                                    .prixAchat + '">+</button></td></tr>'
-                                );
-                            });
-                        } else {
-                            // No matching products found
-                            productTableBody.append(
-                                '<tr><td colspan="3">Aucun résultat trouvé </td></tr>');
-                        }
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
         });
+    });
 
-        // Listen for click events on the "+" buttons
-        $(document).on('click', '.add-product-btn', function(e) {
-            e.preventDefault();
-            var productName = $(this).data('nom');
-            var productPrixAchat = $(this).data('prixachat');
-            // Create a new row for selected product
-            var newRow = '<tr>' +
+    // Listen for click events on the "+" buttons
+    $(document).on('click', '.add-product-btn', function(e) {
+        e.preventDefault();
+        var productName = $(this).data('nom');
+        var productPrixAchat = $(this).data('prixachat');
+        
+        // Check if a row with the same product already exists
+        var existingRow = selectedProductTableBody.find('tr[data-nom="' + productName + '"]');
+        
+        if (existingRow.length === 0) {
+            // If the row doesn't exist, create a new row for the selected product
+            var newRow = '<tr data-nom="' + productName + '">' +
                 '<td><input type="text" class="form-control" value="' + productName +
                 '" name="productName[]" readonly></td>' +
                 '<td><input type="text" class="form-control" value="' + productPrixAchat +
@@ -241,11 +246,13 @@
 
             // Append the new row to the selected product table
             selectedProductTableBody.append(newRow);
-        });
-
-        // Listen for click events on the "-" buttons to remove rows
-        $(document).on('click', '.remove-product-btn', function() {
-            $(this).closest('tr').remove();
-        });
+        }
     });
+
+    // Listen for click events on the "-" buttons to remove rows
+    $(document).on('click', '.remove-product-btn', function() {
+        $(this).closest('tr').remove();
+    });
+});
+
 </script>
