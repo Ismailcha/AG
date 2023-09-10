@@ -127,7 +127,7 @@
 </x-default-layout>
 
 <script>
-    $(document).ready(function() {
+   $(document).ready(function() {
     // Reference to the product table body
     var productTableBody = $('#productTable tbody');
     // Reference to the selected product table body
@@ -222,6 +222,24 @@
         });
     });
 
+    // Listen for input change events on the discount[] and qty[] inputs
+    $(document).on('input', 'input[name="discount[]"], input[name="qty[]"]', function() {
+        var row = $(this).closest('tr');
+        var productPrixAchatInput = row.find('input[name="productPrixAchat[]"]');
+        var discountedPrixAchatInput = row.find('input[name="discountedPrixAchat[]"]');
+        
+        // Get the values as numbers
+        var productPrixAchat = parseFloat(productPrixAchatInput.val()) || 0;
+        var discount = parseFloat(row.find('input[name="discount[]"]').val()) || 0;
+        var qty = parseFloat(row.find('input[name="qty[]"]').val()) || 0;
+        
+        // Calculate the discountedPrixAchat
+        var discountedPrixAchat = (productPrixAchat - discount) * qty;
+        
+        // Update the discountedPrixAchatInput
+        discountedPrixAchatInput.val(discountedPrixAchat);
+    });
+
     // Listen for click events on the "+" buttons
     $(document).on('click', '.add-product-btn', function(e) {
         e.preventDefault();
@@ -239,7 +257,7 @@
                 '<td><input type="text" class="form-control" value="' + productPrixAchat +
                 '" name="productPrixAchat[]" readonly></td>' +
                 '<td><input type="number" class="form-control" name="qty[]"></td>' +
-                '<td><input type="number" class="form-control" name="discount[]">' +
+                '<td><input type="number" class="form-control" name="discount[]" oninput="updateDiscountedPrixAchat(this)"></td>' +
                 '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
                 '<td><button class="remove-product-btn btn btn-primary">-</button></td>' +
                 '</tr>';
@@ -253,6 +271,27 @@
     $(document).on('click', '.remove-product-btn', function() {
         $(this).closest('tr').remove();
     });
-});
+    
+   // Function to calculate and update discountedPrixAchat
+function updateDiscountedPrixAchat(input) {
+    var row = $(input).closest('tr');
+    var productPrixAchatInput = row.find('input[name="productPrixAchat[]"]');
+    var discountedPrixAchatInput = row.find('input[name="discountedPrixAchat[]"]');
+    
+    // Get the values as numbers
+    var productPrixAchat = parseFloat(productPrixAchatInput.val()) || 0;
+    var discountPercentage = parseFloat(input.value) || 0;
+    
+    // Ensure discountPercentage is within the range [0, 100]
+    discountPercentage = Math.min(Math.max(discountPercentage, 0), 100);
+    
+    // Calculate the discountedPrixAchat as (productPrixAchat * (100 - discountPercentage)) / 100
+    var discountedPrixAchat = ((productPrixAchat / discountPercentage)) / 100;
+    
+    // Update the discountedPrixAchatInput
+    discountedPrixAchatInput.val(discountedPrixAchat.toFixed(2)); // Round to 2 decimal places
+}
 
+
+});
 </script>
