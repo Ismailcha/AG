@@ -11,8 +11,12 @@
 
     <!-- Page content -->
     <div class="container">
-        <h1>Create Offer</h1>
-
+        <!-- Include this input field in your form -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- Display validation errors if any -->
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -27,6 +31,7 @@
         <!-- Offer creation form -->
         <form method="POST" action="{{ route('offers.store') }}">
             @csrf
+            <input type="hidden" name="offer_id" value="{{ $offer->id }}">
 
             <!-- Offer Name -->
             <div class="form-group">
@@ -102,7 +107,6 @@
                     <tr>
                         <th>Nom De produit</th>
                         <th>Image</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,8 +116,9 @@
                             <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
                             </td>
                             <td>
-                                <button class="add-product-btn btn btn-primary" data-nom="{{ $produit->nom }}"
-                                    data-prixAchat="{{ $produit->prixAchat }}">+</button>
+                                <button class="add-product-btn btn btn-primary" data-produit-id="{{ $produit->id }}"
+                                    data-nom="{{ $produit->nom }}" data-prixAchat="{{ $produit->prixAchat }}">+</button>
+
                             </td>
                         </tr>
                     @endforeach
@@ -127,171 +132,186 @@
 </x-default-layout>
 
 <script>
-   $(document).ready(function() {
-    // Reference to the product table body
-    var productTableBody = $('#productTable tbody');
-    // Reference to the selected product table body
-    var selectedProductTableBody = $('#selectedProductTable tbody');
+    $(document).ready(function() {
+        // Reference to the product table body
+        var productTableBody = $('#productTable tbody');
+        // Reference to the selected product table body
+        var selectedProductTableBody = $('#selectedProductTable tbody');
 
-    // Function to fetch and display all products
-    function displayAllProducts() {
-        // Send an AJAX request to the server to get all products
-        $.ajax({
-            type: 'GET',
-            url: '{{ route('produits.all') }}', // Use the correct route name for fetching all products
-            success: function(response) {
-                // Clear the table body
-                productTableBody.empty();
+        // Function to fetch and display all products
+        function displayAllProducts() {
+            // Send an AJAX request to the server to get all products
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('produits.all') }}', // Use the correct route name for fetching all products
+                success: function(response) {
+                    // Clear the table body
+                    productTableBody.empty();
 
-                var produits = response.produits;
-
-                if (produits.length > 0) {
-                    produits.forEach(function(product) {
-                        // Display each product
-                        productTableBody.append('<tr><td>' + product.nom +
-                            '</td><td><img src="{{ asset('storage/') }}/' +
-                            product.image +
-                            '" alt="Produit Image" width="90"></td>' +
-                            '<td><button class="add-product-btn btn btn-primary" data-nom="' +
-                            product.nom + '" data-prixAchat="' + product.prixAchat +
-                            '">+</button></td></tr>'
-                        );
-                    });
-                } else {
-                    // No products found
-                    productTableBody.append(
-                        '<tr><td colspan="3">Aucun produit trouvé </td></tr>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    }
-
-    // Initial display of all products
-    displayAllProducts();
-
-    // Listen for keyup event on the search input
-    $('#searchInput').keyup(function() {
-        // Get the search query value
-        var query = $(this).val();
-
-        // If the search query is empty, display all products
-        if (query === '') {
-            displayAllProducts();
-            return;
-        }
-
-        // Send an AJAX request to the server to search for products
-        $.ajax({
-            type: 'GET',
-            url: '{{ route('produits.search') }}', // Use the correct route name for searching products
-            data: {
-                query: query
-            },
-            success: function(response) {
-                // Clear the table body
-                productTableBody.empty();
-
-                if (query !== '') {
                     var produits = response.produits;
 
                     if (produits.length > 0) {
                         produits.forEach(function(product) {
-                            // Display each matching product
+                            // Display each product
                             productTableBody.append('<tr><td>' + product.nom +
                                 '</td><td><img src="{{ asset('storage/') }}/' +
                                 product.image +
                                 '" alt="Produit Image" width="90"></td>' +
                                 '<td><button class="add-product-btn btn btn-primary" data-nom="' +
-                                product.nom + '" data-prixAchat="' + product
-                                .prixAchat + '">+</button></td></tr>'
+                                product.nom + '" data-prixAchat="' + product.prixAchat +
+                                '"data-produit-id="' + product.id +
+                                '">+</button></td></tr>'
                             );
                         });
                     } else {
-                        // No matching products found
+                        // No products found
                         productTableBody.append(
-                            '<tr><td colspan="3">Aucun résultat trouvé </td></tr>');
+                            '<tr><td colspan="3">Aucun produit trouvé </td></tr>');
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
+            });
+        }
+
+        // Initial display of all products
+        displayAllProducts();
+
+        // Listen for keyup event on the search input
+        $('#searchInput').keyup(function() {
+            // Get the search query value
+            var query = $(this).val();
+
+            // If the search query is empty, display all products
+            if (query === '') {
+                displayAllProducts();
+                return;
+            }
+
+            // Send an AJAX request to the server to search for products
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('produits.search') }}', // Use the correct route name for searching products
+                data: {
+                    query: query
+                },
+                success: function(response) {
+                    // Clear the table body
+                    productTableBody.empty();
+
+                    if (query !== '') {
+                        var produits = response.produits;
+
+                        if (produits.length > 0) {
+                            produits.forEach(function(product) {
+                                // Display each matching product
+                                productTableBody.append('<tr><td>' + product.nom +
+                                    '</td><td><img src="{{ asset('storage/') }}/' +
+                                    product.image +
+                                    '" alt="Produit Image" width="90"></td>' +
+                                    '<td><button class="add-product-btn btn btn-primary" data-nom="' +
+                                    product.nom + '" data-prixAchat="' + product
+                                    .prixAchat + '"data-produit-id="' + product
+                                    .id + '">+</button></td></tr>'
+                                );
+                            });
+                        } else {
+                            // No matching products found
+                            productTableBody.append(
+                                '<tr><td colspan="3">Aucun résultat trouvé </td></tr>');
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        // Listen for input change events on the discount[] and qty[] inputs
+        $(document).on('input', 'input[name="discount[]"], input[name="qty[]"]', function() {
+            var row = $(this).closest('tr');
+            var productPrixAchatInput = row.find('input[name="productPrixAchat[]"]');
+            var discountedPrixAchatInput = row.find('input[name="discountedPrixAchat[]"]');
+
+            // Get the values as numbers
+            var productPrixAchat = parseFloat(productPrixAchatInput.val()) || 0;
+            var discount = parseFloat(row.find('input[name="discount[]"]').val()) || 0;
+            var qty = parseFloat(row.find('input[name="qty[]"]').val()) || 0;
+
+            // Calculate the discountedPrixAchat
+            var discountedPrixAchat = (productPrixAchat - discount) * qty;
+
+            // Update the discountedPrixAchatInput
+            discountedPrixAchatInput.val(discountedPrixAchat);
+        });
+
+        // Listen for click events on the "+" buttons
+        $(document).on('click', '.add-product-btn', function(e) {
+            e.preventDefault();
+            var productName = $(this).data('nom');
+            var productPrixAchat = $(this).data('prixachat');
+            var productId = $(this).data('produit-id');
+            console.log(productId);
+            // Check if a row with the same product already exists
+            var existingRow = selectedProductTableBody.find('tr[data-nom="' + productName + '"]');
+
+            if (existingRow.length === 0) {
+                // If the row doesn't exist, create a new row for the selected product
+                var newRow = '<tr data-nom="' + productName + '">' +
+                    '<input type="hidden" name="produit_id[]" value="' + productId + '">' +
+                    '<td><input type="text" class="form-control" value="' + productName +
+                    '" name="productName[]" readonly></td>' +
+                    '<td><input type="text" class="form-control" value="' + productPrixAchat +
+                    '" name="productPrixAchat[]" readonly></td>' +
+                    '<td><input type="number" class="form-control" name="qty[]"></td>' +
+                    '<td><input type="number" class="form-control" name="discount[]"></td>' +
+                    '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
+                    '<td><button class="remove-product-btn btn btn-primary">-</button></td>' +
+                    '</tr>';
+
+
+                // Append the new row to the selected product table
+                selectedProductTableBody.append(newRow);
             }
         });
-    });
 
-    // Listen for input change events on the discount[] and qty[] inputs
-    $(document).on('input', 'input[name="discount[]"], input[name="qty[]"]', function() {
-        var row = $(this).closest('tr');
-        var productPrixAchatInput = row.find('input[name="productPrixAchat[]"]');
-        var discountedPrixAchatInput = row.find('input[name="discountedPrixAchat[]"]');
-        
-        // Get the values as numbers
-        var productPrixAchat = parseFloat(productPrixAchatInput.val()) || 0;
-        var discount = parseFloat(row.find('input[name="discount[]"]').val()) || 0;
-        var qty = parseFloat(row.find('input[name="qty[]"]').val()) || 0;
-        
-        // Calculate the discountedPrixAchat
-        var discountedPrixAchat = (productPrixAchat - discount) * qty;
-        
-        // Update the discountedPrixAchatInput
-        discountedPrixAchatInput.val(discountedPrixAchat);
-    });
+        // Listen for click events on the "-" buttons to remove rows
+        $(document).on('click', '.remove-product-btn', function() {
+            $(this).closest('tr').remove();
+        });
 
-    // Listen for click events on the "+" buttons
-    $(document).on('click', '.add-product-btn', function(e) {
-        e.preventDefault();
-        var productName = $(this).data('nom');
-        var productPrixAchat = $(this).data('prixachat');
-        
-        // Check if a row with the same product already exists
-        var existingRow = selectedProductTableBody.find('tr[data-nom="' + productName + '"]');
-        
-        if (existingRow.length === 0) {
-            // If the row doesn't exist, create a new row for the selected product
-            var newRow = '<tr data-nom="' + productName + '">' +
-                '<td><input type="text" class="form-control" value="' + productName +
-                '" name="productName[]" readonly></td>' +
-                '<td><input type="text" class="form-control" value="' + productPrixAchat +
-                '" name="productPrixAchat[]" readonly></td>' +
-                '<td><input type="number" class="form-control" name="qty[]"></td>' +
-                '<td><input type="number" class="form-control" name="discount[]" oninput="updateDiscountedPrixAchat(this)"></td>' +
-                '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
-                '<td><button class="remove-product-btn btn btn-primary">-</button></td>' +
-                '</tr>';
+        // Function to calculate and update discountedPrixAchat
+        function updateDiscountedPrixAchat(input) {
+            var row = $(input).closest('tr');
 
-            // Append the new row to the selected product table
-            selectedProductTableBody.append(newRow);
+            // Get the values by name
+            var productName = row.find('input[name="productName[]"]').val();
+            var productPrixAchat = parseFloat(row.find('input[name="productPrixAchat[]"]').val()) || 0;
+            var discountPercentage = parseFloat(row.find('input[name="discount[]"]').val()) || 0;
+            var qty = parseFloat(row.find('input[name="qty[]"]').val()) || 0;
+            // Ensure discountPercentage is within the range [0, 100]
+            discountPercentage = discountPercentage;
+            console.log(discountPercentage);
+            // Calculate the discountedPrixAchat
+            productPrixAchat = productPrixAchat * qty;
+            var discountedPrixAchat = (productPrixAchat * discountPercentage) / 100;
+            discountedPrixAchat = productPrixAchat - discountedPrixAchat;
+            // Update the discountedPrixAchatInput by name
+            row.find('input[name="discountedPrixAchat[]"]').val(discountedPrixAchat.toFixed(
+                2)); // Round to 2 decimal places
+
+            // You can also update other elements if needed, such as displaying the product name
+            // row.find('.product-name').text(productName);
         }
+
+        // Add an event listener to listen for input changes on discount inputs
+        $(document).on('input', 'input[name="discount[]"]', function() {
+            updateDiscountedPrixAchat(this);
+        });
+
+
+
     });
-
-    // Listen for click events on the "-" buttons to remove rows
-    $(document).on('click', '.remove-product-btn', function() {
-        $(this).closest('tr').remove();
-    });
-    
-   // Function to calculate and update discountedPrixAchat
-function updateDiscountedPrixAchat(input) {
-    var row = $(input).closest('tr');
-    var productPrixAchatInput = row.find('input[name="productPrixAchat[]"]');
-    var discountedPrixAchatInput = row.find('input[name="discountedPrixAchat[]"]');
-    
-    // Get the values as numbers
-    var productPrixAchat = parseFloat(productPrixAchatInput.val()) || 0;
-    var discountPercentage = parseFloat(input.value) || 0;
-    
-    // Ensure discountPercentage is within the range [0, 100]
-    discountPercentage = Math.min(Math.max(discountPercentage, 0), 100);
-    
-    // Calculate the discountedPrixAchat as (productPrixAchat * (100 - discountPercentage)) / 100
-    var discountedPrixAchat = ((productPrixAchat / discountPercentage)) / 100;
-    
-    // Update the discountedPrixAchatInput
-    discountedPrixAchatInput.val(discountedPrixAchat.toFixed(2)); // Round to 2 decimal places
-}
-
-
-});
 </script>

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offer_produit', function (Blueprint $table) {
+        Schema::create('offer_produit_individual', function (Blueprint $table) {
             $table->id();
             $table->foreignId('offer_id')->constrained();
             $table->foreignId('produit_id')->constrained();
@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('discount')->nullable();
             $table->timestamps();
         });
-        
     }
 
     /**

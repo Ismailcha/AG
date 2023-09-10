@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OfferProduitIndividual;
 use App\Models\Offer; // Import the Offer model with the correct namespace
 use Illuminate\Http\Request;
 use App\Models\Produit;
@@ -19,23 +20,44 @@ class OfferController extends Controller
     public function create()
     {
         $produits = Produit::all();
-        return view('offers.create', compact('produits'));
+        $offer = new Offer(); // Create an empty Offer model instance
+        return view('offers.create', compact('produits', 'offer'));
     }
 
     // Store a newly created offer in the database
     public function store(Request $request)
     {
         // Validate the request data
+        $validatedData = $request->validate([
+            'offre_name' => 'required|string|max:255',
+            'laboratoire' => 'required|string|max:255',
+            'grossiste' => 'nullable|string|max:255',
+            'date_start' => 'required|date',
+            'date_end' => 'required|date',
+            'escompte' => 'required|numeric',
+            'min_total' => 'required|numeric',
+        ]);
 
         // Create the offer
-        $offer = Offer::create($request->all());
+        $offer = Offer::create($validatedData);
 
-        // Attach products to the offer (if selected)
-
-        // Calculate discounted prices (if needed)
-
-        // Redirect to the offer details page
+        // Collect data from the request
+        $productIds = $request->input('produit_id');
+        $quantities = $request->input('qty');
+        $discounts = $request->input('discount');
+        // Ensure $productIds is an array
+        foreach ($productIds as $index => $productId) {
+            OfferProduitIndividual::create([
+                'offer_id' => $offer->id,
+                'produit_id' => $productId,
+                'quantity' => $quantities[$index],
+                'discount' => $discounts[$index],
+            ]);
+        }
+        return redirect()->route('offers.index')->with('success', 'Products added to the offer successfully.');
     }
+
+
 
     // Show the details of an offer
     public function show($id)

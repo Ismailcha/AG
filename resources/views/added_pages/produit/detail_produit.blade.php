@@ -1,1 +1,1 @@
-<h1>test</h1>
+<h1>test detail produit</h1>
