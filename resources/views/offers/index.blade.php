@@ -1,5 +1,4 @@
 <x-default-layout>
-
     <!-- Set the title -->
     @section('title', 'Offers')
 
@@ -11,28 +10,53 @@
     <!-- Page content -->
     <div class="container">
         <h1>Offers</h1>
-        <a href="{{ route('offers.create') }}" class="btn btn-primary">Create New Offer</a>
+        <a href="{{ route('offers.create') }}" class="btn btn-primary">Créé une nouvelle offre</a>
         <!-- Display a table of offers -->
-        <table class="table">
-            <thead>
+        <table class="table table-bordered">
+            <thead class="thead-light">
                 <tr>
-                    <th>Offer Name</th>
+                    <th>Nom Offre</th>
                     <th>Laboratoire</th>
-                    <th>Date Start</th>
+                    <th>Date fin</th>
+                    <th>Escompte</th>
+                    <th>Produits</th>
+                    <th>Prix Total</th>
                     <!-- Add more table headers as needed -->
                 </tr>
             </thead>
             <tbody>
-                @foreach($offers as $offer)
-                <tr>
-                    <td>{{ $offer->offre_name }}</td>
-                    <td>{{ $offer->laboratoire }}</td>
-                    <td>{{ $offer->date_start }}</td>
-                    <!-- Add more table data columns as needed -->
-                </tr>
+                @foreach ($offers as $offer)
+                    <tr>
+                        <td>{{ $offer->offre_name }}</td>
+                        <td>{{ $offer->laboratoire }}</td>
+                        <td>{{ $offer->date_end }}</td>
+                        <td>{{ $offer->escompte }}%</td>
+                        <td>
+                            @foreach ($offer->produits as $produit)
+                                <span class="text-primary">{{ $produit->nom }} |</span>
+                                <span>Prix de vente : {{ $produit->prixVente }}</span> <!-- Corrected this line -->
+                                <span><i>Quantiter :</i> {{ $produit->pivot->quantity }}</span>
+                                <span> <i>Remise :</i>
+                                    @if ($produit->pivot->discount !== null)
+                                        {{ $produit->pivot->discount }}
+                                    @else
+                                        <span>0</span>
+                                    @endif
+                                </span>
+
+                                <br>
+                            @endforeach
+                        </td>
+                        <td>
+
+
+                            <span>Total PrixVente: {{ $offer->totalPrixVenteWithEscompte }}</span>
+                            <!-- Display the total here -->
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    
+
 </x-default-layout>

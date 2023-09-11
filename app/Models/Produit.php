@@ -16,11 +16,7 @@ class Produit extends Model
     }
     public function offers()
     {
-        return $this->belongsToMany(Offer::class, 'offer_produit')
-            ->withPivot('quantity', 'discount', 'discounted_price');
-    }
-    public function offerProduitIndividuals()
-    {
-        return $this->hasMany(Offer_Produit_Individual::class);
+        return $this->belongsToMany(Offer::class, 'offer_produit_individual')
+            ->withPivot('quantity', 'discount');
     }
 }

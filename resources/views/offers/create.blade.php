@@ -2,7 +2,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Set the title -->
-    @section('title', 'Create Offer')
+    @section('title', 'Creation d\'offre individual')
 
     <!-- Define breadcrumbs -->
     @section('breadcrumbs')
@@ -35,7 +35,7 @@
 
             <!-- Offer Name -->
             <div class="form-group">
-                <label for="offre_name">Offer Name</label>
+                <label for="offre_name">Nom offer</label>
                 <input type="text" class="form-control" id="offre_name" name="offre_name" required>
             </div>
 
@@ -53,25 +53,25 @@
 
             <!-- Date Start -->
             <div class="form-group">
-                <label for="date_start">Date Start</label>
+                <label for="date_start">Date debut</label>
                 <input type="date" class="form-control" id="date_start" name="date_start" required>
             </div>
 
             <!-- Date End -->
             <div class="form-group">
-                <label for="date_end">Date End</label>
+                <label for="date_end">Date fin</label>
                 <input type="date" class="form-control" id="date_end" name="date_end" required>
             </div>
 
             <!-- Escompte -->
             <div class="form-group">
-                <label for="escompte">Escompte</label>
+                <label for="escompte">Escompte %</label>
                 <input type="number" class="form-control" id="escompte" name="escompte" required>
             </div>
 
             <!-- Min Total -->
             <div class="form-group">
-                <label for="min_total">Min Total</label>
+                <label for="min_total">Total minimum</label>
                 <input type="number" class="form-control" id="min_total" name="min_total" required>
             </div>
 
@@ -79,14 +79,14 @@
 
 
             <!-- Table to display selected products -->
-            <h2>Selected Produits</h2>
+            <h2 class='text-success'>Produits Sélectionnés</h2>
             <table class="table" id="selectedProductTable">
                 <thead>
                     <tr>
-                        <th>Product Name</th>
+                        <th>Nom produit</th>
                         <th>Prix Achat</th>
-                        <th>Qty</th>
-                        <th>Remise</th>
+                        <th>Quantité</th>
+                        <th>Remise %</th>
                         <th>Prix Remise</th>
                         <th>Action</th>
                     </tr>
@@ -95,7 +95,7 @@
                     <!-- This table will be populated with selected products via JavaScript -->
                 </tbody>
             </table>
-            <h2>Add Products to Offer</h2>
+            <h2 class='text-success'>Ajouter des produits a l'offre</h2>
             <!-- You can include code here to select products and associate them with the offer -->
             <div class="form-group">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search by Name">
@@ -253,7 +253,6 @@
             var productName = $(this).data('nom');
             var productPrixAchat = $(this).data('prixachat');
             var productId = $(this).data('produit-id');
-            console.log(productId);
             // Check if a row with the same product already exists
             var existingRow = selectedProductTableBody.find('tr[data-nom="' + productName + '"]');
 
@@ -267,7 +266,7 @@
                     '" name="productPrixAchat[]" readonly></td>' +
                     '<td><input type="number" class="form-control" name="qty[]"></td>' +
                     '<td><input type="number" class="form-control" name="discount[]"></td>' +
-                    '<td><input type="number" class="form-control" name="discountedPrixAchat[]"></td>' +
+                    '<td><input type="text" class="form-control" name="discountedPrixAchat[]" readonly></td>' +
                     '<td><button class="remove-product-btn btn btn-primary">-</button></td>' +
                     '</tr>';
 
@@ -293,7 +292,6 @@
             var qty = parseFloat(row.find('input[name="qty[]"]').val()) || 0;
             // Ensure discountPercentage is within the range [0, 100]
             discountPercentage = discountPercentage;
-            console.log(discountPercentage);
             // Calculate the discountedPrixAchat
             productPrixAchat = productPrixAchat * qty;
             var discountedPrixAchat = (productPrixAchat * discountPercentage) / 100;

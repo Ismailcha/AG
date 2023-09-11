@@ -12,9 +12,27 @@ class OfferController extends Controller
     // Display a list of offers
     public function index()
     {
-        $offers = Offer::all();
+        // Retrieve all offers with their associated products
+        $offers = Offer::with('produits')->get();
+
+        // Calculate the total prixVente for each offer and apply the escompte percentage
+        $offers->each(function ($offer) {
+            $totalPrixVente = $offer->produits->sum(function ($produit) {
+                return $produit->pivot->quantity * $produit->prixVente;
+            });
+
+            // Apply the escompte percentage
+            $totalPrixVenteWithEscompte = $totalPrixVente - ($totalPrixVente * ($offer->escompte / 100));
+
+            $offer->totalPrixVenteWithEscompte = $totalPrixVenteWithEscompte;
+        });
+
         return view('offers.index', compact('offers'));
     }
+
+
+
+
 
     // Show the form for creating a new offer
     public function create()
@@ -62,7 +80,7 @@ class OfferController extends Controller
     // Show the details of an offer
     public function show($id)
     {
-        $offer = Offer::findOrFail($id);
+        $offer = Offer::with('produits')->findOrFail($id);
         return view('offers.show', compact('offer'));
     }
 
