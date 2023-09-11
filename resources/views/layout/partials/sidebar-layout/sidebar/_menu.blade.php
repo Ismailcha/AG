@@ -72,6 +72,13 @@
                             </span>
                             <span class="menu-title">Liste des client</span>
                         </a>
+                        <a class="menu-link {{ request()->routeIs('vente.liste') ? 'active' : '' }}"
+                            href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Vente&Achat</span>
+                        </a>
                         {{-- <a class="menu-link {{ request()->routeIs('techniciens.index') ? 'active' : '' }}"
                             href="{{ route('techniciens.index') }}">
                             <span class="menu-bullet">
