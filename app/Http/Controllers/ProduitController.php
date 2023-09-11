@@ -84,8 +84,8 @@ class ProduitController extends Controller
     public function edit($id)
     {
         $produit = Produit::findOrFail($id);
-
-        return view('added_pages.produit.modify_produit', compact('produit'));
+        $categories = Categorie::all();
+        return view('added_pages.produit.modify_produit', compact('produit', 'categories'));
     }
 
     /**
@@ -148,7 +148,7 @@ class ProduitController extends Controller
 
         // Perform the search based on the 'nom' field
         $produits = Produit::where('nom', 'like', '%' . $query . '%')->get();
-        
+
 
         return response()->json(['produits' => $produits]); // Use 'produits' instead of 'produit'
     }
