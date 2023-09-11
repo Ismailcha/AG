@@ -48,10 +48,10 @@
                             @endforeach
                         </td>
                         <td>
-
-
-                            <span>Total PrixVente: {{ $offer->totalPrixVenteWithEscompte }}</span>
-                            <!-- Display the total here -->
+                            <span>Total Prix de vente: {{ $offer->totalPrixVenteWithEscompte }}</span>
+                        </td>
+                        <td>
+                            <a href="{{ route('offers.show', ['id' => $offer->id]) }}" class="btn btn-primary">Voir</a>
                         </td>
                     </tr>
                 @endforeach
