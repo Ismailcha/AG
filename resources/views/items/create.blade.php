@@ -9,13 +9,13 @@
     @endsection
 
     <div class="container">
-        <h1>Create a New Item</h1>
+        <h1>Creer Un article</h1>
     
         <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
             @csrf
     
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Nom</label>
                 <input type="text" name="name" id="name" class="form-control" required>
             </div>
     
@@ -25,12 +25,12 @@
             </div>
     
             <div class="form-group">
-                <label for="price">Price (DH)</label>
+                <label for="price">Prix (DH)</label>
                 <input type="number" name="price" id="price" class="form-control" required>
             </div>
     
             <div class="form-group">
-                <label for="seller_name">Seller Name</label>
+                <label for="seller_name">Vendeur Nom</label>
                 <input type="text" name="seller_name" id="seller_name" class="form-control" required>
             </div>
     
@@ -40,12 +40,12 @@
             </div>
     
             <div class="form-group">
-                <label for="phone_number">Phone Number</label>
+                <label for="phone_number">Num tele</label>
                 <input type="text" name="phone_number" id="phone_number" class="form-control" required>
             </div>
     
             <div class="form-group">
-                <label for="city">City</label>
+                <label for="city">Ville</label>
                 <input type="text" name="city" id="city" class="form-control" required>
             </div>
     

@@ -126,7 +126,7 @@
             </table>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary">Create Offer</button>
+            <button type="submit" class="btn btn-primary">Creer un Offer</button>
         </form>
     </div>
 </x-default-layout>
