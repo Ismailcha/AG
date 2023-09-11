@@ -12,6 +12,7 @@ class Offer extends Model
         'grossiste',
         'date_start',
         'date_end',
+        'user_id',
         'escompte',
         'min_total',
     ];
@@ -20,5 +21,9 @@ class Offer extends Model
     {
         return $this->belongsToMany(Produit::class, 'offer_produit_individual')
             ->withPivot('quantity', 'discount');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

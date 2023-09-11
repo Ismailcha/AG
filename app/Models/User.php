@@ -59,4 +59,8 @@ class User extends Authenticatable
 
         return $this->profile_photo_path;
     }
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 }

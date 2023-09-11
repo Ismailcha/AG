@@ -55,14 +55,29 @@ class OfferController extends Controller
             'escompte' => 'required|numeric',
             'min_total' => 'required|numeric',
         ]);
-
-        // Create the offer
-        $offer = Offer::create($validatedData);
-
-        // Collect data from the request
         $productIds = $request->input('produit_id');
+        if (empty($productIds)) {
+            return redirect()->route('offers.create')->with('success', 'L\'offre ne peut pas être enregistrée car aucun produit n\'a été ajouté.');
+        }
+        // Get the authenticated user's ID
+        $userId = auth()->user()->id;
+
+        // Create the offer with user_id
+        $offer = Offer::create([
+            'user_id' => $userId,
+            'offre_name' => $validatedData['offre_name'],
+            'laboratoire' => $validatedData['laboratoire'],
+            'grossiste' => $validatedData['grossiste'],
+            'date_start' => $validatedData['date_start'],
+            'date_end' => $validatedData['date_end'],
+            'escompte' => $validatedData['escompte'],
+            'min_total' => $validatedData['min_total'],
+        ]);
+        // Collect data from the request
+
         $quantities = $request->input('qty');
         $discounts = $request->input('discount');
+
         // Ensure $productIds is an array
         foreach ($productIds as $index => $productId) {
             OfferProduitIndividual::create([
@@ -72,8 +87,10 @@ class OfferController extends Controller
                 'discount' => $discounts[$index],
             ]);
         }
-        return redirect()->route('offers.index')->with('success', 'Products added to the offer successfully.');
+
+        return redirect()->route('offers.index')->with('success', 'Offer created successfully.');
     }
+
 
 
 
