@@ -12,7 +12,7 @@
         <div class="container mt-4">
             <h1>Modifier le Produit</h1>
 
-            <form action="{{ route('produits.update', $produit->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('produit.update', $produit->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') <!-- Use the HTTP PUT method for update -->
 
