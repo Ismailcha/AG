@@ -31,6 +31,7 @@
                             <th>Quantiter</th>
                             <th>Prix</th>
                             <th>Remise</th>
+                            <th>Prix</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +39,11 @@
                             <tr>
                                 <td>{{ $produit->nom }}</td>
                                 <td>{{ $produit->prixVente }}</td>
-                                <td>{{ $produit->pivot->quantity }}</td> <!-- Accessing pivot data -->
+                                <td> <input type="number" class='form-control' min='0'
+                                        max='{{ $produit->pivot->quantity }}'> <small>max :
+                                        {{ $produit->pivot->quantity }} </small>
+                                </td>
+                                <!-- Accessing pivot data -->
                                 <td>{{ $produit->pivot->discount }}%</td> <!-- Accessing pivot data -->
                                 <td></td>
                             </tr>
