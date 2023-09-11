@@ -80,7 +80,7 @@
 
             <!-- Table to display selected products -->
             <h2 class='text-success'>Produits Sélectionnés</h2>
-            <table class="table" id="selectedProductTable">
+            <table class="table table table-bordered" id="selectedProductTable">
                 <thead>
                     <tr>
                         <th>Nom produit</th>
@@ -102,7 +102,7 @@
             </div>
 
             <!-- Display a table of products with live search -->
-            <table class="table" id="productTable">
+            <table class="table table-bordered" id="productTable">
                 <thead>
                     <tr>
                         <th>Nom De produit</th>
