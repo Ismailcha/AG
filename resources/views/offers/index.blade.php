@@ -9,8 +9,12 @@
 
     <!-- Page content -->
     <div class="container">
-        <h1>Offers</h1>
         <a href="{{ route('offers.create') }}" class="btn btn-primary">Créé une nouvelle offre</a>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- Display a table of offers -->
         <table class="table table-bordered">
             <thead class="thead-light">

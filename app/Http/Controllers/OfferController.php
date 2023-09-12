@@ -88,7 +88,7 @@ class OfferController extends Controller
             ]);
         }
 
-        return redirect()->route('offers.index')->with('success', 'Offer created successfully.');
+        return redirect()->route('offers.index')->with('success', 'Offre cree avec success');
     }
 
 
