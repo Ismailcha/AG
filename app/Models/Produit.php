@@ -19,4 +19,8 @@ class Produit extends Model
         return $this->belongsToMany(Offer::class, 'offer_produit_individual')
             ->withPivot('quantity', 'discount');
     }
+    public function commandeOffreIndividus()
+    {
+        return $this->hasMany(CommandeOffreIndividu::class, 'produit_id');
+    }
 }

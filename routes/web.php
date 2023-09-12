@@ -1,21 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrganismeController;
 use App\Http\Controllers\TechnicienController;
-use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
+use App\Http\Controllers\CommandeOffreIndividuController;
 use App\Http\Controllers\Apps\PermissionManagementController;
-use App\Http\Controllers\CategorieController;
-use App\Http\Controllers\OrganismeController;
-use App\Http\Controllers\ItemController;
 //items
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
@@ -85,6 +86,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
 
+    // commande offer individual 
+    Route::post('/commandesindividu', [CommandeOffreIndividuController::class, 'store'])->name('commandesindividu.store');
 
     // produits
     Route::resource('produit', ProduitController::class);

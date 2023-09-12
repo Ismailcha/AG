@@ -305,7 +305,7 @@
         }
 
         // Add an event listener to listen for input changes on discount inputs
-        $(document).on('input', 'input[name="discount[]"]', function() {
+        $(document).on('input', 'input[name="discount[]"], input[name="qty[]"]', function() {
             updateDiscountedPrixAchat(this);
         });
 

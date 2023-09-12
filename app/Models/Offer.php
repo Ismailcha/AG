@@ -26,4 +26,8 @@ class Offer extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function commandeOffreIndividus()
+    {
+        return $this->hasMany(CommandeOffreIndividu::class, 'offer_id');
+    }
 }
