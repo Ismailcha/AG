@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\CommandeOffreIndividu;
 
 class UserController extends Controller
 {
@@ -75,5 +76,16 @@ class UserController extends Controller
     public function create()
     {
         return view('users.create');
+    }
+    public function userCommandes()
+    {
+        $commandes = CommandeOffreIndividu::where('user_id', auth()->user()->id)
+            ->with('offer', 'produit') // Load relationships if you have defined them
+            ->get();
+
+        // Group commandes by offer
+        $groupedCommandes = $commandes->groupBy('offer_id');
+
+        return view('offers.user_commandes', compact('groupedCommandes'));
     }
 }

@@ -101,6 +101,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // commande offer individual 
     Route::post('/commandesindividu', [CommandeOffreIndividuController::class, 'store'])->name('commandesindividu.store');
+    // user_commandes
+    Route::get('/commandes', [UserController::class, 'userCommandes'])->name('user.commandes');
 
     // produits
     Route::resource('produit', ProduitController::class);

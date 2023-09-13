@@ -7,39 +7,37 @@
     @endsection
 
     @section('breadcrumbs')
-       
     @endsection
 
-    <h1>List an Item for Sale</h1>
-    
+
     <form method="POST" action="/items">
         @csrf <!-- CSRF Protection -->
-        
+
         <!-- Item Name -->
-        <label for="item_name">Item Name:</label>
+        <label for="item_name">Nom:</label>
         <input type="text" name="item_name" id="item_name" required>
         <br>
-        
+
         <!-- Price -->
-        <label for="price">Price:</label>
+        <label for="price">Prix:</label>
         <input type="number" name="price" id="price" required>
         <br>
-        
+
         <!-- Seller's Name -->
-        <label for="seller_name">Seller's Name:</label>
+        <label for="seller_name">Nom vendeur:</label>
         <input type="text" name="seller_name" id="seller_name" required>
         <br>
-        
+
         <!-- Phone Number -->
-        <label for="phone_number">Phone Number:</label>
+        <label for="phone_number">Numero telephone:</label>
         <input type="tel" name="phone_number" id="phone_number" required>
         <br>
-        
+
         <!-- City -->
-        <label for="city">City:</label>
+        <label for="city">Ville:</label>
         <input type="text" name="city" id="city" required>
         <br>
-        
-        <button type="submit">List Item</button>
+
+        <button type="submit">Enregistrer</button>
     </form>
 </x-default-layout>
