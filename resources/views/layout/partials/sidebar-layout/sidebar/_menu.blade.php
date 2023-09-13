@@ -74,12 +74,20 @@
                         </a>
                         <a class="menu-link {{ request()->routeIs('items.index') ? 'active' : '' }}"
                             href="{{ route('items.index') }}">
-                             <span class="menu-bullet">
-                                 <span class="bullet bullet-dot"></span>
-                             </span>
-                             <span class="menu-title">Vente&Achat</span>
-                         </a>
-                         
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Vente&Achat</span>
+                        </a>
+
+
+                        <a class="menu-link {{ request()->routeIs('user.commandes') ? 'active' : '' }}"
+                            href="{{ route('user.commandes') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Vos commandes</span>
+                        </a>
                         {{-- <a class="menu-link {{ request()->routeIs('techniciens.index') ? 'active' : '' }}"
                             href="{{ route('techniciens.index') }}">
                             <span class="menu-bullet">
