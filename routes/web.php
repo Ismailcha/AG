@@ -17,6 +17,21 @@ use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\CommandeOffreIndividuController;
 use App\Http\Controllers\Apps\PermissionManagementController;
+use App\Http\Controllers\SpecialityController;
+use App\Http\Controllers\CandidateController;
+
+// les condidate
+Route::resource('candidates', CandidateController::class);
+Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+Route::get('/candidates/create', [CandidateController::class, 'create'])->name('candidates.create');
+Route::post('/candidates', [CandidateController::class, 'store'])->name('candidates.store');
+Route::get('/candidates/{candidate}', [CandidateController::class, 'show'])->name('candidates.show');
+Route::get('/candidates/{candidate}/edit', [CandidateController::class, 'edit'])->name('candidates.edit');
+Route::put('/candidates/{candidate}', [CandidateController::class, 'update'])->name('candidates.update');
+Route::delete('/candidates/{candidate}', [CandidateController::class, 'destroy'])->name('candidates.destroy');
+
+Route::post('/specialities', [SpecialityController::class, 'store'])->name('specialities.store');
+
 //items
 Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');

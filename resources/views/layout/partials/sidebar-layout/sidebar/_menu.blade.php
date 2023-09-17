@@ -109,6 +109,14 @@
                             </span>
                             <span class="menu-title">Liste des organismes</span>
                         </a>
+                        <a class="menu-link {{ request()->routeIs('candidates.index') ? 'active' : '' }}"
+                            href="{{ route('candidates.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Liste des candidats</span>
+                         </a>
+                         
 
                         <!--end:Menu link-->
                     </div>

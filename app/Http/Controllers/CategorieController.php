@@ -29,26 +29,29 @@ class CategorieController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nomCat' => 'required|string|max:255', Rule::unique('categories')->ignore($request->id), // Ignore the current category
-        ]);
+{
+    $validatedData = $request->validate([
+        'nom' => 'required',
+        'prenom' => 'required',
+        'date_naissance' => 'required',
+        'genre' => 'required',
+        'ville' => 'required',
+        'specialites' => 'required|array', // Validate as an array
+        'disponibilite' => 'required',
+        'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation for your file input
+        'cv' => 'mimes:pdf,doc,docx|max:2048', // Adjust the validation for your file input
+    ]);
 
-        // Check if a category with the same name exists
-        $existingCategory = Categorie::where('nomCat', $validatedData['nomCat'])->first();
+    // Create the candidate
+    $candidate = Candidate::create($validatedData);
 
-        if ($existingCategory) {
-            // Category already exists, you can return a message
-            return redirect()->route('produit.create')->with('error', 'Category already exists.');
-        } else {
-            // Category doesn't exist, create a new one
-            Categorie::create([
-                'nomCat' => $validatedData['nomCat'],
-            ]);
+    // Attach selected specialities to the candidate
+    $candidate->specialities()->attach($request->input('specialites'));
 
-            return redirect()->route('produit.create')->with('success', 'Categories cree avec success.')->with('input', $request->input());
-        }
-    }
+    return redirect()->route('candidates.index')
+        ->with('success', 'Candidat a été bien ajouté.');
+}
+
 
 
     /**
