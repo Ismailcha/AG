@@ -73,6 +73,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/commandesindividu', [CommandeOffreIndividuController::class, 'store'])->name('commandesindividu.store');
     // user_commandes
     Route::get('/commandes', [CommandeOffreIndividuController::class, 'index'])->name('user.commandes');
+    // user_commandes -> details
+    Route::get('/commande/{id}', [CommandeOffreIndividuController::class, 'show'])->name('commande.show');
+
     //commande filter
     Route::get('/commande/filter', [CommandeOffreIndividuController::class, 'filter'])->name('commande.filter');
     // produits
