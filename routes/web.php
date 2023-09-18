@@ -32,41 +32,8 @@ Route::delete('/candidates/{candidate}', [CandidateController::class, 'destroy']
 
 Route::post('/specialities', [SpecialityController::class, 'store'])->name('specialities.store');
 
-//items
-Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
-Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
-Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
-Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
-Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
-// List all offers
-Route::get('/offers', [OfferController::class, 'index'])->name('offers.index');
 
-// Show the form to create a new offer
-Route::get('/offers/create', [OfferController::class, 'create'])->name('offers.create');
-
-// Store a newly created offer
-Route::post('/offers', [OfferController::class, 'store'])->name('offers.store');
-
-// Show the details of a specific offer
-Route::get('/offers/{id}', [OfferController::class, 'show'])->name('offers.show');
-
-// Show the form to edit an existing offer
-Route::get('/offers/{id}/edit', [OfferController::class, 'edit'])->name('offers.edit');
-
-// Update an existing offer
-Route::put('/offers/{id}', [OfferController::class, 'update'])->name('offers.update');
-
-// Remove a product from an offer
-Route::delete('/offers/{offerId}/remove-product/{produitId}', [OfferController::class, 'removeProduct'])->name('offers.removeProduct');
-
-// Delete an offer
-Route::delete('/offers/{id}', [OfferController::class, 'destroy'])->name('offers.destroy');
-
-
-
-Route::get('/offress/create',  [OffreController::class, 'searchArticles'])->name('articles.search');
+// Route::get('/offress/create',  [OffreController::class, 'searchArticles'])->name('articles.search');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.delete');
 Route::post('/articles', [ArticleController::class, 'createproduct'])->name('articles.store');
 Route::get('/produits/{id}', [ProduitController::class, 'show']);
@@ -101,11 +68,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
 
+
     // commande offer individual 
     Route::post('/commandesindividu', [CommandeOffreIndividuController::class, 'store'])->name('commandesindividu.store');
     // user_commandes
-    Route::get('/commandes', [UserController::class, 'userCommandes'])->name('user.commandes');
-
+    Route::get('/commandes', [CommandeOffreIndividuController::class, 'index'])->name('user.commandes');
+    //commande filter
+    Route::get('/commande/filter', [CommandeOffreIndividuController::class, 'filter'])->name('commande.filter');
     // produits
     Route::resource('produit', ProduitController::class);
     // recherche produit
@@ -128,10 +97,40 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/organismes/{organisme}/edit', [OrganismeController::class, 'edit'])->name('organismes.edit');
     // delete organisme
     Route::delete('/organismes/{organisme}', [OrganismeController::class, 'destroy'])->name('organismes.destroy');
-    // delete organisme
-    Route::put('/organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
     //update organisme
+    Route::put('/organismes/{organisme}', [OrganismeController::class, 'update'])->name('organismes.update');
 
+    //items
+    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
+    Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+    Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
+    Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
+    // List all offers
+    Route::get('/offers', [OfferController::class, 'index'])->name('offers.index');
+
+    // Show the form to create a new offer
+    Route::get('/offers/create', [OfferController::class, 'create'])->name('offers.create');
+
+    // Store a newly created offer
+    Route::post('/offers', [OfferController::class, 'store'])->name('offers.store');
+
+    // Show the details of a specific offer
+    Route::get('/offers/{id}', [OfferController::class, 'show'])->name('offers.show');
+
+    // Show the form to edit an existing offer
+    Route::get('/offers/{id}/edit', [OfferController::class, 'edit'])->name('offers.edit');
+
+    // Update an existing offer
+    Route::put('/offers/{id}', [OfferController::class, 'update'])->name('offers.update');
+
+    // Remove a product from an offer
+    Route::delete('/offers/{offerId}/remove-product/{produitId}', [OfferController::class, 'removeProduct'])->name('offers.removeProduct');
+
+    // Delete an offer
+    Route::delete('/offers/{id}', [OfferController::class, 'destroy'])->name('offers.destroy');
 });
 
 Route::get('/error', function () {
