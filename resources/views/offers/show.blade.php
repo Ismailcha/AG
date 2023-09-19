@@ -61,7 +61,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </form>
+
                     </tbody>
                 </table>
             @endif
@@ -74,128 +74,132 @@
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-primary" id="submit-button">Commendez</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
     <!--end::Row-->
 </x-default-layout>
 <script>
-    $('#quantity-error-message').hide();
-    $('#total-min-message').hide();
-    // Function to update the total product price for a row
-    function updateTotalPrice(row) {
-        var prixVente = parseFloat(row.find('.prixVente').text());
-        var quantity = parseFloat(row.find('input.quantity').val()) || 0;
-        var remiseText = row.find('.remise').text().trim();
-        var remise = parseFloat(remiseText.replace('%', '')) || 0;
-
-        // Calculate the total price before remise
-        var totalBeforeRemise = prixVente * quantity;
-
-        // Apply remise as a percentage
-        if (remise > 0) {
-            var remiseAmount = (totalBeforeRemise * remise) / 100;
-            var totalAfterRemise = totalBeforeRemise - remiseAmount;
-            row.find('.total-price').text(totalAfterRemise.toFixed(2));
-        } else {
-            // If no remise, update with the total before remise
-            row.find('.total-price').text(totalBeforeRemise.toFixed(2));
-        }
-    }
-
-    // Function to calculate and display the totals
-    // Function to calculate and display the totals
-    function calculateAndDisplayTotals() {
-        var tsRemise = 0;
-        var tpRemiser = 0;
-
-        // Loop through all rows and calculate the totals
-        $('table > tbody > tr').each(function() {
-            var row = $(this);
+    $(document).ready(function() {
+        $('#quantity-error-message').hide();
+        $('#total-min-message').hide();
+        // Function to update the total product price for a row
+        function updateTotalPrice(row) {
             var prixVente = parseFloat(row.find('.prixVente').text());
             var quantity = parseFloat(row.find('input.quantity').val()) || 0;
-            // Calculate and display the product of prixVente and quantity for each row
-            var rowTotal = prixVente * quantity;
-            // Sum up the rowTotal for tsRemise
-            tsRemise += rowTotal;
-        });
+            var remiseText = row.find('.remise').text().trim();
+            var remise = parseFloat(remiseText.replace('%', '')) || 0;
 
-        // Calculate total with remises applied
-        $('table > tbody > tr').each(function() {
-            var total = parseFloat($(this).find('.total-price').text()) || 0;
-            tpRemiser += total;
-        });
+            // Calculate the total price before remise
+            var totalBeforeRemise = prixVente * quantity;
 
-        // Display the calculated totals
-        $('.tsremise').text(tsRemise.toFixed(2));
-        $('.tpremiser').text(tpRemiser.toFixed(2));
-        $('.gain').text((tsRemise - tpRemiser - ({{ $offer->escompte }} * tpRemiser / 100)).toFixed(2));
-    }
-
-
-    // Event listener for quantity input changes
-    $(document).on('input', 'input.quantity', function() {
-        var allInputsValid = true;
-
-        // Loop through all quantity inputs and check if any are less than the minimum
-        $('input.quantity').each(function() {
-            var row = $(this).closest('tr');
-            var minQuantity = parseFloat(row.find('.input-group-text').text().replace('Min:', ''));
-
-            // Get the entered quantity
-            var enteredQuantity = parseFloat($(this).val()) || 0;
-
-            // Check if the entered quantity is less than the minimum allowed
-            if (enteredQuantity < minQuantity) {
-                allInputsValid = false;
-                return false; // Exit the loop if an input is invalid
+            // Apply remise as a percentage
+            if (remise > 0) {
+                var remiseAmount = (totalBeforeRemise * remise) / 100;
+                var totalAfterRemise = totalBeforeRemise - remiseAmount;
+                row.find('.total-price').text(totalAfterRemise.toFixed(2));
+            } else {
+                // If no remise, update with the total before remise
+                row.find('.total-price').text(totalBeforeRemise.toFixed(2));
             }
+        }
+
+        // Function to calculate and display the totals
+        // Function to calculate and display the totals
+        function calculateAndDisplayTotals() {
+            var tsRemise = 0;
+            var tpRemiser = 0;
+
+            // Loop through all rows and calculate the totals
+            $('table > tbody > tr').each(function() {
+                var row = $(this);
+                var prixVente = parseFloat(row.find('.prixVente').text());
+                var quantity = parseFloat(row.find('input.quantity').val()) || 0;
+                // Calculate and display the product of prixVente and quantity for each row
+                var rowTotal = prixVente * quantity;
+                // Sum up the rowTotal for tsRemise
+                tsRemise += rowTotal;
+            });
+
+            // Calculate total with remises applied
+            $('table > tbody > tr').each(function() {
+                var total = parseFloat($(this).find('.total-price').text()) || 0;
+                tpRemiser += total;
+            });
+
+            // Display the calculated totals
+            $('.tsremise').text(tsRemise.toFixed(2));
+            $('.tpremiser').text(tpRemiser.toFixed(2));
+            $('.gain').text((tsRemise - tpRemiser - ({{ $offer->escompte }} * tpRemiser / 100)).toFixed(2));
+        }
+
+
+        // Event listener for quantity input changes
+        $(document).on('input', 'input.quantity', function() {
+            var allInputsValid = true;
+
+            // Loop through all quantity inputs and check if any are less than the minimum
+            $('input.quantity').each(function() {
+                var row = $(this).closest('tr');
+                var minQuantity = parseFloat(row.find('.input-group-text').text().replace(
+                    'Min:', ''));
+
+                // Get the entered quantity
+                var enteredQuantity = parseFloat($(this).val()) || 0;
+
+                // Check if the entered quantity is less than the minimum allowed
+                if (enteredQuantity < minQuantity) {
+                    allInputsValid = false;
+                    return false; // Exit the loop if an input is invalid
+                }
+            });
+
+            // Show or hide the error message based on validation results
+            if (allInputsValid) {
+                $('#quantity-error-message').hide();
+            } else {
+                $('#quantity-error-message').show();
+            }
+
+            // Enable or disable the submit button based on validation results
+            if (allInputsValid) {
+                $('#submit-button').prop('disabled', false);
+            } else {
+                $('#submit-button').prop('disabled', true);
+            }
+
+            // Update the total prices for all rows
+            $('input.quantity').each(function() {
+                var row = $(this).closest('tr');
+                updateTotalPrice(row);
+            });
+
+            // Calculate and display the totals
+            calculateAndDisplayTotals();
+            // Call the function to check the Total minimum initially
+            checkTotalMin();
         });
 
-        // Show or hide the error message based on validation results
-        if (allInputsValid) {
-            $('#quantity-error-message').hide();
-        } else {
-            $('#quantity-error-message').show();
-        }
-
-        // Enable or disable the submit button based on validation results
-        if (allInputsValid) {
-            $('#submit-button').prop('disabled', false);
-        } else {
-            $('#submit-button').prop('disabled', true);
-        }
-
-        // Update the total prices for all rows
-        $('input.quantity').each(function() {
-            var row = $(this).closest('tr');
+        // Initial calculation
+        $('tr').each(function() {
+            var row = $(this);
             updateTotalPrice(row);
         });
 
-        // Calculate and display the totals
-        calculateAndDisplayTotals();
-        // Call the function to check the Total minimum initially
-        checkTotalMin();
-    });
-
-    // Initial calculation
-    $('tr').each(function() {
-        var row = $(this);
-        updateTotalPrice(row);
-    });
-
-    function checkTotalMin() {
-        var prixRemis = parseFloat($('.tpremiser').text()) || 0;
-        var totalMin = parseFloat($('.total-minimum').text()) || 0;
-        if (prixRemis <= totalMin) {
-            $('#total-min-message').show();
-        } else {
-            $('#total-min-message').hide();
+        function checkTotalMin() {
+            var prixRemis = parseFloat($('.tpremiser').text()) || 0;
+            var totalMin = parseFloat($('.total-minimum').text()) || 0;
+            if (prixRemis <= totalMin) {
+                $('#total-min-message').show();
+            } else {
+                $('#total-min-message').hide();
+            }
         }
-    }
 
 
 
-    // Calculate and display the totals initially
-    calculateAndDisplayTotals();
+        // Calculate and display the totals initially
+        calculateAndDisplayTotals();
+    });
 </script>

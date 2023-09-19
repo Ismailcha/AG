@@ -47,7 +47,7 @@
                                     @foreach ($groupedCommandes as $offerId => $groupedDates)
                                         @foreach ($groupedDates as $date => $offerCommandes)
                                             <tr>
-                                                <td rowspan="{{ count($offerCommandes) }}">
+                                                <td>
                                                     <h3 class="text-success">{{ $offerCommandes[0]->offer->offre_name }}
                                                     </h3>
                                                 </td>

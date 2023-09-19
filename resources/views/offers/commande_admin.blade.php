@@ -8,6 +8,10 @@
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
         <div class="container mt-5 justify-content-center">
+            <div class="mb-4 col-4">
+                <label for="search-input" class="form-label">Recherche par nom d'offre :</label>
+                <input type="text" class="form-control" id="search-input" placeholder="Rechercher...">
+            </div>
             <table id='filtered-tables-container' class="table table-bordered">
                 <thead>
                     <tr>
@@ -22,7 +26,7 @@
                     @foreach ($groupedCommandes as $offerId => $groupedDates)
                         @foreach ($groupedDates as $date => $offerCommandes)
                             <tr>
-                                <td rowspan="{{ count($offerCommandes) }}">
+                                <td>
                                     <h3 class="text-success">{{ $offerCommandes[0]->offer->offre_name }}</h3>
                                 </td>
                                 <td> {{ $offerCommandes[0]->offer->laboratoire }}</td>
@@ -51,5 +55,24 @@
 
         </div>
     </div>
-    <!--end::Row-->
+    <script>
+        $(document).ready(function() {
+            // Add an input event listener to the search input
+            $('#search-input').on('input', function() {
+                var searchValue = $(this).val().toLowerCase();
+
+                // Iterate through table rows and hide/show them based on the search input
+                $('#filtered-tables-container tbody tr').each(function() {
+                    var row = $(this);
+                    var offerName = row.find('td:first h3').text().toLowerCase();
+
+                    if (offerName.includes(searchValue) || searchValue === '') {
+                        row.show();
+                    } else {
+                        row.hide();
+                    }
+                });
+            });
+        });
+    </script>
 </x-default-layout>
