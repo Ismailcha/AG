@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CommandeOffreIndividu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\CommandeOffreIndividu;
 
 class CommandeOffreIndividuController extends Controller
 {
@@ -12,7 +13,16 @@ class CommandeOffreIndividuController extends Controller
      */
     public function index()
     {
-        //
+        $commandes = CommandeOffreIndividu::where('user_id', auth()->user()->id)
+            ->with('offer', 'produit')
+            ->get();
+
+        // Group commandes by offer and date
+        $groupedCommandes = $commandes->groupBy(['offer_id', function ($item) {
+            return $item->created_at->toDateString(); // Group by date only
+        }]);
+
+        return view('offers.user_commandes', compact('groupedCommandes'));
     }
 
     /**
@@ -53,10 +63,20 @@ class CommandeOffreIndividuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CommandeOffreIndividu $commandeOffreIndividu)
+    public function show($offerId)
     {
-        //
+        // Retrieve CommandeOffreIndividu records for the specified offer_id
+        $commandes = CommandeOffreIndividu::where('offer_id', $offerId)
+            ->with('offer', 'produit')
+            ->get();
+
+        // You can handle the case where no commandes are found for the offer_id as needed
+
+        return view('offers.commande_detail', compact('commandes'));
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -80,5 +100,29 @@ class CommandeOffreIndividuController extends Controller
     public function destroy(CommandeOffreIndividu $commandeOffreIndividu)
     {
         //
+    }
+    public function filter(Request $request)
+    {
+        $query = CommandeOffreIndividu::query()->with('offer', 'produit');
+        // Apply the offer name search filter if the input is not empty
+        if ($request->filled('search-offer-name')) {
+            $query->whereHas('offer', function ($offerQuery) use ($request) {
+                $offerQuery->where('offre_name', 'like', '%' . $request->input('search-offer-name') . '%');
+            });
+        }
+
+        // Apply the created_at date filter if the input is not empty
+        if ($request->filled('filter-created-at')) {
+            $query->whereDate('created_at', '=', $request->input('filter-created-at'));
+        }
+
+        // Fetch the filtered and grouped commandes
+        $filteredCommandes = $query->get();
+
+        // You can return the filtered commandes as JSON or a view, depending on your needs
+        return response()->json(['filteredCommandes' => $filteredCommandes]);
+
+        // Alternatively, if you want to return a Blade view with the filtered data:
+        // return view('your.view', compact('filteredOffers'));
     }
 }
