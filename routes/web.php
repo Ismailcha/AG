@@ -3,22 +3,23 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganismeController;
+use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\TechnicienController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Apps\RoleManagementController;
 use App\Http\Controllers\Apps\UserManagementController;
 use App\Http\Controllers\CommandeOffreIndividuController;
 use App\Http\Controllers\Apps\PermissionManagementController;
-use App\Http\Controllers\SpecialityController;
-use App\Http\Controllers\CandidateController;
 
 // les condidate
 Route::resource('candidates', CandidateController::class);
@@ -68,7 +69,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
 
-
+    //admin
+    Route::get('/admin/commandes', [AdminController::class, 'index'])->name('admin.commandes');
     // commande offer individual 
     Route::post('/commandesindividu', [CommandeOffreIndividuController::class, 'store'])->name('commandesindividu.store');
     // user_commandes

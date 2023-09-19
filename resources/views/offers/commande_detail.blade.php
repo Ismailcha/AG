@@ -1,6 +1,6 @@
 <x-default-layout>
     @section('title')
-        <h2 class="text-primary">Votre commande</h2>
+        <h2 class="text-primary">Commande detail</h2>
     @endsection
 
     <!--begin::Row-->
