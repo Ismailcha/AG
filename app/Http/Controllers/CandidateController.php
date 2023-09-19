@@ -22,42 +22,46 @@ class CandidateController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'date_naissance' => 'required|date',
-            'genre' => 'required|in:Male,Female',
-            'ville' => 'required',
-            'specialities' => 'required|array',
-            'specialities.*' => 'exists:specialities,id',
-            'disponibilite' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'resume' => 'required|mimes:pdf,doc,docx|max:2048',
-        ]);
+{
+    // Validate the incoming request data
+    $request->validate([
+        'nom' => 'required',
+        'prenom' => 'required',
+        'date_de_naissance' => 'required|date',
+        'gender' => 'required|in:male,female', // Ensure the gender is one of the specified values
+        'ville' => 'required',
+        'specialites' => 'required|array', // Assuming specialities is an array of selected IDs
+        'disponibilite' => 'required|in:1,2', // Ensure the disponibilite is one of the specified values
+        'avatar' => 'required|image|mimes:jpeg,png,jpg,gif',
+        'resume' => 'required|mimes:pdf,docx',
+    ]);
 
-        $avatarPath = $request->file('avatar')->store('avatars', 'public');
-        $resumePath = $request->file('resume')->store('resumes', 'public');
+    // Handle file uploads for avatar and cv
+    $avatarPath = $request->file('avatar')->store('avatars', 'public'); // Store avatar in 'storage/app/avatars' folder
+    $cvPath = $request->file('resume')->store('cv'); // Store CV in 'storage/app/cv' folder
 
-        $candidate = new Candidate([
-            'nom' => $request->input('nom'),
-            'prenom' => $request->input('prenom'),
-            'date_naissance' => $request->input('date_naissance'),
-            'genre' => $request->input('genre'),
-            'ville' => $request->input('ville'),
-            'disponibilite' => $request->input('disponibilite'),
-            'avatar' => $avatarPath,
-            'resume' => $resumePath,
-        ]);
+    // Create a new candidate
+    $candidate = new Candidate();
+    $candidate->nom = $request->input('nom');
+    $candidate->prenom = $request->input('prenom');
+    $candidate->date_de_naissance = $request->input('date_de_naissance');
+    $candidate->gender = $request->input('gender');
+    $candidate->ville = $request->input('ville');
+    $candidate->disponibility = $request->input('disponibilite');
+    $candidate->avatar = $avatarPath; // Save the path to the stored avatar image
+    $candidate->resume_path = $cvPath; // Save the path to the stored CV file
+    $candidate->save();
 
-        $candidate->save();
+    // Attach selected specialities to the candidate
+    $specialityIds = $request->input('specialites');
+    $candidate->specialities()->attach($specialityIds);
 
-        // Attach selected specialities to the candidate
-        $candidate->specialities()->attach($request->input('specialities'));
+    // Redirect to a success page or return a response as needed
+    return redirect()->route('candidates.index')->with('success', 'Candidate added successfully.');
+}
 
-        return redirect()->route('candidates.index')
-            ->with('success', 'Candidate has been registered successfully.');
-    }
+
+
 
     public function show($id)
     {
@@ -75,7 +79,7 @@ class CandidateController extends Controller
 
         $path = storage_path('app/public/' . $candidate->resume);
 
-        return response()->download($path, 'resume.pdf'); // Adjust the filename as needed.
+        return response()->download($path, 'resume.pdf'); 
     }
 
     // You can implement the edit and update methods if needed.

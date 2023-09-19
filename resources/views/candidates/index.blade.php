@@ -40,8 +40,8 @@
                             <tr>
                                 <td>{{ $candidate->nom }}</td>
                                 <td>{{ $candidate->prenom }}</td>
-                                <td>{{ $candidate->date_naissance }}</td>
-                                <td>{{ $candidate->genre }}</td>
+                                <td>{{ $candidate->date_de_naissance }}</td>
+                                <td>{{ $candidate->gender }}</td>
                                 <td>{{ $candidate->ville }}</td>
                                 <td>
                                     @foreach($candidate->specialities as $speciality)

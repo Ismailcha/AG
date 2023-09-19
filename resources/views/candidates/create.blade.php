@@ -39,40 +39,54 @@
             </div>
 
             <div class="mb-3">
-                <label for="date_naissance" class="form-label">Date de Naissance:</label>
-                <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
-            </div>
+    <label for="date_de_naissance" class="form-label">Date de Naissance:</label>
+    <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance" required>
+</div>
 
-            <div class="mb-3">
-                <label class="form-label">Genre:</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="genre" id="genre_male" value="male" required>
-                    <label class="form-check-label" for="genre_male">Homme</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="genre" id="genre_female" value="female" required>
-                    <label class="form-check-label" for="genre_female">Femme</label>
-                </div>
-            </div>
+
+<div class="mb-3">
+    <label class="form-label">Genre:</label>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" id="genre_male" value="male" required>
+        <label class="form-check-label" for="genre_male">Homme</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="gender" id="genre_female" value="female" required>
+        <label class="form-check-label" for="genre_female">Femme</label>
+    </div>
+</div>
+
+            
 
             <div class="mb-3">
                 <label for="ville" class="form-label">Ville:</label>
                 <input type="text" class="form-control" id="ville" name="ville" required>
             </div>
 
+            
             <div class="mb-3">
                 <label for="specialites" class="form-label">Spécialités:</label>
-                <select class="search-dropdown form-select" id="specialites" name="specialites[]" multiple="multiple">
-                    <!-- Options for specialities go here -->
+                <select class="select2-multiple form-control" id="specialites" name="specialites[]" multiple="multiple">
+                    <!-- Populate options with specialities from your database -->
+                    @foreach($specialities as $speciality)
+                        <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
+                    @endforeach
                 </select>
+            </div>
+            
+                
                 <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#specialityModal">
                     Ajouter une spécialité
                 </button>
-            </div>
+            <
 
             <div class="mb-3">
                 <label for="disponibilite" class="form-label">Disponibilité:</label>
-                <input type="text" class="form-control" id="disponibilite" name="disponibilite" required>
+                
+                <select type="text" class="form-control" id="disponibilite" name="disponibilite" required>
+                    <option value="1"> immédiate</option>
+                    <option value="2">à fixer</option>
+                </select>
             </div>
 
             <div class="mb-3">
@@ -117,8 +131,14 @@
     </div>
 </x-default-layout>
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.search-dropdown').select2();
+        // Select2 Multiple
+        $('.select2-multiple').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
     });
 </script>
+

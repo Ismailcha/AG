@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Speciality; // Adjust the namespace as per your application's structure
@@ -16,7 +18,9 @@ class SpecialityController extends Controller
         'name' => $request->name,
     ]);
 
-    return response()->json(['success' => true, 'speciality' => $speciality]);
+    // Redirect to a specific route (e.g., the index page for specialities) with a success message
+    return redirect()->route('candidates.create')->with('success', 'Speciality created successfully');
 }
+
 
 }
