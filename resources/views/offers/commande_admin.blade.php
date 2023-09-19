@@ -2,7 +2,7 @@
 
 <x-default-layout>
     @section('title')
-        <h2 class="text-primary">Toutes les commandes groupées par offre</h2>
+        <h2 class="text-primary">Admin liste des offres</h2>
     @endsection
 
     <!--begin::Row-->
@@ -17,6 +17,7 @@
                     <tr>
                         <th>Nom offre</th>
                         <th>Laboratoire</th>
+                        <th>Client</th>
                         <th>Date de commande</th>
                         <th>Escompte</th>
                         <th>Total à Payer</th>
@@ -30,6 +31,7 @@
                                     <h3 class="text-success">{{ $offerCommandes[0]->offer->offre_name }}</h3>
                                 </td>
                                 <td> {{ $offerCommandes[0]->offer->laboratoire }}</td>
+                                <td> {{ $offerCommandes[0]->offer->user->name }}</td>
                                 <td>{{ $date }}</td>
                                 @php
                                     $totalDiscounted = 0;
