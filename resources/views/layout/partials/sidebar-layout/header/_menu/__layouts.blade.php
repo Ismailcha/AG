@@ -9,53 +9,61 @@
 				<!--begin:Col-->
 				<div class="col-lg-6 mb-3">
 					<!--begin:Heading-->
-					<h4 class="fs-6 fs-lg-4 text-gray-800 fw-bold mt-3 mb-3 ms-4">Layouts</h4>
+					<h4 class="fs-6 fs-lg-4 text-gray-800 fw-bold mt-3 mb-3 ms-4">Organismes</h4>
 					<!--end:Heading-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
+						{{-- <a href="{{ route('dashboard') }}" class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
 							</span>
 							<span class="menu-title">Light Sidebar</span>
-						</a>
+						</a> --}}
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
+						{{-- <a href="{{ route('dashboard') }}" class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
 							</span>
 							<span class="menu-title">Dark Sidebar</span>
-						</a>
+						</a> --}}
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
+						{{-- <a href="{{ route('dashboard') }}" class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
 							</span>
 							<span class="menu-title">Light Header</span>
-						</a>
+						</a> --}}
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
-							</span>
-							<span class="menu-title">Dark Header</span>
-						</a>
+						<a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
+                            href="{{ route('categories.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Liste des categories</span>
+                        </a>
+						<a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
+                            href="{{ route('categories.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Liste des Specialiter</span>
+                        </a>
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
@@ -64,53 +72,54 @@
 				<!--begin:Col-->
 				<div class="col-lg-6 mb-3">
 					<!--begin:Heading-->
-					<h4 class="fs-6 fs-lg-4 text-gray-800 fw-bold mt-3 mb-3 ms-4">Toolbars</h4>
+					<h4 class="fs-6 fs-lg-4 text-gray-800 fw-bold mt-3 mb-3 ms-4">Techniciens</h4>
 					<!--end:Heading-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
-							<span class="menu-bullet">
-								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
-							</span>
-							<span class="menu-title">Classic</span>
-						</a>
+						<a class="menu-link {{ request()->routeIs('candidates.index') ? 'active' : '' }}"
+                            href="{{ route('candidates.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Liste des candidats</span>
+                         </a>
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
+						{{-- <a href="{{ route('dashboard') }}" class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
 							</span>
 							<span class="menu-title">SaaS</span>
-						</a>
+						</a> --}}
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
+						{{-- <a href="{{ route('dashboard') }}" class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
 							</span>
 							<span class="menu-title">Accounting</span>
-						</a>
+						</a> --}}
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
 					<!--begin:Menu item-->
 					<div class="menu-item p-0 m-0">
 						<!--begin:Menu link-->
-						<a href="{{ route('dashboard') }}" class="menu-link">
+						{{-- <a href="{{ route('dashboard') }}" class="menu-link">
 							<span class="menu-bullet">
 								<span class="bullet bullet-dot bg-gray-300i h-6px w-6px"></span>
 							</span>
 							<span class="menu-title">Extended</span>
-						</a>
+						</a> --}}
 						<!--end:Menu link-->
 					</div>
 					<!--end:Menu item-->
