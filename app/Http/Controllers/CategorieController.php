@@ -29,29 +29,23 @@ class CategorieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // Make sure to import the Categorie model
+
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'nom' => 'required',
-        'prenom' => 'required',
-        'date_naissance' => 'required',
-        'genre' => 'required',
-        'ville' => 'required',
-        'specialites' => 'required|array', // Validate as an array
-        'disponibilite' => 'required',
-        'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation for your file input
-        'cv' => 'mimes:pdf,doc,docx|max:2048', // Adjust the validation for your file input
-    ]);
-
-    // Create the candidate
-    $candidate = Candidate::create($validatedData);
-
-    // Attach selected specialities to the candidate
-    $candidate->specialities()->attach($request->input('specialites'));
-
-    return redirect()->route('candidates.index')
-        ->with('success', 'Candidat a été bien ajouté.');
-}
+    {
+        $request->validate([
+            'nomCat' => 'required|unique:categories',
+        ]);
+    
+        $categorie = Categorie::create([
+            'nomCat' => $request->nomCat, // Use 'nomCat' from the request
+        ]);
+    
+        // Redirect to the desired route with a success message
+        return redirect()->route('produit.create')->with('success', 'Category created successfully');
+    }
+    
+    
 
 
 

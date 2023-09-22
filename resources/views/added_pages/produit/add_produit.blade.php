@@ -25,7 +25,21 @@
         </a>
         <form action="{{ route('produit.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <div class="mb-3">
+                <label for="categorie_id" class="form-label">Categorie:</label>
+                <select class="search-dropdown form-select" id="categorie_id" name="categorie_id">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ old('categorie_id', isset(session('input')['categorie_id']) ? session('input')['categorie_id'] : '') == $category->id ? 'selected' : '' }}>
+                            {{ $category->nomCat }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
+            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindow">
+                <h6>Ajouter categorie</h6>
+            </button>
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom:</label>
                 <input type="text" class="form-control" id="nom" name="nom"
@@ -64,21 +78,7 @@
                     value="{{ old('grossiste', isset(session('input')['grossiste']) ? session('input')['grossiste'] : '') }}">
             </div>
 
-            <div class="mb-3">
-                <label for="categorie_id" class="form-label">Categorie:</label>
-                <select class="search-dropdown form-select" id="categorie_id" name="categorie_id">
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}"
-                            {{ old('categorie_id', isset(session('input')['categorie_id']) ? session('input')['categorie_id'] : '') == $category->id ? 'selected' : '' }}>
-                            {{ $category->nomCat }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalWindow">
-                <h6>Ajouter categorie</h6>
-            </button>
+           
 
             <div class="mb-3">
                 <label for="image" class="form-label">Image:</label>
