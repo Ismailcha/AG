@@ -29,105 +29,115 @@
         @endif
 
         <!-- Offer creation form -->
-        <form method="POST" action="{{ route('offers.store') }}">
-            @csrf
-            <input type="hidden" name="offer_id" value="{{ $offer->id }}">
+        <div class="card card-flush py-4">
+            <div class="d-flex flex-column gap-5 gap-md-7">
+                <form method="POST" action="{{ route('offers.store') }}">
+                    @csrf
+                    <input type="hidden" name="offer_id" value="{{ $offer->id }}">
 
-            <!-- Offer Name -->
-            <div class="form-group">
-                <label for="offre_name">Nom offer</label>
-                <input type="text" class="form-control" id="offre_name" name="offre_name" required>
+                    <!-- Offer Name -->
+                    <div class="d-flex flex-column flex-md-row gap-5 m-3">
+                        <div class="form-group">
+                            <label for="offre_name">Nom offer</label>
+                            <input type="text" class="form-control" id="offre_name" name="offre_name" required>
+                        </div>
+
+                        <!-- Laboratoire -->
+                        <div class="form-group">
+                            <label for="laboratoire">Laboratoire</label>
+                            <input type="text" class="form-control" id="laboratoire" name="laboratoire" required>
+                        </div>
+                        <!-- Grossiste (optional) -->
+                        <div class="form-group">
+                            <label for="grossiste">Grossiste</label>
+                            <input type="text" class="form-control" id="grossiste" name="grossiste">
+                        </div>
+
+                    </div>
+                    <div class="d-flex flex-column flex-md-row gap-5 m-3">
+                        <!-- Date Start -->
+                        <div class="form-group">
+                            <label for="date_start">Date debut</label>
+                            <input type="date" class="form-control" id="date_start" name="date_start" required>
+                        </div>
+
+                        <!-- Date End -->
+                        <div class="form-group">
+                            <label for="date_end">Date fin</label>
+                            <input type="date" class="form-control" id="date_end" name="date_end" required>
+                        </div>
+                    </div>
+                    <!-- Escompte -->
+
+                    <div class="d-flex flex-column flex-md-row gap-5 m-3">
+                        <div class="form-group">
+                            <label for="escompte">Escompte %</label>
+                            <input type="number" class="form-control" id="escompte" name="escompte" required>
+
+                        </div>
+                        <!-- Min Total -->
+                        <div class="form-group">
+                            <label for="min_total">Total minimum</label>
+                            <input type="number" class="form-control" id="min_total" name="min_total" required>
+                        </div>
+                    </div>
+                    <!-- Add Products Section -->
+
+
+                    <!-- Table to display selected products -->
+                    <h2 class='text-success'>Produits Sélectionnés</h2>
+                    <table class="table table table-bordered" id="selectedProductTable">
+                        <thead>
+                            <tr>
+                                <th>Nom produit</th>
+                                <th>Prix Achat</th>
+                                <th>Quantité</th>
+                                <th>Remise %</th>
+                                <th>Prix Remise</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- This table will be populated with selected products via JavaScript -->
+                        </tbody>
+                    </table>
+                    <h2 class='text-success'>Ajouter des produits a l'offre</h2>
+                    <!-- You can include code here to select products and associate them with the offer -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search by Name">
+                    </div>
+
+                    <!-- Display a table of products with live search -->
+                    <table class="table table-bordered" id="productTable">
+                        <thead>
+                            <tr>
+                                <th>Nom De produit</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($produits as $produit)
+                                <tr>
+                                    <td>{{ $produit->nom }}</td>
+                                    <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image"
+                                            width="90">
+                                    </td>
+                                    <td>
+                                        <button class="add-product-btn btn btn-primary"
+                                            data-produit-id="{{ $produit->id }}" data-nom="{{ $produit->nom }}"
+                                            data-prixAchat="{{ $produit->prixAchat }}">+</button>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary">Creer un Offer</button>
+                </form>
             </div>
-
-            <!-- Laboratoire -->
-            <div class="form-group">
-                <label for="laboratoire">Laboratoire</label>
-                <input type="text" class="form-control" id="laboratoire" name="laboratoire" required>
-            </div>
-
-            <!-- Grossiste (optional) -->
-            <div class="form-group">
-                <label for="grossiste">Grossiste</label>
-                <input type="text" class="form-control" id="grossiste" name="grossiste">
-            </div>
-
-            <!-- Date Start -->
-            <div class="form-group">
-                <label for="date_start">Date debut</label>
-                <input type="date" class="form-control" id="date_start" name="date_start" required>
-            </div>
-
-            <!-- Date End -->
-            <div class="form-group">
-                <label for="date_end">Date fin</label>
-                <input type="date" class="form-control" id="date_end" name="date_end" required>
-            </div>
-
-            <!-- Escompte -->
-            <div class="form-group">
-                <label for="escompte">Escompte %</label>
-                <input type="number" class="form-control" id="escompte" name="escompte" required>
-            </div>
-
-            <!-- Min Total -->
-            <div class="form-group">
-                <label for="min_total">Total minimum</label>
-                <input type="number" class="form-control" id="min_total" name="min_total" required>
-            </div>
-
-            <!-- Add Products Section -->
-
-
-            <!-- Table to display selected products -->
-            <h2 class='text-success'>Produits Sélectionnés</h2>
-            <table class="table table table-bordered" id="selectedProductTable">
-                <thead>
-                    <tr>
-                        <th>Nom produit</th>
-                        <th>Prix Achat</th>
-                        <th>Quantité</th>
-                        <th>Remise %</th>
-                        <th>Prix Remise</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- This table will be populated with selected products via JavaScript -->
-                </tbody>
-            </table>
-            <h2 class='text-success'>Ajouter des produits a l'offre</h2>
-            <!-- You can include code here to select products and associate them with the offer -->
-            <div class="form-group">
-                <input type="text" class="form-control" id="searchInput" placeholder="Search by Name">
-            </div>
-
-            <!-- Display a table of products with live search -->
-            <table class="table table-bordered" id="productTable">
-                <thead>
-                    <tr>
-                        <th>Nom De produit</th>
-                        <th>Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($produits as $produit)
-                        <tr>
-                            <td>{{ $produit->nom }}</td>
-                            <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image" width="90">
-                            </td>
-                            <td>
-                                <button class="add-product-btn btn btn-primary" data-produit-id="{{ $produit->id }}"
-                                    data-nom="{{ $produit->nom }}" data-prixAchat="{{ $produit->prixAchat }}">+</button>
-
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary">Creer un Offer</button>
-        </form>
+        </div>
     </div>
 </x-default-layout>
 
