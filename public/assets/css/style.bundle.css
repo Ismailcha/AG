@@ -184,7 +184,10 @@
 *::after {
   box-sizing: border-box;
 }
-
+/*added styles*/
+.sidebar{
+  display: none;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -29555,6 +29558,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 @media (max-width: 991.98px) {
+  .sidebar{
+    display:block;
+  }
   .page-item {
     margin-right: 0.25rem;
   }

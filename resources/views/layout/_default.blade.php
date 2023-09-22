@@ -8,7 +8,9 @@
             @include(config('settings.KT_THEME_LAYOUT_DIR') . '/partials/sidebar-layout/_header')
             <!--begin::Wrapper-->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
-                {{-- @include(config('settings.KT_THEME_LAYOUT_DIR').'/partials/sidebar-layout/_sidebar') --}}
+                <div class="sidebar">
+                    @include(config('settings.KT_THEME_LAYOUT_DIR') . '/partials/sidebar-layout/_sidebar')
+                </div>
                 <!--begin::Main-->
                 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
                     <!--begin::Content wrapper-->

@@ -14,6 +14,7 @@
                         @php
                             $previousOfferId = null;
                             $overallTotal = 0;
+                            $totalsansecompte = 0;
                         @endphp
 
                         @foreach ($commandes as $commande)
@@ -32,8 +33,8 @@
                                         <span class="fs-5">{{ $commande->offer->laboratoire }}</span>
                                     </div>
                                     <div class="flex-root d-flex flex-column">
-                                        <span class="text-muted">Escompte:</span>
-                                        <span class="fs-5">{{ $commande->offer->escompte }}%</span>
+                                        <span class="text-muted">Cree par:</span>
+                                        <span class="fs-5">{{ $commande->offer->user->name }}</span>
                                     </div>
                                 </div>
 
@@ -59,11 +60,12 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <!--begin::Thumbnail-->
-                                        <a href="../../demo53/dist/apps/ecommerce/catalog/edit-product.html"
-                                            class="symbol symbol-50px">
+                                        <div class="symbol symbol-50px">
                                             <span class="symbol-label"
-                                                style="background-image:url(assets/media//stock/ecommerce/1.png);"></span>
-                                        </a>
+                                                style="background-image: url('{{ asset('storage/' . $commande->produit->image) }}');"></span>
+
+
+                                        </div>
                                         <!--end::Thumbnail-->
                                         <!--begin::Title-->
                                         <div class="ms-5">
@@ -75,17 +77,38 @@
                                 <td class="text-end">{{ $commande->produit->prixVente }} MAD</td>
                                 <td class="text-end">{{ $commande->quantite }}</td>
                                 <td class="text-end">{{ $commande->discount }}%</td>
-                                <td class="text-end"> @php
-                                    $itemPrice = $commande->produit->prixVente * $commande->quantite - $commande->produit->prixVente * $commande->quantite * ($commande->discount / 100);
-                                    $totalDiscounted = $itemPrice * (1 - $commande->offer->escompte / 100);
-                                    $overallTotal += $totalDiscounted;
-                                @endphp
+                                <td class="text-end">
+                                    @php
+                                        $itemPrice = $commande->produit->prixVente * $commande->quantite - $commande->produit->prixVente * $commande->quantite * ($commande->discount / 100);
+                                        $totalsansecompte += $itemPrice;
+                                        $totalDiscounted = $itemPrice * (1 - $commande->offer->escompte / 100);
+                                        $overallTotal += $totalDiscounted;
+                                    @endphp
                                     {{ number_format($totalDiscounted, 2) }} MAD</td>
                             </tr>
                         @endforeach
+
+                        <tr>
+                            <td colspan="3" class="fs-3 text-dark fw-bold text-end">Total sans escompte</td>
+                            <td class="text-dark fs-3 fw-bolder text-end">{{ $totalsansecompte }}MAD
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3" class="fs-3 text-dark fw-bold text-end">Escompte</td>
+                            <td class="text-dark fs-3 fw-bolder text-end">{{ $commande->offer->escompte }}%
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="3" class="fs-3 text-dark fw-bold text-end">Grand Total</td>
-                            <td class="text-dark fs-3 fw-bolder text-end">{{ number_format($overallTotal, 2) }} MAD</td>
+                            <td class="text-dark fs-3 fw-bolder text-end">{{ number_format($overallTotal) }} MAD
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="fs-3 text-dark fw-bold text-end">Gain</td>
+                            <td class="text-dark fs-3 fw-bolder text-end">
+                                {{ number_format($totalsansecompte - $overallTotal) }} MAD
+                            </td>
                         </tr>
                         </tbody>
                         </table>
