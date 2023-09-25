@@ -1231,6 +1231,13 @@
                         href="{{ route('user.commandes') }}">
                         <span class="menu-title">Vos commandes</span>
                     </a>
+                    <a class="menu-link {{ request()->routeIs('candidates.index') ? 'active' : '' }}"
+                        href="{{ route('candidates.index') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Liste des candidats</span>
+                     </a>
                     <!--end:Menu link-->
                 </div>
                 <!--end:Menu item-->
@@ -1263,3 +1270,4 @@
     <!--end::Menu-->
 </div>
 <!--end::Menu wrapper-->
+<!--MENU JDID-->
