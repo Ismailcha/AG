@@ -55,7 +55,7 @@
                             </div>
                             <!-- Grossiste (optional) -->
                             <div class="form-group">
-                                <label for="grossiste">Grossiste</label>
+                                <label for="grossiste"class="form-label">Grossiste</label>
                                 <input type="text" class="form-control" id="grossiste" name="grossiste">
                             </div>
 
@@ -114,34 +114,82 @@
                         </div>
 
                         <!-- Display a table of products with live search -->
-                        <table class="table table-bordered" id="productTable">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                            id="kt_ecommerce_edit_order_product_table" style="width: 100%;">
                             <thead>
-                                <tr>
-                                    <th>Nom De produit</th>
-                                    <th>Image</th>
+                                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0"
+                                    style="height: 0px;">
+                                    <th class="w-25px pe-2 sorting_disabled" rowspan="1" colspan="1"
+                                        style="width: 25px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;"></div>
+                                    </th>
+                                    <th class="min-w-200px sorting"
+                                        aria-controls="kt_ecommerce_edit_order_product_table" rowspan="1"
+                                        colspan="1"
+                                        style="width: 487.733px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Product
+                                        </div>
+                                    </th>
+                                    <th class="min-w-100px text-end pe-5 sorting"
+                                        aria-controls="kt_ecommerce_edit_order_product_table" rowspan="1"
+                                        colspan="1"
+                                        style="width: 272.683px; padding-top: 0px; padding-bottom: 0px; border-top-width: 0px; border-bottom-width: 0px; height: 0px;">
+                                        <div class="dataTables_sizing" style="height: 0px; overflow: hidden;">Qty
+                                            Remaining</div>
+                                    </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="fw-semibold text-gray-600">
                                 @foreach ($produits as $produit)
                                     <tr>
-                                        <td>{{ $produit->nom }}</td>
-                                        <td><img src="{{ asset('storage/' . $produit->image) }}" alt="Produit Image"
-                                                width="90">
+                                        <td>
+                                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                <input class="form-check-input" type="checkbox" value="1">
+                                            </div>
                                         </td>
                                         <td>
+                                            <div class="d-flex align-items-center"
+                                                data-kt-ecommerce-edit-order-filter="product"
+                                                data-kt-ecommerce-edit-order-id="product_1">
+                                                <!--begin::Thumbnail-->
+                                                <a href="../../demo53/dist/apps/ecommerce/catalog/edit-product.html"
+                                                    class="symbol symbol-50px">
+                                                    <span class="symbol-label"
+                                                        style="background-image: url({{ asset('storage/' . $produit->image) }});"></span>
+                                                </a>
+                                                <!--end::Thumbnail-->
+                                                <div class="ms-5">
+                                                    <!--begin::Title-->
+                                                    <a href="../../demo53/dist/apps/ecommerce/catalog/edit-product.html"
+                                                        class="text-gray-800 text-hover-primary fs-5 fw-bold">
+                                                        {{ $produit->nom }}
+                                                    </a>
+                                                    <!--end::Title-->
+                                                    <!--begin::Price-->
+                                                    <div class="fw-semibold fs-7">
+                                                        Prix
+                                                        <span data-kt-ecommerce-edit-order-filter="price">
+                                                            {{ $produit->prixVente }} MAD
+                                                        </span>
+                                                    </div>
+                                                    <!--end::Price-->
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end pe-5">
                                             <button class="add-product-btn btn btn-primary"
                                                 data-produit-id="{{ $produit->id }}" data-nom="{{ $produit->nom }}"
                                                 data-prixAchat="{{ $produit->prixAchat }}">+</button>
-
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
 
+
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Creer un Offer</button>
+                        <button type="submit" class="btn btn-primary">Cree l'offre</button>
                     </div>
                 </form>
             </div>
@@ -171,10 +219,12 @@
                     if (produits.length > 0) {
                         produits.forEach(function(product) {
                             // Display each product
-                            productTableBody.append('<tr><td>' + product.nom +
-                                '</td><td><img src="{{ asset('storage/') }}/' +
+                            productTableBody.append('<tr>' +
+                                '<td><img src="{{ asset('storage/') }}/' +
                                 product.image +
-                                '" alt="Produit Image" width="90"></td>' +
+                                '" alt="Produit Image" width="90"></td>' + '<td>' +
+                                product.nom +
+                                '</td>' +
                                 '<td><button class="add-product-btn btn btn-primary" data-nom="' +
                                 product.nom + '" data-prixAchat="' + product.prixAchat +
                                 '"data-produit-id="' + product.id +
