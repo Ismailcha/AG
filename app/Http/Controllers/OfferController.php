@@ -12,23 +12,12 @@ class OfferController extends Controller
     // Display a list of offers
     public function index()
     {
-        // Retrieve all offers with their associated products
-        $offers = Offer::with('produits')->get();
-
-        // Calculate the total prixVente for each offer and apply the escompte percentage
-        $offers->each(function ($offer) {
-            $totalPrixVente = $offer->produits->sum(function ($produit) {
-                return $produit->pivot->quantity * $produit->prixVente;
-            });
-
-            // Apply the escompte percentage
-            $totalPrixVenteWithEscompte = $totalPrixVente - ($totalPrixVente * ($offer->escompte / 100));
-
-            $offer->totalPrixVenteWithEscompte = $totalPrixVenteWithEscompte;
-        });
+        // Retrieve all offers with their associated products and paginate the results
+        $offers = Offer::with('produits')->paginate(9); // You can adjust the number of items per page (e.g., 10)
 
         return view('offers.index', compact('offers'));
     }
+
 
 
 
