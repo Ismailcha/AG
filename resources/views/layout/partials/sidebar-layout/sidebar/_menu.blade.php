@@ -15,8 +15,10 @@
                 <span class="menu-link">
                     <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
                     <span class="menu-title">Dashboards</span>
+                    
                     <span class="menu-arrow"></span>
                 </span>
+                
                 <!--end:Menu link-->
                 <!--begin:Menu sub-->
                 <div class="menu-sub menu-sub-accordion">
