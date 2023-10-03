@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CommandeOffreIndividu;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class CommandeOffreIndividuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
         $commandes = CommandeOffreIndividu::where('user_id', auth()->user()->id)
@@ -22,8 +26,24 @@ class CommandeOffreIndividuController extends Controller
             return $item->created_at->toDateString(); // Group by date only
         }]);
 
-        return view('offers.user_commandes', compact('groupedCommandes'));
+        // Manually paginate the grouped collection
+        $perPage = 10; // Number of items per page
+        $currentPage = request()->get('page', 1);
+
+        $totalItems = count($groupedCommandes);
+        $pagedData = array_slice($groupedCommandes->all(), ($currentPage - 1) * $perPage, $perPage);
+
+        $groupedCommandes = new LengthAwarePaginator($pagedData, $totalItems, $perPage, $currentPage, [
+            'path' => request()->url(),
+            'query' => request()->query(),
+        ]);
+
+        // Pass the paginated data to the view
+        return view('offers.user_commandes', [
+            'groupedCommandes' => $groupedCommandes,
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

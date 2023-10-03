@@ -31,59 +31,93 @@
                                 </div>
                                 <!--end::Actions-->
                             </div>
-                            <div class="card-body">
-                                <table id='filtered-tables-container'
-                                    class="table table-bordered fs-6 gy-5 my-0 dataTable no-footer">
+                            <div class="card-body pt-0">
 
-                                    <thead>
-                                        <tr>
-                                            <th>Nom offre</th>
-                                            <th>Laboratoire</th>
-                                            <th>Date de commande</th>
-                                            <th>Escompte</th>
-                                            <th>Total a payer</th>
-                                        </tr>
+                                <div class="table-responsive">
+                                    <div id="kt_ecommerce_sales_table_wrapper"
+                                        class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                        <div class="table-responsive">
+                                            <table
+                                                class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+                                                id="kt_ecommerce_sales_table">
+                                                <thead>
+                                                    <tr
+                                                        class='text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0'>
+                                                        <th>Nom offre</th>
+                                                        <th>Laboratoire</th>
+                                                        <th>Date de commande</th>
+                                                        <th>Escompte</th>
+                                                        <th>Total a payer</th>
+                                                    </tr>
 
-                                    </thead>
+                                                </thead>
 
 
-                                    <tbody>
+                                                <tbody class="fw-semibold text-gray-600">
 
-                                        @foreach ($groupedCommandes as $offerId => $groupedDates)
-                                            @foreach ($groupedDates as $date => $offerCommandes)
-                                                <tr>
-                                                    <td>
-                                                        <h3 class="text-success">
-                                                            {{ $offerCommandes[0]->offer->offre_name }}
-                                                        </h3>
-                                                    </td>
-                                                    <td> {{ $offerCommandes[0]->offer->laboratoire }}</td>
-                                                    <td>{{ $date }}</td>
-                                                    @php
-                                                        $totalDiscounted = 0;
-                                                    @endphp
-                                                    @foreach ($offerCommandes as $commande)
-                                                        @php
-                                                            $totalDiscounted += $commande->quantite * ($commande->produit->prixVente - ($commande->produit->prixVente * $commande->discount) / 100);
-                                                        @endphp
+                                                    @foreach ($groupedCommandes as $offerId => $groupedDates)
+                                                        @foreach ($groupedDates as $date => $offerCommandes)
+                                                            <tr>
+                                                                <td>
+                                                                    <h3 class="text-success">
+                                                                        {{ $offerCommandes[0]->offer->offre_name }}
+                                                                    </h3>
+                                                                </td>
+                                                                <td
+                                                                    class="text-gray-800 text-hover-primary fs-5 fw-bold">
+                                                                    {{ $offerCommandes[0]->offer->laboratoire }}</td>
+                                                                <td>{{ $date }}</td>
+                                                                @php
+                                                                    $totalDiscounted = 0;
+                                                                @endphp
+                                                                @foreach ($offerCommandes as $commande)
+                                                                    @php
+                                                                        $totalDiscounted += $commande->quantite * ($commande->produit->prixVente - ($commande->produit->prixVente * $commande->discount) / 100);
+                                                                    @endphp
+                                                                @endforeach
+                                                                <td>
+                                                                    {{ $offerCommandes[0]->offer->escompte }}%
+                                                                </td>
+                                                                <td>
+                                                                    {{ number_format($totalDiscounted * (1 - $offerCommandes[0]->offer->escompte / 100), 2) }}
+                                                                    MAD
+                                                                </td>
+                                                                <td>
+                                                                    <a href="{{ route('commande.show', ['id' => $offerCommandes[0]->offer->id]) }}"
+                                                                        class="btn btn-primary">Detail</a>
+
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     @endforeach
-                                                    <td> {{ $offerCommandes[0]->offer->escompte }}%</td>
-                                                    <td>
-                                                        {{ number_format($totalDiscounted * (1 - $offerCommandes[0]->offer->escompte / 100), 2) }}
-                                                        MAD
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('commande.show', ['id' => $offerCommandes[0]->offer->id]) }}"
-                                                            class="btn btn-primary">Detail</a>
+                                                </tbody>
 
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                    </tbody>
-                        @endforeach
-                        </table>
+
+                                            </table>
+                                            <div class="text-end">
+                                                <!-- Previous Page Link -->
+                                                @if ($groupedCommandes->currentPage() > 1)
+                                                    <a href="{{ $groupedCommandes->previousPageUrl() }}"
+                                                        class="btn btn-outline-primary">Precedent</a>
+                                                @endif
+
+                                                <!-- Page Links -->
+                                                @for ($i = 1; $i <= $groupedCommandes->lastPage(); $i++)
+                                                    <a href="{{ $groupedCommandes->url($i) }}"
+                                                        class="btn btn-outline-secondary{{ $i === $groupedCommandes->currentPage() ? ' active' : '' }}">{{ $i }}</a>
+                                                @endfor
+
+                                                <!-- Next Page Link -->
+                                                @if ($groupedCommandes->hasMorePages())
+                                                    <a href="{{ $groupedCommandes->nextPageUrl() }}"
+                                                        class="btn btn-outline-primary">Suivant</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                        @endif
                     </div>
-                    @endif
+
+
                 </div>
             </div>
         </div>
