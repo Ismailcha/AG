@@ -64,15 +64,21 @@
                             <!-- Date Start -->
                             <div class="form-group">
                                 <label for="date_start"class="required form-label">Date debut</label>
-                                <input type="date" class="form-control" id="date_start" name="date_start" required>
+                                <input type="date"
+                                    class="form-control form-control-transparent fw-bold pe-5 flatpickr-input"
+                                    id="date_start" name="date_start" required>
                             </div>
 
                             <!-- Date End -->
                             <div class="form-group">
                                 <label for="date_end"class="required form-label">Date fin</label>
-                                <input type="date" class="form-control" id="date_end" name="date_end" required>
+                                <input type="date"
+                                    class="form-control form-control-transparent fw-bold pe-5 flatpickr-input"
+                                    id="date_end" name="date_end" required>
                             </div>
+
                         </div>
+
                         <!-- Escompte -->
 
                         <div class="d-flex flex-column flex-md-row gap-5 m-3">
@@ -92,7 +98,7 @@
 
                         <!-- Table to display selected products -->
                         <h2 class='text-success'>Produits Sélectionnés</h2>
-                        <table class="table table table-bordered" id="selectedProductTable">
+                        <table class="table g-5 gs-0 mb-0 fw-bold text-gray-700" id="selectedProductTable">
                             <thead>
                                 <tr>
                                     <th>Nom produit</th>
@@ -100,7 +106,6 @@
                                     <th>Quantité</th>
                                     <th>Remise %</th>
                                     <th>Prix Remise</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,7 +149,6 @@
                                     <tr>
                                         <td>
                                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="checkbox" value="1">
                                             </div>
                                         </td>
                                         <td>
@@ -188,13 +192,14 @@
 
 
                     </div>
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">Cree l'offre</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
 </x-default-layout>
 
 <script>
