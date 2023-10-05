@@ -86,7 +86,7 @@
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
                                             <a href="{{ route('produit.edit', $produit->id) }}"
-                                                class="menu-link px-3">Modifier</a>
+                                                class="menu-link btn btn-link px-3">Modifier</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
@@ -95,7 +95,8 @@
                                                 onsubmit="return confirmWithSweetAlert(this);">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="menu-link px-3">Supprimer</button>
+                                                <button type="submit"
+                                                    class="menu-link btn btn-link px-3">Supprimer</button>
                                             </form>
                                         </div>
                                         <!--end::Menu item-->

@@ -1,83 +1,110 @@
 <x-default-layout>
     @section('title')
-        <h2 class="text-primary">{{ $offer->offre_name }}</h2>
+        <h2 class="text-primary">Commandez</h2>
     @endsection
 
     <!--begin::Row-->
-    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-        <div class="container mt-5 justify-content-center">
-            <h2 class='text-center text-primary'></h2>
-            <p><i>laboratoire : </i>{{ $offer->laboratoire }}</p>
-            <p><i>grossiste : </i>
-                @if ($offer->grossiste !== null)
-                    {{ $offer->grossiste }}
-                @else
-                    <span>Pas de grossiste</span>
-                @endif
-            </p>
-            <p><i>date debut : </i>{{ $offer->date_start }}</p>
-            <p><i>date fin : </i>{{ $offer->date_end }}</p>
-            <p><i>Total minimum : </i><span class="total-minimum">{{ $offer->min_total }}</span></p>
-            <p><i>escompte : </i>{{ $offer->escompte }}%</p>
-            <p id="total-min-message" class='text-danger'>Votre total doit etre supperieur ou egal le total minimum</p>
-            @if ($offer->produits->isEmpty())
-                <p>Pas de produit dans cette offre</p>
-            @else
-                <table class="table table-bordered">
-                    <h4><u>Produits</u> :</h4>
-                    <div id='quantity-error-message'>
-                        <h6 class="text-danger">Quantité est moin que le minimum</h6>
+    <div class="card">
+        <div class="card-header mb-5">
+            <div class="d-flex justify-content-between flex-column flex-sm-row mb-19">
+                <h3 class="fw-bolder text-gray-800 fs-2qx pe-5 pb-7 mt-5">{{ $offer->offre_name }}</h3>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <div class="row g-5 g-xl-10 mt-5 mb-xl-10">
+                <div class="container mt-5 justify-content-center ">
+                    <div class="d-flex flex-column flex-sm-row gap-7 gap-md-10 fw-bold">
+                        <p class="flex-root d-flex flex-column"><i class="text-muted">laboratoire :
+                            </i><span class="fs-5">{{ $offer->laboratoire }}</span></p>
+                        <p class="flex-root d-flex flex-column"><i class="text-muted">grossiste : </i>
+                            @if ($offer->grossiste !== null)
+                                {{ $offer->grossiste }}
+                            @else
+                                <span>Pas de grossiste</span>
+                            @endif
+                        </p>
+                        <p class="flex-root d-flex flex-column"><i class="text-muted">date debut :
+                            </i>{{ $offer->date_start }}</p>
+                        <p class="flex-root d-flex flex-column"><i class="text-muted">date fin :
+                            </i>{{ $offer->date_end }}
+                        </p>
+                        <p class="flex-root d-flex flex-column"><i class="text-muted">Total minimum : </i><span
+                                class="total-minimum">{{ $offer->min_total }}</span></p>
+                        <p class="flex-root d-flex flex-column"><i class="text-muted">escompte :
+                            </i>{{ $offer->escompte }}%
+                        </p>
                     </div>
-                    <thead>
-                        <tr>
-                            <th>Nom Produit</th>
-                            <th>Prix</th>
-                            <th>Quantité</th>
-                            <th>Remise</th>
-                            <th>Total produit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <form action="{{ route('commandesindividu.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" value="{{ $offer->id }}" name='id_offer'>
-                            @foreach ($offer->produits as $produit)
-                                <tr>
-                                    <input type="hidden" value="{{ $produit->id }}" name="id_produit[]">
-                                    <td>{{ $produit->nom }}</td>
-                                    <td class='prixVente'>{{ $produit->prixVente }}</td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input type="number" class='form-control quantity'
-                                                min='{{ $produit->pivot->quantity }}' name='quantity[]'>
-                                            <span class="input-group-text">Min:
-                                                {{ $produit->pivot->quantity }}</span>
-                                        </div>
-                                    </td>
-                                    <input type="hidden" value="{{ $produit->pivot->discount }}" name='discount[]'>
-                                    <td class='remise'>{{ $produit->pivot->discount }}%</td>
-                                    <td class='total-price'>
-                                        <input type="text" class="form-control total-price-input" readonly>
-                                    </td>
-                                </tr>
-                            @endforeach
+                    <p id="total-min-message" class='text-danger'>Votre total doit etre supperieur ou egal le total
+                        minimum</p>
+                    @if ($offer->produits->isEmpty())
+                        <p>Pas de produit dans cette offre</p>
+                    @else
+                        <h4 class="min-w-175px pb-2 m-5">Produits :</h4>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
 
-                    </tbody>
-                </table>
-            @endif
-            <div class="row">
-                <div class="col-md-6">
-                    <p>Total sans remise : <span class='tsremise'></span></p>
-                    <p>Total prix remis : <span class='tpremiser'></span></p>
-                    <p>Gains : <span class='gain'></span></p>
+                                <div id='quantity-error-message'>
+                                    <h6 class="text-danger">Quantité est moin que le minimum</h6>
+                                </div>
+                                <thead>
+                                    <tr class='text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0'>
+                                        <th class="min-w-100px sorting">Nom Produit</th>
+                                        <th class="min-w-100px sorting">Prix</th>
+                                        <th class="min-w-100px sorting">Quantité</th>
+                                        <th class="min-w-100px sorting">Remise</th>
+                                        <th class="min-w-100px sorting">Total produit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <form action="{{ route('commandesindividu.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $offer->id }}" name='id_offer'>
+                                        @foreach ($offer->produits as $produit)
+                                            <tr>
+                                                <input type="hidden" value="{{ $produit->id }}" name="id_produit[]">
+                                                <td class='text-gray-800 fw-bold'>
+                                                    {{ $produit->nom }}</td>
+                                                <td class='prixVente text-gray-800 fw-bold'>
+                                                    {{ $produit->prixVente }}</td>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="number" class='form-control quantity'
+                                                            min='{{ $produit->pivot->quantity }}' name='quantity[]'>
+                                                        <span class="input-group-text text-gray-80 fw-bold">Min:
+                                                            {{ $produit->pivot->quantity }}</span>
+                                                    </div>
+                                                </td>
+                                                <input type="hidden" value="{{ $produit->pivot->discount }}"
+                                                    name='discount[]' class="text-gray-800 fw-bold">
+                                                <td class='remise text-gray-800fw-bold'>
+                                                    {{ $produit->pivot->discount }}%</td>
+                                                <td class='total-price'>
+                                                    <input type="text" class="form-control total-price-input"
+                                                        readonly>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Total sans remise : <span class='tsremise'></span></p>
+                            <p>Total prix remis : <span class='tpremiser'></span></p>
+                            <p>Gains : <span class='gain'></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary" id="submit-button">Commendez</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary" id="submit-button">Commendez</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
+
     <!--end::Row-->
 </x-default-layout>
 <script>
