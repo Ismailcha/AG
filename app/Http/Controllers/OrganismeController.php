@@ -12,10 +12,11 @@ class OrganismeController extends Controller
     // List all organismes
     public function index()
     {
+        $organismes = Organisme::paginate(10);
         $produits = Produit::all();
-        $organismes = Organisme::all();
         return view('added_pages.organisme.index', compact('organismes', 'produits'));
     }
+    
 
     // Show the create form
     public function create()

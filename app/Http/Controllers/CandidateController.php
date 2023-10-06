@@ -11,7 +11,7 @@ class CandidateController extends Controller
 {
     public function index()
     {
-        $candidates = Candidate::paginate(10); // Adjust the pagination as needed
+        $candidates = Candidate::paginate(6); // Adjust the pagination as needed
         return view('candidates.index', compact('candidates'));
     }
 
@@ -55,6 +55,7 @@ class CandidateController extends Controller
     // Attach selected specialities to the candidate
     $specialityIds = $request->input('specialites');
     $candidate->specialities()->attach($specialityIds);
+    $candidates = Candidate::paginate(3); // Adjust the pagination as needed
 
     // Redirect to a success page or return a response as needed
     return redirect()->route('candidates.index')->with('success', 'Candidate added successfully.');
