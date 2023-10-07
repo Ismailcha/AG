@@ -3,7 +3,7 @@
         Liste des categories
     @endsection
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('added_pages.produit.add_produit') }}
+        {{ Breadcrumbs::render('added_pages.produit.categorie.liste.cat') }}
     @endsection
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
@@ -14,8 +14,8 @@
                         <thead>
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Actions</th>
+                                <th>Nom</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody class="">
@@ -48,13 +48,32 @@
                                             style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
                                         </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div
+                        class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+
+                        @if ($categories->currentPage() > 1)
+                            <a href="{{ $categories->previousPageUrl() }}" class="btn btn-outline-primary">Precedent</a>
+                        @endif
+
+                        <!-- Page Links -->
+                        @for ($i = 1; $i <= $categories->lastPage(); $i++)
+                            <a href="{{ $categories->url($i) }}"
+                                class="btn btn-outline-secondary{{ $i === $categories->currentPage() ? ' active' : '' }}">{{ $i }}</a>
+                        @endfor
+
+                        <!-- Next Page Link -->
+                        @if ($categories->hasMorePages())
+                            <a href="{{ $categories->nextPageUrl() }}" class="btn btn-outline-primary">Suivant</a>
+                        @endif
+                    </div>
+
                 </div>
             </div>
         </div>

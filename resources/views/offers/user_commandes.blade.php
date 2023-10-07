@@ -2,7 +2,9 @@
         @section('title')
             <h2 class="text-primary">Vos commandes</h2>
         @endsection
-
+        @section('breadcrumbs')
+            {{ Breadcrumbs::render('offers.user_commandes') }}
+        @endsection
         <!--begin::Row-->
         <div id="datacontainer">
             <div class="row g-5 g-xl-10 mb-5 mb-xl-10">

@@ -6,13 +6,13 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Spatie\Permission\Models\Role;
 
 // Home
-Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
-    $trail->push('Home', route('dashboard'));
+Breadcrumbs::for('Accueil', function (BreadcrumbTrail $trail) {
+    $trail->push('Accueil', route('dashboard'));
 });
 
 // Home > Dashboard
 Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('Accueil');
     $trail->push('Dashboard', route('dashboard'));
 });
 
@@ -53,11 +53,41 @@ Breadcrumbs::for('user-management.permissions.index', function (BreadcrumbTrail 
 });
 // Home > Dashboard > produit form
 Breadcrumbs::for('added_pages.produit.add_produit', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('Accueil');
     $trail->push('Ajoute Produit', route('dashboard'));
 });
 // Home > Dashboard > produit liste
 Breadcrumbs::for('added_pages.produit.liste_produit', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('Accueil');
     $trail->push('Liste des produits', route('dashboard'));
+});
+// Home > Dashboard > produit > Liste des categorie
+Breadcrumbs::for('added_pages.produit.categorie.liste.cat', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Liste des categories', route('dashboard'));
+});
+// offers liste 
+Breadcrumbs::for('offers.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Liste des offers', route('dashboard'));
+});
+// Commande detail
+Breadcrumbs::for('offers.commande_detail', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Commande detail', route('dashboard'));
+});
+// USER Commande
+Breadcrumbs::for('offers.user_commandes', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Vos commandes', route('dashboard'));
+});
+// Liste candidat
+Breadcrumbs::for('candidats.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Liste candidats', route('dashboard'));
+});
+// Liste candidat
+Breadcrumbs::for('added_pages.organismes.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Liste organismes', route('dashboard'));
 });

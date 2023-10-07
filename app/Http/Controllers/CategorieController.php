@@ -14,7 +14,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::all();
+        $categories = Categorie::paginate(10);
         return view('added_pages.produit.categorie.liste_cat', compact('categories'));
     }
 
@@ -36,16 +36,16 @@ class CategorieController extends Controller
         $request->validate([
             'nomCat' => 'required|unique:categories',
         ]);
-    
+
         $categorie = Categorie::create([
             'nomCat' => $request->nomCat, // Use 'nomCat' from the request
         ]);
-    
+
         // Redirect to the desired route with a success message
         return redirect()->route('produit.create')->with('success', 'Category created successfully');
     }
-    
-    
+
+
 
 
 
