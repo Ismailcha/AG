@@ -1271,6 +1271,7 @@ SVG Icons - svgicons.sparkk.fr
                     .svg-icon circle {
                         stroke: #4691f6;
                         stroke-width: 1;
+                    }
                 </style>
 
 
@@ -1341,9 +1342,7 @@ SVG Icons - svgicons.sparkk.fr
                     </a>
                     <a class="menu-link {{ request()->routeIs('candidates.index') ? 'active' : '' }}"
                         href="{{ route('candidates.index') }}">
-                        <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
-                        </span>
+
                         <span class="menu-title">Liste des Technicien</span>
                         <svg class="svg-icon" viewBox="0 0 20 20">
                             <path fill="none"

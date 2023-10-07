@@ -15,10 +15,10 @@
                 <span class="menu-link">
                     <span class="menu-icon">{!! getIcon('element-11', 'fs-2') !!}</span>
                     <span class="menu-title">Dashboards</span>
-                    
+
                     <span class="menu-arrow"></span>
                 </span>
-                
+
                 <!--end:Menu link-->
                 <!--begin:Menu sub-->
                 <div class="menu-sub menu-sub-accordion">
@@ -41,9 +41,6 @@
                         </a>
                         <a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
                             href="{{ route('categories.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
                             <span class="menu-title">Liste des categories</span>
                         </a>
                         <a class="menu-link {{ request()->routeIs('techniciens.index') ? 'active' : '' }}"
@@ -117,8 +114,8 @@
                                 <span class="bullet bullet-dot"></span>
                             </span>
                             <span class="menu-title">Liste des candidats</span>
-                         </a>
-                         
+                        </a>
+
 
                         <!--end:Menu link-->
                     </div>

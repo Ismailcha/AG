@@ -1,58 +1,63 @@
 <x-default-layout>
     @section('title')
-        Ajouter categorie
+        Liste des categories
     @endsection
-
     @section('breadcrumbs')
         {{ Breadcrumbs::render('added_pages.produit.add_produit') }}
     @endsection
-
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+        <div class="card">
+            <div class="card-body pt-1">
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                        <thead>
+                            <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            @foreach ($categories as $category)
+                                <tr data-category-id="{{ $category->id }}">
+                                    <td>{{ $category->id }}</td>
+                                    <td class="category-name" data-original-name="{{ $category->nomCat }}">
+                                        {{ $category->nomCat }}
+                                    </td>
+                                    <td>
+                                        <!-- Edit Button -->
+                                        <button type="button" class="btn btn-primary edit-category">
+                                            modifier
+                                        </button>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($categories as $category)
-                    <tr data-category-id="{{ $category->id }}">
-                        <td>{{ $category->id }}</td>
-                        <td class="category-name" data-original-name="{{ $category->nomCat }}">
-                            {{ $category->nomCat }}
-                        </td>
-                        <td>
-                            <!-- Edit Button -->
-                            <button type="button" class="btn btn-primary edit-category">
-                                modifier
-                            </button>
+                                        <!-- Save Button (Hidden by Default) -->
+                                        <button type="button" class="btn btn-success save-category"
+                                            style="display: none;">
+                                            enregistrer
+                                        </button>
 
-                            <!-- Save Button (Hidden by Default) -->
-                            <button type="button" class="btn btn-success save-category" style="display: none;">
-                                enregistrer
-                            </button>
+                                        <!-- Cancel Button (Hidden by Default) -->
+                                        <button type="button" class="btn btn-secondary cancel-edit"
+                                            style="display: none;">
+                                            annuler
+                                        </button>
 
-                            <!-- Cancel Button (Hidden by Default) -->
-                            <button type="button" class="btn btn-secondary cancel-edit" style="display: none;">
-                                annuler
-                            </button>
-
-                            <!-- Delete Button (Outside Modal) -->
-                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
-                                style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                                        <!-- Delete Button (Outside Modal) -->
+                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                                            style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </x-default-layout>
 <script>
