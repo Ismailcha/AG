@@ -8,13 +8,13 @@
         <div class="text-center mb-11">
             <!--begin::Title-->
             <h1 class="text-dark fw-bolder mb-3">
-                Sign Up
+                Creation de compte
             </h1>
             <!--end::Title-->
 
             <!--begin::Subtitle-->
             <div class="text-gray-500 fw-semibold fs-6">
-                Your Social Campaigns
+
             </div>
             <!--end::Subtitle--->
         </div>
@@ -60,7 +60,7 @@
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Name-->
-            <input type="text" placeholder="Name" name="name" autocomplete="off"
+            <input type="text" placeholder="Nom" name="name" autocomplete="off"
                 class="form-control bg-transparent" />
             <!--end::Name-->
         </div>
@@ -92,8 +92,8 @@
             <div class="mb-1">
                 <!--begin::Input wrapper-->
                 <div class="position-relative mb-3">
-                    <input class="form-control bg-transparent" type="password" placeholder="Password" name="password"
-                        autocomplete="off" />
+                    <input class="form-control bg-transparent" type="password" placeholder="Mot de passe"
+                        name="password" autocomplete="off" />
 
                     <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
                         data-kt-password-meter-control="visibility">
@@ -116,7 +116,7 @@
 
             <!--begin::Hint-->
             <div class="text-muted">
-                Use 8 or more characters with a mix of letters, numbers & symbols.
+                Utilisez 8 caractères ou plus avec un mélange de lettres, de chiffres et de symboles.
             </div>
             <!--end::Hint-->
         </div>
@@ -137,9 +137,9 @@
                 <input class="form-check-input" type="checkbox" name="toc" value="1" />
 
                 <label class="form-check-label fw-semibold text-gray-700 fs-6">
-                    I Agree &
+                    J'accepte
 
-                    <a href="#" class="ms-1 link-primary">Terms and conditions</a>.
+                    <a href="#" class="ms-1 link-primary">les termes et conditions</a>.
                 </label>
             </div>
         </div>
@@ -148,17 +148,17 @@
         <!--begin::Submit button-->
         <div class="d-grid mb-10">
             <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
-                @include('partials/general/_button-indicator', ['label' => 'Sign Up'])
+                @include('partials/general/_button-indicator', ['label' => 'Enregistrer'])
             </button>
         </div>
         <!--end::Submit button-->
 
         <!--begin::Sign up-->
         <div class="text-gray-500 text-center fw-semibold fs-6">
-            Already have an Account?
+            Vous avez un compte deja ?
 
             <a href="/login" class="link-primary fw-semibold">
-                Sign in
+                Connectez-vous
             </a>
         </div>
         <!--end::Sign up-->

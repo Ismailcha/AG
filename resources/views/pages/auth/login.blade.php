@@ -1,26 +1,27 @@
 <x-auth-layout>
 
     <!--begin::Form-->
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}" action="{{ route('login') }}">
+    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ route('dashboard') }}"
+        action="{{ route('login') }}">
         @csrf
         <!--begin::Heading-->
         <div class="text-center mb-11">
             <!--begin::Title-->
             <h1 class="text-dark fw-bolder mb-3">
-                Sign In
+                Connectez vous
             </h1>
             <!--end::Title-->
 
             <!--begin::Subtitle-->
-            <div class="text-gray-500 fw-semibold fs-6">
+            {{-- <div class="text-gray-500 fw-semibold fs-6">
                 Your Social Campaigns
-            </div>
+            </div> --}}
             <!--end::Subtitle--->
         </div>
         <!--begin::Heading-->
 
         <!--begin::Login options-->
-        <div class="row g-3 mb-9">
+        {{-- <div class="row g-3 mb-9">
             <!--begin::Col-->
             <div class="col-md-6">
                 <!--begin::Google link--->
@@ -43,26 +44,28 @@
                 <!--end::Google link--->
             </div>
             <!--end::Col-->
-        </div>
+        </div> --}}
         <!--end::Login options-->
 
         <!--begin::Separator-->
         <div class="separator separator-content my-14">
-            <span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
+            <span class="w-125px text-gray-500 fw-semibold fs-7">Avec email</span>
         </div>
         <!--end::Separator-->
 
         <!--begin::Input group--->
         <div class="fv-row mb-8">
             <!--begin::Email-->
-            <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" value="demo@demo.com"/>
+            <input type="text" placeholder="Email" name="email" autocomplete="off"
+                class="form-control bg-transparent" value="demo@demo.com" />
             <!--end::Email-->
         </div>
 
         <!--end::Input group--->
         <div class="fv-row mb-3">
             <!--begin::Password-->
-            <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" value="demo"/>
+            <input type="password" placeholder="Password" name="password" autocomplete="off"
+                class="form-control bg-transparent" value="demo" />
             <!--end::Password-->
         </div>
         <!--end::Input group--->
@@ -73,7 +76,7 @@
 
             <!--begin::Link-->
             <a href="{{ route('password.request') }}" class="link-primary">
-                Forgot Password ?
+                Mot de passe oublier ?
             </a>
             <!--end::Link-->
         </div>
@@ -89,10 +92,10 @@
 
         <!--begin::Sign up-->
         <div class="text-gray-500 text-center fw-semibold fs-6">
-            Not a Member yet?
+            Pas un membre
 
             <a href="{{ route('register') }}" class="link-primary">
-                Sign up
+                Cree votre compte
             </a>
         </div>
         <!--end::Sign up-->
