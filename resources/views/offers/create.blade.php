@@ -42,62 +42,66 @@
 
                     <div class="d-flex flex-column gap-5 gap-md-7">
                         <!-- Offer Name -->
-                        <div class="d-flex flex-column flex-md-row gap-5 m-3">
-                            <div class="form-group">
+                        <div class="d-flex flex-column flex-md-row gap-5">
+                            <div class="fv-row flex-row-fluid fv-plugins-icon-container">
                                 <label for="offre_name" class="required form-label">Nom offer</label>
-                                <input type="text" class="form-control" id="offre_name" name="offre_name" required>
+                                <input type="text" placeholder="Nom d'offer" class="form-control" id="offre_name"
+                                    name="offre_name" required>
                             </div>
 
                             <!-- Laboratoire -->
-                            <div class="form-group">
+                            <div class="fv-row flex-row-fluid fv-plugins-icon-container">
                                 <label for="laboratoire"class="required form-label">Laboratoire</label>
-                                <input type="text" class="form-control" id="laboratoire" name="laboratoire" required>
+                                <input type="text" placeholder="Nom Laboratoire" class="form-control"
+                                    id="laboratoire" name="laboratoire" required>
                             </div>
                             <!-- Grossiste (optional) -->
-                            <div class="form-group">
+                            <div class="flex-row-fluid">
                                 <label for="grossiste"class="form-label">Grossiste</label>
-                                <input type="text" class="form-control" id="grossiste" name="grossiste">
+                                <input type="text" placeholder="Grossiste" class="form-control" id="grossiste"
+                                    name="grossiste">
                             </div>
 
                         </div>
-                        <div class="d-flex flex-column flex-md-row gap-5 m-3">
+                        <div class="d-flex flex-column flex-md-row gap-5">
                             <!-- Date Start -->
-                            <div class="form-group">
+                            <div class="fv-row flex-row-fluid fv-plugins-icon-container">
                                 <label for="date_start"class="required form-label">Date debut</label>
-                                <input type="date"
-                                    class="form-control form-control-transparent fw-bold pe-5 flatpickr-input"
-                                    id="date_start" name="date_start" required>
+                                <input type="date" class="form-control fw-bold pe-5 flatpickr-input" id="date_start"
+                                    name="date_start" required>
                             </div>
 
                             <!-- Date End -->
-                            <div class="form-group">
+                            <div class="flex-row-fluid">
                                 <label for="date_end"class="required form-label">Date fin</label>
-                                <input type="date"
-                                    class="form-control form-control-transparent fw-bold pe-5 flatpickr-input"
-                                    id="date_end" name="date_end" required>
+                                <input type="date" class="form-control fw-bold pe-5 flatpickr-input" id="date_end"
+                                    name="date_end" required>
                             </div>
 
                         </div>
 
-                        <!-- Escompte -->
+
 
                         <div class="d-flex flex-column flex-md-row gap-5 m-3">
+                            <!-- Escompte -->
                             <div class="form-group">
                                 <label for="escompte"class="required form-label">Escompte %</label>
-                                <input type="number" class="form-control" id="escompte" name="escompte" required>
+                                <input type="number" placeholder="Escompte %" class="form-control" id="escompte"
+                                    name="escompte" required>
 
                             </div>
                             <!-- Min Total -->
                             <div class="form-group">
-                                <label for="min_total"class="required form-label">Total minimum</label>
-                                <input type="number" class="form-control" id="min_total" name="min_total" required>
+                                <label for="min_total"class="required form-label">Total minimum de commande</label>
+                                <input type="number" placeholder="Total minimum" class="form-control" id="min_total"
+                                    name="min_total" required>
                             </div>
                         </div>
                         <!-- Add Products Section -->
 
 
                         <!-- Table to display selected products -->
-                        <h2 class='text-success'>Produits Sélectionnés</h2>
+                        <h2>Produits Sélectionnés</h2>
                         <table class="table g-5 gs-0 mb-0 fw-bold text-gray-700" id="selectedProductTable">
                             <thead>
                                 <tr>
@@ -112,7 +116,7 @@
                                 <!-- This table will be populated with selected products via JavaScript -->
                             </tbody>
                         </table>
-                        <h2 class='text-success'>Ajouter des produits a l'offre</h2>
+                        <h2>Ajouter des produits a l'offre</h2>
                         <!-- You can include code here to select products and associate them with the offer -->
                         <div class="form-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Search by Name">
