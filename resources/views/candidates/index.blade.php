@@ -1,6 +1,6 @@
 <x-default-layout>
     <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.js"></script>
     <!-- Link to your custom JavaScript file -->
     <script src="{{ asset('public/js/script2.js') }}"></script>
     <script src="{{ asset('public/js/swiper-bundle.min.js') }}"></script>
@@ -57,15 +57,28 @@
                                         <div class="fw-semibold text-gray-400">Sales</div>
                                     </div>
                                 </div>
-                                <button class="btn btn-sm btn-light-primary btn-flex btn-center" data-kt-follow-btn="true">
-                                    <i class="ki-outline ki-check following fs-3"></i>
-                                    <i class="ki-outline ki-plus follow fs-3 d-none"></i>
-                                    <span class="indicator-label">Afficher le cv</span>
-                                    <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    
+                                <button class="btn btn-sm btn-light-primary btn-flex btn-center" data-kt-follow-btn="true" data-bs-toggle="modal" data-bs-target="#pdfModal{{ $candidate->id }}">
+                                    <span class="indicator-label">Afficher le CV</span>
                                 </button>
-                                
+                
+                                <!-- Create the modal structure with a unique ID -->
+                                <div class="modal fade" id="pdfModal{{ $candidate->id }}" tabindex="-1" aria-labelledby="pdfModalLabel{{ $candidate->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="pdfModalLabel{{ $candidate->id }}">CV de {{ $candidate->nom }} {{ $candidate->prenom }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- Use a unique ID for the iframe element -->
+                                                <iframe id="pdfViewer{{ $candidate->id }}" src="{{ asset('storage/' . $candidate->resume_path) }}" width="100%" height="500px"></iframe>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@ class CandidateController extends Controller
 
     // Handle file uploads for avatar and cv
     $avatarPath = $request->file('avatar')->store('avatars', 'public'); // Store avatar in 'storage/app/avatars' folder
-    $cvPath = $request->file('resume')->store('cv'); // Store CV in 'storage/app/cv' folder
+    $cvPath = $request->file('resume')->store('cv','public'); // Store CV in 'storage/app/cv' folder
 
     // Create a new candidate
     $candidate = new Candidate();
