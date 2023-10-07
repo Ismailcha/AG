@@ -28,9 +28,9 @@
                 <!--end::Search-->
             </div>
             {{-- if admin : --}}
-            <div class='card-toolbar flex-row-fluid justify-content-end gap-5'>
+            <div  class='card-toolbar flex-row-fluid justify-content-end gap-5'>
                 <a class=" btn btn-primary m-4" href="{{ route('produit.create') }}">
-                    <span class="">
+                    <span  class="">
                         <span class=""></span>
                     </span>
                     <span class="menu-title">Ajouter un produit</span>
@@ -108,7 +108,7 @@
                     </tbody>
 
                 </table>
-                <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+               <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
 
                     @if ($produits->currentPage() > 1)
                         <a href="{{ $produits->previousPageUrl() }}" class="btn btn-outline-primary">Precedent</a>
