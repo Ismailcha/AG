@@ -49,20 +49,25 @@
                                         </div>
                                         <a href="#"
                                             class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">{{ $candidate->nom }}
-                                            - {{ $candidate->prenom }}</a>
+                                             {{ $candidate->prenom }}</a>
                                         <h2></h2>
-                                        <div class="fw-semibold text-gray-400 mb-6">Art Director at Novica Co.</div>
+                                        {{-- <div class="fw-semibold text-gray-400 mb-6">Art Director at Novica Co.</div> --}}
                                         <div class="d-flex flex-center flex-wrap mb-5">
                                             <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
                                                 @foreach ($candidate->specialities as $speciality)
-                                                    {{ $speciality->name }}<br>
+                                                    {{ $speciality->name }}-<br>
                                                 @endforeach
                                                 <div class="fw-semibold text-gray-400">Les speciality</div>
                                             </div>
-                                            <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
-                                                <div class="fs-6 fw-bold text-gray-700">$236,400</div>
-                                                <div class="fw-semibold text-gray-400">Sales</div>
+                                           
+                                            <div class="fw-semibold text-gray-400">
+                                                @if ($candidate->disponibility == 1)
+                                                    Immédiate
+                                                @else
+                                                    À fixer
+                                                @endif
                                             </div>
+                                            
                                         </div>
                                         <button class="btn btn-sm btn-light-primary btn-flex btn-center"
                                             data-kt-follow-btn="true" data-bs-toggle="modal"

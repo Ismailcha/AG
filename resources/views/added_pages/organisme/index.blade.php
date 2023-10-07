@@ -172,26 +172,22 @@
                                             <div class="fw-semibold text-gray-400">type</div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-sm btn-light-primary btn-flex btn-center"
-                                        data-kt-follow-btn="true">
+                                    <button class="btn btn-sm btn-light-primary btn-flex btn-center">
                                         <i class="ki-outline ki-check following fs-3"></i>
-                                        <i class="ki-outline ki-plus follow fs-3 d-none"></i>
-                                        <a href="{{ route('organismes.show', $organism->id) }}"><span
-                                                class="indicator-label">Afficher plus d'information</span></a>
-                                        {{-- <a href="{{ route('organismes.edit', $organism->id) }}" class="btn btn-warning">Edit</a> --}}
+                                        <a href="{{ route('organismes.show', $organism->id) }}">
+                                        <i ><span >Afficher plus d'information</span></i>
+                                        
+                                            
+                                            </a>
+                                    
+                                    </button>
+{{-- <a href="{{ route('organismes.edit', $organism->id) }}" class="btn btn-warning">Edit</a> --}}
                                         <!-- Add a delete button if needed -->
                                         {{-- <form action="{{ route('organismes.destroy', $organism->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form> --}}
-
-                                        <span class="indicator-progress">Please wait...
-                                            <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-
-                                    </button>
-
                                 </div>
                             </div>
                         </div>
