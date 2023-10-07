@@ -2,7 +2,9 @@
     @section('title')
         <h2 class="text-primary">Commande detail</h2>
     @endsection
-
+    @section('breadcrumbs')
+        {{ Breadcrumbs::render('offers.commande_detail') }}
+    @endsection
     <!--begin::Row-->
     <div class="card">
         <div class="card-body py-20">

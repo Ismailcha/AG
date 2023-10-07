@@ -3,7 +3,7 @@
         Liste des categories
     @endsection
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('added_pages.produit.add_produit') }}
+        {{ Breadcrumbs::render('added_pages.produit.categorie.liste.cat') }}
     @endsection
     <!--begin::Row-->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">

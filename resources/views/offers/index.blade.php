@@ -4,7 +4,7 @@
 
     <!-- Define breadcrumbs -->
     @section('breadcrumbs')
-        {{ Breadcrumbs::render('dashboard') }}
+        {{ Breadcrumbs::render('offers.index') }}
     @endsection
     <a href="{{ route('offers.create') }}" class="btn btn-primary mb-3">Créé une nouvelle offre</a>
 
