@@ -9,7 +9,7 @@
     <div class="menu menu-rounded menu-column menu-lg-row my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
         id="kt_app_header_menu" data-kt-menu="true">
         <!--begin:Menu item-->
-        <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
+        {{-- <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
             class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
             <!--begin:Menu link-->
             <span class="menu-link">
@@ -22,7 +22,7 @@
                 @include(config('settings.KT_THEME_LAYOUT_DIR') . '/partials/sidebar-layout/header/_menu/__dashboards')
             </div>
             <!--end:Menu sub-->
-        </div>
+        </div> --}}
         <!--end:Menu item-->
         <!--begin:Menu item-->
         {{-- <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
@@ -41,16 +41,17 @@
         </div> --}}
         <!--end:Menu item-->
         <!--begin:Menu item-->
-        {{-- <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
-            class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+        <div {{-- data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" --}} class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
             <!--begin:Menu link-->
-            <span class="menu-link">
-                <span class="menu-title">Apps</span>
-                <span class="menu-arrow d-lg-none"></span>
-            </span>
-            <!--end:Menu link-->
-            <!--begin:Menu sub-->
-            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
+            <a href="{{ route('dashboard') }}">
+                <span class="menu-link">
+
+                    <span class="menu-title">Accueil</span>
+                    <span class="menu-arrow d-lg-none"></span>
+                </span>
+                <!--end:Menu link-->
+                <!--begin:Menu sub-->
+                {{-- <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="{default:'click', lg: 'hover'}" data-kt-menu-placement="right-start"
                     class="menu-item menu-lg-down-accordion">
@@ -1184,9 +1185,10 @@
                     <!--end:Menu link-->
                 </div>
                 <!--end:Menu item-->
-            </div>
-            <!--end:Menu sub-->
-        </div> --}}
+            </div> --}}
+                <!--end:Menu sub-->
+            </a>
+        </div>
         <!--end:Menu item-->
         <!--begin:Menu item-->
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
