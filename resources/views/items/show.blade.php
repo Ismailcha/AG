@@ -31,11 +31,11 @@
                     <div class="card-body">
                         <h1 class="card-title">{{ $item->name }}</h1>
                         <p class="card-text"><strong>Description:</strong> {{ $item->description }}</p>
-                        <p class="card-text"><strong>Price:</strong> DH{{ number_format($item->price, 2) }}</p>
-                        <p class="card-text"><strong>Seller Name:</strong> {{ $item->seller_name }}</p>
+                        <p class="card-text"><strong>Prix:</strong> DH{{ number_format($item->price, 2) }}</p>
+                        <p class="card-text"><strong>Nom Vendeur:</strong> {{ $item->seller_name }}</p>
                         <p class="card-text"><strong>Email:</strong> {{ $item->email }}</p>
-                        <p class="card-text"><strong>Phone Number:</strong> {{ $item->phone_number }}</p>
-                        <p class="card-text"><strong>City:</strong> {{ $item->city }}</p>
+                        <p class="card-text"><strong>Numero telephone:</strong> {{ $item->phone_number }}</p>
+                        <p class="card-text"><strong>Ville:</strong> {{ $item->city }}</p>
                     </div>
                 </div>
             </div>
