@@ -58,7 +58,7 @@ class CandidateController extends Controller
     $candidates = Candidate::paginate(3); // Adjust the pagination as needed
 
     // Redirect to a success page or return a response as needed
-    return redirect()->route('candidates.index')->with('success', 'Candidate added successfully.');
+    return redirect()->route('candidates.index')->with('success', 'Technicien ajouter avec success.');
 }
 
 

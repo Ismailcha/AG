@@ -88,7 +88,7 @@ var KTUsersUpdatePassword = function () {
                         text: "Your form has not been cancelled!.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok, ca marche!",
                         customClass: {
                             confirmButton: "btn btn-primary",
                         }
@@ -122,7 +122,7 @@ var KTUsersUpdatePassword = function () {
                         text: "Your form has not been cancelled!.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok, ca marche!",
                         customClass: {
                             confirmButton: "btn btn-primary",
                         }
@@ -162,7 +162,7 @@ var KTUsersUpdatePassword = function () {
                                 text: "Form has been successfully submitted!",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok, ca marche!",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }

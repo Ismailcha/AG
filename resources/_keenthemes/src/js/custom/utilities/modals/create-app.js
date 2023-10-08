@@ -54,10 +54,10 @@ var KTCreateApp = function () {
 					} else {
 						// Show error message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
 						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
+							text: "Désolé, il semble que des erreurs aient été détectées, veuillez réessayer",
 							icon: "error",
 							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
+							confirmButtonText: "Ok, ca marche!",
 							customClass: {
 								confirmButton: "btn btn-light"
 							}
@@ -111,10 +111,10 @@ var KTCreateApp = function () {
 					}, 2000);
 				} else {
 					Swal.fire({
-						text: "Sorry, looks like there are some errors detected, please try again.",
+						text: "Désolé, il semble que des erreurs aient été détectées, veuillez réessayer",
 						icon: "error",
 						buttonsStyling: false,
-						confirmButtonText: "Ok, got it!",
+						confirmButtonText: "Ok, ca marche!",
 						customClass: {
 							confirmButton: "btn btn-light"
 						}

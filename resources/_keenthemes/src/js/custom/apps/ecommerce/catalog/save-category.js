@@ -234,7 +234,7 @@ var KTAppEcommerceSaveCategory = function () {
                                 text: "Form has been successfully submitted!",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok, ca marche!",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -250,10 +250,10 @@ var KTAppEcommerceSaveCategory = function () {
                         }, 2000);
                     } else {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Désolé, il semble que des erreurs aient été détectées, veuillez réessayer",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok, ca marche!",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }

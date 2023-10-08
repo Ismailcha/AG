@@ -91,7 +91,7 @@
                     icon = 'success';
                 }
                 if (typeof confirmButtonText === 'undefined') {
-                    confirmButtonText = 'Ok, got it!';
+                    confirmButtonText = 'Ok, ca marche!';
                 }
                 Swal.fire({
                     text: message,

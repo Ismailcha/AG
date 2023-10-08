@@ -42,7 +42,7 @@ class CategorieController extends Controller
         ]);
 
         // Redirect to the desired route with a success message
-        return redirect()->route('produit.create')->with('success', 'Category created successfully');
+        return redirect()->route('produit.create')->with('success', 'Category ajouter avec success');
     }
 
 

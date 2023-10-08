@@ -122,7 +122,7 @@ var KTModalNewTarget = function () {
 								text: "Form has been successfully submitted!",
 								icon: "success",
 								buttonsStyling: false,
-								confirmButtonText: "Ok, got it!",
+								confirmButtonText: "Ok, ca marche!",
 								customClass: {
 									confirmButton: "btn btn-primary"
 								}
@@ -137,10 +137,10 @@ var KTModalNewTarget = function () {
 					} else {
 						// Show error message.
 						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
+							text: "Désolé, il semble que des erreurs aient été détectées, veuillez réessayer",
 							icon: "error",
 							buttonsStyling: false,
-							confirmButtonText: "Ok, got it!",
+							confirmButtonText: "Ok, ca marche!",
 							customClass: {
 								confirmButton: "btn btn-primary"
 							}
@@ -173,7 +173,7 @@ var KTModalNewTarget = function () {
 						text: "Your form has not been cancelled!.",
 						icon: "error",
 						buttonsStyling: false,
-						confirmButtonText: "Ok, got it!",
+						confirmButtonText: "Ok, ca marche!",
 						customClass: {
 							confirmButton: "btn btn-primary",
 						}
