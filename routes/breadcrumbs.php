@@ -91,3 +91,8 @@ Breadcrumbs::for('added_pages.organismes.index', function (BreadcrumbTrail $trai
     $trail->parent('Accueil');
     $trail->push('Liste organismes', route('dashboard'));
 });
+// items > show
+Breadcrumbs::for('items.show', function (BreadcrumbTrail $trail) {
+    $trail->parent('Accueil');
+    $trail->push('Detail item', route('dashboard'));
+});
