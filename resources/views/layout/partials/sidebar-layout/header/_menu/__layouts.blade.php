@@ -59,7 +59,7 @@
                                 </path>
                             </svg>
                         </a>
-                        <a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
+                        <a class="menu-link {{ request()->routeIs('items.index') ? 'active' : '' }}"
                             href="{{ route('items.index') }}">
                             <span class="menu-title">Vente Achat</span>
                             <svg class="svg-icon" viewBox="0 0 20 20">
@@ -101,7 +101,7 @@
                                 </path>
                             </svg>
                         </a>
-                        
+
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
@@ -166,7 +166,7 @@
                                 </path>
                             </svg>
                         </a>
-                        
+
 
                         <!--end:Menu link-->
                     </div>

@@ -45,7 +45,6 @@
             <!--begin:Menu link-->
             <a href="{{ route('dashboard') }}">
                 <span class="menu-link">
-
                     <span class="menu-title">Accueil</span>
                     <span class="menu-arrow d-lg-none"></span>
                 </span>
