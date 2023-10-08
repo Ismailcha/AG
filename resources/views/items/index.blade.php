@@ -13,22 +13,53 @@
         <a href="{{ route('items.create') }}" class="btn btn-primary">Cree un offre de vente</a>
         <div class="mb-4">
             <form action="{{ route('items.index') }}" method="GET">
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label for="min_price">Min Prix:</label>
-                        <input type="number" name="min_price" id="min_price" class="form-control" value="{{ request('min_price') }}">
+                <div class="col-xl-9">
+                    <!--begin::Dialer-->
+                    <div class="position-relative w-md-300px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="999999999" data-kt-dialer-step="10" data-kt-dialer-prefix="DH" data-kt-dialer-decimals="2">
+                        <!--begin::Decrease control-->
+                        <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                            <i class="ki-outline ki-minus-square fs-1"></i>
+                        </button>
+                        <!--end::Decrease control-->
+                        <!--begin::Input control-->
+                        <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="max_price"  value="DH1.00">
+                        <!--end::Input control-->
+                        <!--begin::Increase control-->
+                        <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+                            <i class="ki-outline ki-plus-square fs-1"></i>
+                        </button>
+                        <!--end::Increase control-->
                     </div>
-                    <div class="col-md-6">
-                        <label for="max_price">Max Prix:</label>
-                        <input type="number" name="max_price" id="max_price" class="form-control" value="{{ request('max_price') }}">
-                    </div>
+                    <!--end::Dialer-->
                 </div>
+            
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary">Filter</button>
-                    <button type="button" id="reset-filter" class="btn btn-secondary">Reinsialiser </button>
+                    <button type="button" id="reset-filter" class="btn btn-secondary">Reinsialiser</button>
                 </div>
             </form>
+            
+            
         </div>
+        {{-- <div class="col-xl-9">
+            <!--begin::Dialer-->
+            <div class="position-relative w-md-300px" data-kt-dialer="true" data-kt-dialer-min="1000" data-kt-dialer-max="50000" data-kt-dialer-step="1000" data-kt-dialer-prefix="$" data-kt-dialer-decimals="2">
+                <!--begin::Decrease control-->
+                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                    <i class="ki-outline ki-minus-square fs-1"></i>
+                </button>
+                <!--end::Decrease control-->
+                <!--begin::Input control-->
+                <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="manageBudget" readonly="readonly" value="$36,000.00">
+                <!--end::Input control-->
+                <!--begin::Increase control-->
+                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+                    <i class="ki-outline ki-plus-square fs-1"></i>
+                </button>
+                <!--end::Increase control-->
+            </div>
+            <!--end::Dialer-->
+        </div> --}}
         <script>
             $(function() {
                 // ... (previous code)

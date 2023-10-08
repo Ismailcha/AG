@@ -13,24 +13,22 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $minPrice = $request->input('min_price');
-        $maxPrice = $request->input('max_price');
+{
+    $query = Item::query();
 
-        $query = Item::query();
-
-        if ($minPrice !== null) {
-            $query->where('price', '>=', $minPrice);
-        }
-
-        if ($maxPrice !== null) {
-            $query->where('price', '<=', $maxPrice);
-        }
-
-        $items = $query->paginate(10); // Adjust the number of items per page as needed
-
-        return view('items.index', compact('items'));
+    // Filter by maximum price if provided
+    if ($request->has('max_price')) {
+        // Remove the "DH" prefix and convert to float for filtering
+        $maxPrice = (float)str_replace(['DH', ','], '', $request->input('max_price'));
+        $query->where('price', '<=', $maxPrice);
     }
+
+    // Get paginated items
+    $items = $query->paginate(10);
+
+    return view('items.index', compact('items'));
+}
+
 
     /**
      * Show the form for creating a new item.
