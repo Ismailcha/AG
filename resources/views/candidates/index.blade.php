@@ -55,7 +55,7 @@
                                         <div class="d-flex flex-center flex-wrap mb-5">
                                             <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
                                                 @foreach ($candidate->specialities as $speciality)
-                                                    {{ $speciality->name }}-<br>
+                                                    {{ $speciality->name }}-
                                                 @endforeach
                                                 <div class="fw-semibold text-gray-400">Les speciality</div>
                                             </div>
