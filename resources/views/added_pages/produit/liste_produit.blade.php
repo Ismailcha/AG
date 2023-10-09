@@ -28,9 +28,9 @@
                 <!--end::Search-->
             </div>
             {{-- if admin : --}}
-            <div  class='card-toolbar flex-row-fluid justify-content-end gap-5'>
+            <div class='card-toolbar flex-row-fluid justify-content-end gap-5'>
                 <a class=" btn btn-primary m-4" href="{{ route('produit.create') }}">
-                    <span  class="">
+                    <span class="">
                         <span class=""></span>
                     </span>
                     <span class="menu-title">Ajouter un produit</span>
@@ -108,7 +108,7 @@
                     </tbody>
 
                 </table>
-               <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
+                <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
 
                     @if ($produits->currentPage() > 1)
                         <a href="{{ $produits->previousPageUrl() }}" class="btn btn-outline-primary">Precedent</a>
@@ -132,3 +132,24 @@
     </div>
     <!--end::Row-->
 </x-default-layout>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Handle product search
+        $('input[data-kt-ecommerce-product-filter="search"]').on('input', function() {
+            var searchText = $(this).val().toLowerCase();
+
+            // Loop through each row in the table
+            $('tbody tr').each(function() {
+                var productName = $(this).find('td:first-child .fs-5').text().toLowerCase();
+
+                // If the product name contains the search text, show the row, otherwise hide it
+                if (productName.includes(searchText)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    });
+</script>
