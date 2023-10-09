@@ -147,7 +147,7 @@
             <div class="d-flex flex-column flex-column-fluid">
                 <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
                     @foreach ($organismes as $organism)
-                        <div class="col-md-6 col-xxl-4">
+                        <div class="col-md-4 col-xxl-4">
                             <div class="card">
                                 <div class="card-body d-flex flex-center flex-column py-9 px-5">
                                     <div class="symbol symbol-65px symbol-circle mb-5">
@@ -175,15 +175,15 @@
                                     <button class="btn btn-sm btn-light-primary btn-flex btn-center">
                                         <i class="ki-outline ki-check following fs-3"></i>
                                         <a href="{{ route('organismes.show', $organism->id) }}">
-                                        <i ><span >Afficher plus d'information</span></i>
-                                        
-                                            
-                                            </a>
-                                    
+                                            <i><span>Afficher plus d'information</span></i>
+
+
+                                        </a>
+
                                     </button>
-{{-- <a href="{{ route('organismes.edit', $organism->id) }}" class="btn btn-warning">Edit</a> --}}
-                                        <!-- Add a delete button if needed -->
-                                        {{-- <form action="{{ route('organismes.destroy', $organism->id) }}" method="POST">
+                                    {{-- <a href="{{ route('organismes.edit', $organism->id) }}" class="btn btn-warning">Edit</a> --}}
+                                    <!-- Add a delete button if needed -->
+                                    {{-- <form action="{{ route('organismes.destroy', $organism->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
