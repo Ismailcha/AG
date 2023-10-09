@@ -37,7 +37,7 @@
                 <div class="d-flex flex-column flex-column-fluid">
                     <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
                         @foreach ($candidates as $candidate)
-                            <div class="col-md-6 col-xxl-4">
+                            <div class="col-md-4 col-xxl-4">
                                 <div class="card">
                                     <div class="card-body d-flex flex-center flex-column py-9 px-5">
                                         <div class="symbol symbol-65px symbol-circle mb-5">
@@ -49,7 +49,7 @@
                                         </div>
                                         <a href="#"
                                             class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">{{ $candidate->nom }}
-                                             {{ $candidate->prenom }}</a>
+                                            {{ $candidate->prenom }}</a>
                                         <h2></h2>
                                         {{-- <div class="fw-semibold text-gray-400 mb-6">Art Director at Novica Co.</div> --}}
                                         <div class="d-flex flex-center flex-wrap mb-5">
@@ -59,7 +59,7 @@
                                                 @endforeach
                                                 <div class="fw-semibold text-gray-400">Les speciality</div>
                                             </div>
-                                           
+
                                             <div class="fw-semibold text-gray-400">
                                                 @if ($candidate->disponibility == 1)
                                                     Immédiate
@@ -67,7 +67,7 @@
                                                     À fixer
                                                 @endif
                                             </div>
-                                            
+
                                         </div>
                                         <button class="btn btn-sm btn-light-primary btn-flex btn-center"
                                             data-kt-follow-btn="true" data-bs-toggle="modal"

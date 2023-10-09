@@ -1,7 +1,7 @@
 <x-default-layout>
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
-    
+
     @section('title')
         Ajouter Candidat
     @endsection
@@ -39,50 +39,51 @@
             </div>
 
             <div class="mb-3">
-    <label for="date_de_naissance" class="form-label">Date de Naissance:</label>
-    <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance" required>
-</div>
+                <label for="date_de_naissance" class="form-label">Date de Naissance:</label>
+                <input type="date" class="form-control" id="date_de_naissance" name="date_de_naissance" required>
+            </div>
 
 
-<div class="mb-3">
-    <label class="form-label">Genre:</label>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="gender" id="genre_male" value="male" required>
-        <label class="form-check-label" for="genre_male">Homme</label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="gender" id="genre_female" value="female" required>
-        <label class="form-check-label" for="genre_female">Femme</label>
-    </div>
-</div>
+            <div class="mb-3">
+                <label class="form-label">Genre:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="genre_male" value="male"
+                        required>
+                    <label class="form-check-label" for="genre_male">Homme</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="genre_female" value="female"
+                        required>
+                    <label class="form-check-label" for="genre_female">Femme</label>
+                </div>
+            </div>
 
-            
+
 
             <div class="mb-3">
                 <label for="ville" class="form-label">Ville:</label>
                 <input type="text" class="form-control" id="ville" name="ville" required>
             </div>
 
-            
+
             <div class="mb-3">
                 <label for="specialites" class="form-label">Spécialités:</label>
                 <select class="select2-multiple form-control" id="specialites" name="specialites[]" multiple="multiple">
                     <!-- Populate options with specialities from your database -->
-                    @foreach($specialities as $speciality)
+                    @foreach ($specialities as $speciality)
                         <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
                     @endforeach
                 </select>
             </div>
-            
-                
-                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#specialityModal">
-                    Ajouter une spécialité
-                </button>
-            <
 
+
+            <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal"
+                data-bs-target="#specialityModal">
+                Ajouter une spécialité
+            </button>
             <div class="mb-3">
                 <label for="disponibilite" class="form-label">Disponibilité:</label>
-                
+
                 <select type="text" class="form-control" id="disponibilite" name="disponibilite" required>
                     <option value="1"> immédiate</option>
                     <option value="2">à fixer</option>
