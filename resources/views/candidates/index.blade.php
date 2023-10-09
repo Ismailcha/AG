@@ -37,7 +37,7 @@
                 <div class="d-flex flex-column flex-column-fluid">
                     <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
                         @foreach ($candidates as $candidate)
-                            <div class="col-md-4 col-xxl-4">
+                            <div class="col-md-3 col-xxl-4">
                                 <div class="card">
                                     <div class="card-body d-flex flex-center flex-column py-9 px-5">
                                         <div class="symbol symbol-65px symbol-circle mb-5">
