@@ -36,10 +36,6 @@
                                             <span class="text-muted">Laboratoire:</span>
                                             <span class="fs-5">{{ $commande->offer->laboratoire }}</span>
                                         </div>
-                                        <div class="flex-root d-flex flex-column">
-                                            <span class="text-muted">Cree par:</span>
-                                            <span class="fs-5">{{ $commande->offer->user->name }}</span>
-                                        </div>
                                     </div>
 
                                     <div class="d-flex justify-content-between flex-column">

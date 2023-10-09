@@ -13,44 +13,6 @@
         <div>
             <a href="{{ route('items.create') }}" class="btn btn-primary">Cree un offre de vente</a>
         </div>
-        <div class="m-4">
-            <form action="{{ route('items.index') }}" method="GET">
-                <div class="col-xl-9">
-                    <!--begin::Dialer-->
-                    <div class="position-relative w-md-300px" data-kt-dialer="true" data-kt-dialer-min="1"
-                        data-kt-dialer-max="999999999" data-kt-dialer-step="100">
-                        <!--begin::Decrease control-->
-                        <button type="button"
-                            class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0"
-                            data-kt-dialer-control="decrease">
-                            <i class="ki-outline ki-minus-square fs-1"></i>
-                        </button>
-                        <!--end::Decrease control-->
-                        <!--begin::Input control-->
-                        <input type="text" class="form-control form-control-solid border-0 ps-12"
-                            data-kt-dialer-control="input" placeholder="Prix max" name="max_price">
-                        <!--end::Input control-->
-                        <!--begin::Increase control-->
-                        <button type="button"
-                            class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0"
-                            data-kt-dialer-control="increase">
-                            <i class="ki-outline ki-plus-square fs-1"></i>
-                        </button>
-                        <!--end::Increase control-->
-                    </div>
-                    <!--end::Dialer-->
-                </div>
-
-                <div class="mt-2">
-                    <button type="submit" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
-                        data-kt-menu-placement="bottom-end">
-                        <i class="ki-outline ki-filter fs-2"></i>Filter</button>
-                    <button type="button" id="reset-filter" class="btn btn-secondary">Reinsialiser</button>
-                </div>
-            </form>
-
-
-        </div>
         {{-- <div class="col-xl-9">
             <!--begin::Dialer-->
             <div class="position-relative w-md-300px" data-kt-dialer="true" data-kt-dialer-min="1000" data-kt-dialer-max="50000" data-kt-dialer-step="1000" data-kt-dialer-prefix="$" data-kt-dialer-decimals="2">
@@ -70,21 +32,6 @@
             </div>
             <!--end::Dialer-->
         </div> --}}
-        <script>
-            $(function() {
-                // ... (previous code)
-
-                // Reset button click handler
-                $("#reset-filter").click(function() {
-                    // Clear the input fields
-                    $("#min_price").val('');
-                    $("#max_price").val('');
-
-                    // Submit the form without the min_price and max_price parameters
-                    $("form").submit();
-                });
-            });
-        </script>
 
 
 
