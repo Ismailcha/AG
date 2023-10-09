@@ -10,7 +10,9 @@
     <div class="container">
 
         <!-- Button to Create a New Item -->
-        <a href="{{ route('items.create') }}" class="btn btn-primary">Cree un offre de vente</a>
+        <div>
+            <a href="{{ route('items.create') }}" class="btn btn-primary">Cree un offre de vente</a>
+        </div>
         <div class="m-4">
             <form action="{{ route('items.index') }}" method="GET">
                 <div class="col-xl-9">
@@ -40,7 +42,9 @@
                 </div>
 
                 <div class="mt-2">
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <button type="submit" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
+                        data-kt-menu-placement="bottom-end">
+                        <i class="ki-outline ki-filter fs-2"></i>Filter</button>
                     <button type="button" id="reset-filter" class="btn btn-secondary">Reinsialiser</button>
                 </div>
             </form>
