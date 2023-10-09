@@ -11,35 +11,41 @@
 
         <!-- Button to Create a New Item -->
         <a href="{{ route('items.create') }}" class="btn btn-primary">Cree un offre de vente</a>
-        <div class="mb-4">
+        <div class="m-4">
             <form action="{{ route('items.index') }}" method="GET">
                 <div class="col-xl-9">
                     <!--begin::Dialer-->
-                    <div class="position-relative w-md-300px" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="999999999" data-kt-dialer-step="10" data-kt-dialer-prefix="DH" data-kt-dialer-decimals="2">
+                    <div class="position-relative w-md-300px" data-kt-dialer="true" data-kt-dialer-min="1"
+                        data-kt-dialer-max="999999999" data-kt-dialer-step="100">
                         <!--begin::Decrease control-->
-                        <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                        <button type="button"
+                            class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0"
+                            data-kt-dialer-control="decrease">
                             <i class="ki-outline ki-minus-square fs-1"></i>
                         </button>
                         <!--end::Decrease control-->
                         <!--begin::Input control-->
-                        <input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="max_price"  value="DH1.00">
+                        <input type="text" class="form-control form-control-solid border-0 ps-12"
+                            data-kt-dialer-control="input" placeholder="Prix max" name="max_price">
                         <!--end::Input control-->
                         <!--begin::Increase control-->
-                        <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+                        <button type="button"
+                            class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0"
+                            data-kt-dialer-control="increase">
                             <i class="ki-outline ki-plus-square fs-1"></i>
                         </button>
                         <!--end::Increase control-->
                     </div>
                     <!--end::Dialer-->
                 </div>
-            
+
                 <div class="mt-2">
                     <button type="submit" class="btn btn-primary">Filter</button>
                     <button type="button" id="reset-filter" class="btn btn-secondary">Reinsialiser</button>
                 </div>
             </form>
-            
-            
+
+
         </div>
         {{-- <div class="col-xl-9">
             <!--begin::Dialer-->
@@ -63,22 +69,22 @@
         <script>
             $(function() {
                 // ... (previous code)
-        
+
                 // Reset button click handler
                 $("#reset-filter").click(function() {
                     // Clear the input fields
                     $("#min_price").val('');
                     $("#max_price").val('');
-        
+
                     // Submit the form without the min_price and max_price parameters
                     $("form").submit();
                 });
             });
         </script>
-        
-                
-        
-        
+
+
+
+
         {{-- <table class="table mt-3">
             <thead>
                 <tr>
@@ -106,17 +112,19 @@
             <div class="d-flex flex-column flex-column-fluid">
                 <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
                     @foreach ($items as $item)
-                        <div class="col-md-6 col-xxl-4">
+                        <div class="col-md-4 col-xxl-4">
                             <div class="card">
                                 <div class="card-body text-center py-9 px-5">
-                                    @if($item->itemImages->isNotEmpty())
+                                    @if ($item->itemImages->isNotEmpty())
                                         <div class="mb-5">
                                             <div class="symbol symbol-150px symbol-circle mb-3 mx-auto">
-                                                <img src="{{ asset('storage/' . $item->itemImages->first()->image_path) }}" alt="{{ $item->name }}">
+                                                <img src="{{ asset('storage/' . $item->itemImages->first()->image_path) }}"
+                                                    alt="{{ $item->name }}">
                                             </div>
                                         </div>
                                     @endif
-                                    <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">{{ $item->nom }}</a>
+                                    <a href="#"
+                                        class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">{{ $item->nom }}</a>
                                     <h2></h2>
                                     <div class="fw-semibold text-gray-400 mb-6">{{ $item->telephone }}</div>
                                     <div class="d-flex flex-center flex-wrap mb-5">
@@ -125,7 +133,7 @@
                                         </div>
                                         <div class="border border-dashed rounded min-w-90px py-3 px-4 mx-2 mb-3">
                                             <div class="fs-6 fw-bold text-gray-700">
-                                                {{ "Prix" }}
+                                                {{ 'Prix' }}
                                             </div>
                                             <div class="fw-semibold text-gray-400">DH{{ $item->price }}</div>
                                         </div>
@@ -142,39 +150,38 @@
                     @endforeach
                 </div>
             </div>
-            
-
-
-
-    <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
-
-        @if ($items->currentPage() > 1)
-            <a href="{{ $items->previousPageUrl() }}" class="btn btn-outline-primary">Precedent</a>
-        @endif
-
-        <!-- Page Links -->
-        @for ($i = 1; $i <= $items->lastPage(); $i++)
-            <a href="{{ $items->url($i) }}"
-                class="btn btn-outline-secondary{{ $i === $items->currentPage() ? ' active' : '' }}">{{ $i }}</a>
-        @endfor
-
-        <!-- Next Page Link -->
-        @if ($items->hasMorePages())
-            <a href="{{ $items->nextPageUrl() }}" class="btn btn-outline-primary">Suivant</a>
-        @endif
-    </div>
 
 
 
 
+            <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.min.js"></script>
+                @if ($items->currentPage() > 1)
+                    <a href="{{ $items->previousPageUrl() }}" class="btn btn-outline-primary">Precedent</a>
+                @endif
 
-    <!-- <div class="swiper-button-next swiper-navBtn"></div>
+                <!-- Page Links -->
+                @for ($i = 1; $i <= $items->lastPage(); $i++)
+                    <a href="{{ $items->url($i) }}"
+                        class="btn btn-outline-secondary{{ $i === $items->currentPage() ? ' active' : '' }}">{{ $i }}</a>
+                @endfor
+
+                <!-- Next Page Link -->
+                @if ($items->hasMorePages())
+                    <a href="{{ $items->nextPageUrl() }}" class="btn btn-outline-primary">Suivant</a>
+                @endif
+            </div>
+
+
+
+
+
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+            <script src="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.min.js"></script>
+
+            <!-- <div class="swiper-button-next swiper-navBtn"></div>
     <div class="swiper-button-prev swiper-navBtn"></div> -->
-    <div class="swiper-pagination"></div>
-    <!--end::Row-->
+            <div class="swiper-pagination"></div>
+            <!--end::Row-->
 </x-default-layout>
-    

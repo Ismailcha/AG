@@ -56,7 +56,7 @@
                         class="form-control-file">
                 </div>
 
-                <button type="button" class="btn btn-success mt-3" id="add-image">Ajouter une autre page</button>
+                <button type="button" class="btn btn-success mt-3" id="add-image">Ajouter une autre image</button>
             </div>
 
 
@@ -73,7 +73,7 @@
                 const newImageInput = document.createElement("div");
                 newImageInput.innerHTML = `
                     <div class="form-group">
-                        <label for="photos">Upload Another Image</label>
+                        <label for="photos">Ajouter une autre image</label>
                         <input type="file" name="photos[]" accept="image/*" class="form-control-file">
                     </div>
                 `;

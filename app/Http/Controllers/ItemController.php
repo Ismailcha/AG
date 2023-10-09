@@ -13,21 +13,21 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-{
-    $query = Item::query();
+    {
+        $query = Item::query();
 
-    // Filter by maximum price if provided
-    if ($request->has('max_price')) {
-        // Remove the "DH" prefix and convert to float for filtering
-        $maxPrice = (float)str_replace(['DH', ','], '', $request->input('max_price'));
-        $query->where('price', '<=', $maxPrice);
+        // Filter by maximum price if provided
+        if ($request->has('max_price')) {
+            // Remove the "DH" prefix and convert to float for filtering
+            $maxPrice = (float)str_replace(['DH', ','], '', $request->input('max_price'));
+            $query->where('price', '<=', $maxPrice);
+        }
+
+        // Get paginated items
+        $items = $query->paginate(10);
+
+        return view('items.index', compact('items'));
     }
-
-    // Get paginated items
-    $items = $query->paginate(10);
-
-    return view('items.index', compact('items'));
-}
 
 
     /**
@@ -59,7 +59,7 @@ class ItemController extends Controller
             'city' => 'required|string|max:255',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Multiple photo uploads
         ]);
-    
+
         // Create the item in the database
         $item = Item::create([
             'name' => $request->input('name'),
@@ -70,7 +70,7 @@ class ItemController extends Controller
             'phone_number' => $request->input('phone_number'),
             'city' => $request->input('city'),
         ]);
-    
+
         // Handle multiple photo uploads
         $photos = $request->file('photos');
         if ($photos) {
@@ -82,11 +82,11 @@ class ItemController extends Controller
             // Associate the images with the item
             $item->addImages($imagePaths);
         }
-    
+
         // Redirect to the item's details page
-        return redirect()->route('items.show', ['item' => $item->id]);
+        return redirect()->route('items.index');
     }
-    
+
 
     /**
      * Display the specified item.
