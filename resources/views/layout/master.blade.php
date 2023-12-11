@@ -50,7 +50,7 @@
 
 <!--begin::Body-->
 
-<body {!! printHtmlClasses('body') !!} {!! printHtmlAttributes('body') !!}>
+<body {!! printHtmlClasses('body') !!} {!! printHtmlAttributes('body') !!} style="background-color: rgb(251, 249, 249)">
 
     @include('partials/theme-mode/_init')
 

@@ -1,5 +1,5 @@
 <!--begin:Pages menu-->
-<div class="menu-active-bg px-4 px-lg-0">
+<div class="menu-active-bg px-4 px-lg-0"  >
 	<!--begin:Tabs nav-->
 	<div class="d-flex w-100 overflow-auto">
 		<ul class="nav nav-stretch nav-line-tabs fw-bold fs-6 p-0 p-lg-10 flex-nowrap flex-grow-1">

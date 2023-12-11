@@ -1,7 +1,7 @@
 <!--begin:Row-->
 <div class="row">
 	<!--begin:Col-->
-	<div class="col-lg-4 mb-6 mb-lg-0">
+	<div class="col-lg-4 mb-6 mb-lg-0" >
 		<!--begin:Menu item-->
 		<div class="menu-item p-0 m-0">
 			<!--begin:Menu link-->

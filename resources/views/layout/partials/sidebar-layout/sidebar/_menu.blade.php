@@ -1,5 +1,5 @@
 <!--begin::sidebar menu-->
-<div class="app-sidebar-menu overflow-hidden flex-column-fluid">
+<div class="app-sidebar-menu overflow-hidden flex-column-fluid" style="background-color: white;">
     <!--begin::Menu wrapper-->
     <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5" data-kt-scroll="true"
         data-kt-scroll-activate="true" data-kt-scroll-height="auto"
