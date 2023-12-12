@@ -1,6 +1,6 @@
 <x-default-layout>
     @section('title')
-        <h2 class="text-primary">Commande detail</h2>
+        <h2 style="font-size: 30px" class="text-primary">Commande detail</h2>
     @endsection
     @section('breadcrumbs')
         {{ Breadcrumbs::render('offers.commande_detail') }}

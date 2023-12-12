@@ -108,7 +108,7 @@
             </div>
             <!--end::Card-->
         @endforeach
-        <div class="d-flex flex-stack flex-wrap pt-10">
+        <div  class="d-flex flex-stack flex-wrap pt-10">
             <div class="fs-6 fw-semibold text-gray-700"></div>
             <!--begin::Pages-->
             <ul class="pagination">
