@@ -89,7 +89,7 @@
                             <a class="menu-link {{ request()->routeIs('fifth.route') ? 'active' : '' }}" href="{{ route('offers.index') }}">
                                 <span class="menu-link">
                                     <span class="menu-icon">
-                                        <img src="{{ asset('assets/media/icons/duotune/ecommerce/ecm004.svg') }}" alt="Example Icon">
+                                        <img src="{{ asset('assets/media/icons/duotune/ecommerce/ecm003.svg') }}" alt="Example Icon">
                                     </span>
                                     <span class="menu-title">Offres</span>
                                     <span class="menu-arrow d-lg-none"></span>
@@ -100,10 +100,10 @@
                     
                         <!--begin:Menu item 6 (Sixth Item)-->
                         <div data-kt-menu-placement="bottom-start" data-kt-menu-offset="-400,0" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
-                            <a class="menu-link {{ request()->routeIs('user.commandes') ? 'active' : '' }}" href="{{ route('user.commandes') }}">
+                            <a class="menu-link {{ request()->routeIs('user.commandes')  }}" href="{{ route('user.commandes') }}">
                                 <span class="menu-link">
                                     <span class="menu-icon">
-                                        <img src="{{ asset('assets/media/icons/duotune/ecommerce/ecm004.svg') }}" alt="Example Icon">
+                                        <img src="{{ asset('assets/media/icons/duotune/ecommerce/ecm005.svg') }}" alt="Example Icon">
                                     </span>
                                     <span class="menu-title">Commandes</span>
                                     <span class="menu-arrow d-lg-none"></span>
