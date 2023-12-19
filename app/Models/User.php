@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -29,6 +29,7 @@ class User extends Authenticatable
         'last_login_at',
         'last_login_ip',
         'profile_photo_path',
+        'role', // Add the 'role' field here
     ];
 
     /**
@@ -59,10 +60,12 @@ class User extends Authenticatable
 
         return $this->profile_photo_path;
     }
+
     public function offers()
     {
         return $this->hasMany(Offer::class);
     }
+
     public function commandeOffreIndividus()
     {
         return $this->hasMany(CommandeOffreIndividu::class, 'user_id');

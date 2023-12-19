@@ -52,12 +52,13 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         // Validate the request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:1,2,3,4',
+            'role' => 'required|in:1,2',
             // Add any other validation rules as per your requirements
         ]);
 
@@ -72,6 +73,7 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'User added successfully.');
     }
+
 
     public function create()
     {

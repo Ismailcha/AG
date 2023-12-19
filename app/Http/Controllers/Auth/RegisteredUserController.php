@@ -35,29 +35,32 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'tel' => ['required', 'string', 'max:255'],
-            'adresse' => ['required', 'string', 'max:255'],
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'tel' => ['required', 'string', 'max:255'],
+        'adresse' => ['required', 'string', 'max:255'],
+        'role' => ['required', 'in:1,2'], // Add validation rule for role
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'last_login_at' => Carbon::now()->toDateTimeString(),
-            'last_login_ip' => $request->getClientIp(),
-            'tel' => $request->input('tel'), // Save tel
-            'adresse' => $request->input('adresse'), // Save adresse
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'last_login_at' => Carbon::now()->toDateTimeString(),
+        'last_login_ip' => $request->getClientIp(),
+        'tel' => $request->input('tel'), // Save tel
+        'adresse' => $request->input('adresse'), // Save adresse
+        'role' => $request->input('role'), // Save role
+    ]);
 
-        event(new Registered($user));
+    event(new Registered($user));
 
-        Auth::login($user);
+    Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+    return redirect(RouteServiceProvider::HOME);
+}
+
 }
